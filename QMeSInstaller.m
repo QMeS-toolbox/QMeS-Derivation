@@ -57,6 +57,7 @@ QMeSRepositoryAddress="https://raw.githubusercontent.com/CoralieSchneider/QMeS--
 
 (* ::Input::Initialization:: *)
 If[Head[QMeSZipLocation]=!=String,QMeSZipLocation=QMeSRepositoryAddress<>"QMeS.zip"];
+Print[QMeSZipLocation];
 QMeSInstallDir=FileNameJoin[{$UserBaseDirectory,"Applications"}];
 
 
