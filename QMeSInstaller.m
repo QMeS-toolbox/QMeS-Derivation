@@ -52,7 +52,7 @@ If[ToString[Context[URLDownload]]=!="System`",URLDownload=URLSave];
 
 
 (* ::Input::Initialization:: *)
-QMeSRepositoryAddress="https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main";
+QMeSRepositoryAddress="https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main/";
 
 
 (* ::Input:: *)
