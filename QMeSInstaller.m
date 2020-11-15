@@ -67,16 +67,16 @@ QMeSInstaller::installationfailed="\nInstallation failed. Please read the error 
 Print["Downloading QMeS ..."];
 QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeS.zip"}];
 URLDownload[QMeSZipLocation,QMeSArchive]
-
+Print[QMeSArchive];
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
 Echo[tmpQMeSImport];
-(*newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS","PacletInfo.m"}]];*)
+newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS","PacletInfo.m"}]];
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
-(*QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS","PacletInfo.m"}];*)
-(*QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];*)
+QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS","PacletInfo.m"}];
+QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
 
 
 (* ::Input::Initialization:: *)
