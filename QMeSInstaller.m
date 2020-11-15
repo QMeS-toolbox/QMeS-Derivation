@@ -52,7 +52,7 @@ If[ToString[Context[URLDownload]]=!="System`",URLDownload=URLSave];
 
 
 (* ::Input::Initialization:: *)
-QMeSRepositoryAddress="https://lin0.thphys.uni-heidelberg.de:4443/qmes/qmes-derivation/-/tree/Version_0.2";
+QMeSRepositoryAddress=(*"https://lin0.thphys.uni-heidelberg.de:4443/qmes/qmes-derivation/-/tree/Version_0.2"*)"https://github.com/CoralieSchneider/QMeS---Derivation";
 
 
 (* ::Input::Initialization:: *)
@@ -70,13 +70,13 @@ URLDownload[QMeSZipLocation,QMeSArchive]
 
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
-
-newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS","PacletInfo.m"}]];
+Echo[tmpQMeSImport];
+(*newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS","PacletInfo.m"}]];*)
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
-QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS","PacletInfo.m"}];
-QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
+(*QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS","PacletInfo.m"}];*)
+(*QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];*)
 
 
 (* ::Input::Initialization:: *)
