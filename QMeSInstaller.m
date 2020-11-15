@@ -55,8 +55,12 @@ If[ToString[Context[URLDownload]]=!="System`",URLDownload=URLSave];
 QMeSRepositoryAddress="https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main";
 
 
+(* ::Input:: *)
+(*Head[QMeSZipLocation]=!=String*)
+
+
 (* ::Input::Initialization:: *)
-If[Head[QMeSZipLocation]=!=String,QMeSZipLocation=QMeSRepositoryAddress<>"QMeS.zip"];
+(*If[Head[QMeSZipLocation]=!=String,*)QMeSZipLocation=QMeSRepositoryAddress<>"QMeS.zip"(*]*);
 Print[QMeSZipLocation];
 QMeSInstallDir=FileNameJoin[{$UserBaseDirectory,"Applications"}];
 
