@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 (* ::Input::Initialization:: *)
-QMeSInstaller::allowinternetuse="You have forbidden Mathematica to access the internet. Either allow Mathematica to access the internet or download the QMeS from https://lin0.thphys.uni-heidelberg.de:4443/qmes/qmes-derivation/-/tree/Version_0.1 manually.";
+QMeSInstaller::allowinternetuse="You have forbidden Mathematica to access the internet. Either allow Mathematica to access the internet or download the QMeS from https://github.com/CoralieSchneider/QMeS---Derivation manually.";
 If[Not["AllowInternetUse" /. SystemInformation["Network"]],
 Message[QMeSInstaller::allowinternetuse];
 Abort[];
@@ -52,7 +52,7 @@ If[ToString[Context[URLDownload]]=!="System`",URLDownload=URLSave];
 
 
 (* ::Input::Initialization:: *)
-QMeSRepositoryAddress=(*"https://lin0.thphys.uni-heidelberg.de:4443/qmes/qmes-derivation/-/tree/Version_0.2"*)"https://github.com/CoralieSchneider/QMeS---Derivation";
+QMeSRepositoryAddress="https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main";
 
 
 (* ::Input::Initialization:: *)
