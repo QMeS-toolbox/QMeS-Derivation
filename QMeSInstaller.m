@@ -69,7 +69,7 @@ QMeSInstaller::installationfailed="\nInstallation failed. Please read the error 
 Print["Downloading QMeS ..."];
 QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeS-Derivation.zip"}];
 URLDownload[QMeSZipLocation,QMeSArchive]
-Print[QMeSArchive];
+Print[{QMeSZipLocation,QMeSArchive}];
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
 Echo[tmpQMeSImport];
