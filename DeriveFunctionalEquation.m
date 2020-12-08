@@ -9,10 +9,10 @@ BeginPackage["DeriveFunctionalEquation`"]
 
 
 (* ::Input::Initialization:: *)
-Needs[StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\getDSE`"]]
-Needs[StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\FunctionalDerivatives`"]]
-Needs[StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\SuperindexDiagrams`"]]
-Needs[StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\FullDiagrams`"]]
+Needs["getDSE`",StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\getDSE.m"]]
+Needs["FunctionalDerivatives`",StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\FunctionalDerivatives.m"]]
+Needs["SuperindexDiagrams`",StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\SuperindexDiagrams.m"]]
+Needs["FullDiagrams`",StringJoin[$UserBaseDirectory,"\\Applications\\QMeS-Derivation-main\\package\\FullDiagrams.m"]]
 
 
 (* ::Input::Initialization:: *)
