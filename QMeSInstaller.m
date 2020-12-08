@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 (* ::Input::Initialization:: *)
-QMeSInstaller::allowinternetuse="You have forbidden Mathematica to access the internet. Either allow Mathematica to access the internet or download the QMeS from https://github.com/CoralieSchneider/QMeS---Derivation manually.";
+QMeSInstaller::allowinternetuse="You have forbidden Mathematica to access the internet. Either allow Mathematica to access the internet or download the QMeS from https://github.com/QMeS-toolbox/QMeS-Derivation manually.";
 If[Not["AllowInternetUse" /. SystemInformation["Network"]],
 Message[QMeSInstaller::allowinternetuse];
 Abort[];
@@ -52,15 +52,12 @@ If[ToString[Context[URLDownload]]=!="System`",URLDownload=URLSave];
 
 
 (* ::Input::Initialization:: *)
-QMeSRepositoryAddress="https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main/";
-
-
-(* ::Input:: *)
-(*Head[QMeSZipLocation]=!=String*)
+QMeSRepositoryAddress=(*"https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main/"*)"https://raw.githubusercontent.com/QMeS-toolbox/QMeS-Derivation/main/";
+Print[QMeSRepositoryAddress];
 
 
 (* ::Input::Initialization:: *)
-(*If[Head[QMeSZipLocation]=!=String,*)QMeSZipLocation=QMeSRepositoryAddress<>"QMeS.zip"(*]*);
+(*If[Head[QMeSZipLocation]=!=String,*)QMeSZipLocation=QMeSRepositoryAddress<>"QMeS-Derivation.zip"(*]*);
 Print[QMeSZipLocation];
 QMeSInstallDir=FileNameJoin[{$UserBaseDirectory,"Applications"}];
 
@@ -70,18 +67,21 @@ QMeSInstaller::zipdownloadfailed="Download from "<>QMeSZipLocation<>" failed.";
 QMeSInstaller::installationfailed="\nInstallation failed. Please read the error messages for more information!";
 
 Print["Downloading QMeS ..."];
-QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeS.zip"}];
+QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeS-Derivation.zip"}];
 URLDownload[QMeSZipLocation,QMeSArchive]
 Print[QMeSArchive];
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
 Echo[tmpQMeSImport];
-newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS","PacletInfo.m"}]];
+newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS-Derivation-main","QMeS_PacletInfo.m"}]];
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
-QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS","PacletInfo.m"}];
+QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS-Derivation-main","QMeS_PacletInfo.m"}];
 QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
+Echo[QMeSExistingVersionString];
+Echo[QMeSFiles];
+Echo[QMeSFilesExist];
 
 
 (* ::Input::Initialization:: *)
@@ -100,7 +100,7 @@ Print["QMeS installation aborted."];,
 (*install QMeS*)
 installationSuccess=Check[
 ExtractArchive[QMeSArchive,QMeSInstallDir];
-<<"QMeS`";
+<<"QMeS-Derivation-main\\package\\DeriveFunctionalEquation.m";
 ,$Failed];
 If[installationSuccess===$Failed,
 (*installation failed*)
