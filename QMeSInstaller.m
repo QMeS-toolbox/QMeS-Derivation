@@ -97,7 +97,7 @@ Print["QMeS installation aborted."];,
 installationSuccess=Check[
 ExtractArchive[QMeSArchive,QMeSInstallDir];
 getQMeS = FileNameJoin[{"QMeS-Derivation","DeriveFunctionalEquation.m"}];
-Get[getQMeS];
+Get[getQMeS]
 ,$Failed];
 If[installationSuccess===$Failed,
 (*installation failed*)
