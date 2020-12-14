@@ -95,7 +95,7 @@ If[QMeSExistingInstallation&&deleteExisting===False,
 Print["QMeS installation aborted."];,
 (*install QMeS*)
 installationSuccess=Check[
-ExtractArchive[QMeSArchive,QMeSInstallDir];
+Quiet@ExtractArchive[QMeSArchive,QMeSInstallDir];
 getQMeS = FileNameJoin[{"QMeS-Derivation","DeriveFunctionalEquation.m"}];
 Get[getQMeS]
 ,$Failed];
