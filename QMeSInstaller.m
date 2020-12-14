@@ -53,12 +53,11 @@ If[ToString[Context[URLDownload]]=!="System`",URLDownload=URLSave];
 
 (* ::Input::Initialization:: *)
 QMeSRepositoryAddress=(*"https://raw.githubusercontent.com/CoralieSchneider/QMeS---Derivation/main/"*)"https://raw.githubusercontent.com/QMeS-toolbox/QMeS-Derivation/main/";
-Print[QMeSRepositoryAddress];
 
 
 (* ::Input::Initialization:: *)
 (*If[Head[QMeSZipLocation]=!=String,*)QMeSZipLocation=QMeSRepositoryAddress<>"QMeS-Derivation.zip"(*]*);
-Print[QMeSZipLocation];
+
 QMeSInstallDir=FileNameJoin[{$UserBaseDirectory,"Applications"}];
 
 
@@ -69,19 +68,16 @@ QMeSInstaller::installationfailed="\nInstallation failed. Please read the error 
 Print["Downloading QMeS ..."];
 QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeS-Derivation.zip"}];
 URLDownload[QMeSZipLocation,QMeSArchive]
-Print[{QMeSZipLocation,QMeSArchive}];
+
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
-Echo[tmpQMeSImport];
+
 newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS-Derivation-main","QMeS_PacletInfo.m"}]];
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
 QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS-Derivation-main","QMeS_PacletInfo.m"}];
 QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
-Echo[QMeSExistingVersionString];
-Echo[QMeSFiles];
-Echo[QMeSFilesExist];
 
 
 (* ::Input::Initialization:: *)
