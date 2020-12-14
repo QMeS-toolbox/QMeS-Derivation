@@ -72,11 +72,11 @@ URLDownload[QMeSZipLocation,QMeSArchive]
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
 
-newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS-Derivation-main","QMeS_PacletInfo.m"}]];
+newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS-Derivation","QMeS_PacletInfo.m"}]];
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
-QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS-Derivation-main","QMeS_PacletInfo.m"}];
+QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS-Derivation","QMeS_PacletInfo.m"}];
 QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
 
 
@@ -96,7 +96,7 @@ Print["QMeS installation aborted."];,
 (*install QMeS*)
 installationSuccess=Check[
 ExtractArchive[QMeSArchive,QMeSInstallDir];
-getQMeS = FileNameJoin[{"QMeS-Derivation-main","DeriveFunctionalEquation.m"}];
+getQMeS = FileNameJoin[{"QMeS-Derivation","DeriveFunctionalEquation.m"}];
 <<getQMeS;
 ,$Failed];
 If[installationSuccess===$Failed,
