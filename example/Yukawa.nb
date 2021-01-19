@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     74365,       1869]
-NotebookOptionsPosition[     63284,       1705]
-NotebookOutlinePosition[     63630,       1720]
-CellTagsIndexPosition[     63587,       1717]
+NotebookDataLength[     63594,       1581]
+NotebookOptionsPosition[     60288,       1506]
+NotebookOutlinePosition[     60662,       1522]
+CellTagsIndexPosition[     60619,       1519]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -34,20 +34,14 @@ Cell["Load Package", "Section",
 136d3f5a5e99"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"AppendTo", "[", 
-   RowBox[{
-   "$Path", ",", 
-    "\"\<C:\\\\Users\\\\coral\\\\Documents\\\\QCD\\\\qmes-derivation\\\\\
-package\>\""}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.8051004317129717`*^9, 3.805100432949464*^9}},
- CellLabel->"In[1]:=",ExpressionUUID->"8922c0fa-f8a8-4de8-9a4e-c733d6d29a1c"],
-
-Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<DeriveFunctionalEquation`\>\"", "]"}]], "Input",
+ RowBox[{"<<", 
+  "\"\<QMeS-Derivation\\\\DeriveFunctionalEquation.m\>\""}]], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.7770126771083345`*^9, 3.777012697489112*^9}, 
    3.7770128727460027`*^9, {3.804318106318177*^9, 3.804318107668975*^9}, 
-   3.8061389411722*^9},ExpressionUUID->"7c94cdba-9884-4c91-9a98-936f099fa7ab"]
+   3.8061389308504753`*^9, {3.811145453159852*^9, 3.811145454083929*^9}, {
+   3.817530854203228*^9, 3.817530868612495*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"d8398d88-8904-4ec1-a35c-c2c3c5855d9b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -93,35 +87,25 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"\"\<bosonic\>\"", " ", "\[Rule]", " ", 
        RowBox[{"{", 
-        RowBox[{"Phi", "[", 
-         RowBox[{"p", ",", 
-          RowBox[{"{", "i", "}"}]}], "]"}], "}"}]}], ",", 
-      "\[IndentingNewLine]", 
+        RowBox[{"Phi", "[", "p", "]"}], "}"}]}], ",", "\[IndentingNewLine]", 
       RowBox[{"\"\<fermionic\>\"", "\[Rule]", " ", 
        RowBox[{"{", 
         RowBox[{"{", 
          RowBox[{
           RowBox[{"Psibar", "[", 
            RowBox[{"p", ",", 
-            RowBox[{"{", 
-             RowBox[{"d", ",", "i"}], "}"}]}], "]"}], ",", 
+            RowBox[{"{", "d", "}"}]}], "]"}], ",", 
           RowBox[{"Psi", "[", 
            RowBox[{"p", ",", 
-            RowBox[{"{", 
-             RowBox[{"d", ",", "i"}], "}"}]}], "]"}]}], "}"}], "}"}]}]}], 
-     "|>"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+            RowBox[{"{", "d", "}"}]}], "]"}]}], "}"}], "}"}]}]}], "|>"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
-  RowBox[{"DerivativeListBosonTwopoint", " ", "=", 
+  RowBox[{"DerivativeListScalarTwopoint", " ", "=", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"Phi", "[", 
-      RowBox[{
-       RowBox[{"-", "p"}], ",", 
-       RowBox[{"{", "m", "}"}]}], "]"}], ",", 
-     RowBox[{"Phi", "[", 
-      RowBox[{"p", ",", 
-       RowBox[{"{", "n", "}"}]}], "]"}]}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
+      RowBox[{"-", "p"}], "]"}], ",", 
+     RowBox[{"Phi", "[", "p", "]"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DerivativeListFermionTwopoint", " ", "=", 
@@ -130,13 +114,11 @@ Cell[BoxData[{
       RowBox[{"Psibar", "[", 
        RowBox[{
         RowBox[{"-", "p"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"d", ",", "m"}], "}"}]}], "]"}], ",", 
+        RowBox[{"{", "d", "}"}]}], "]"}], ",", 
       RowBox[{"Psi", "[", 
        RowBox[{"p", ",", 
-        RowBox[{"{", 
-         RowBox[{"e", ",", "n"}], "}"}]}], "]"}]}], "}"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\n", 
+        RowBox[{"{", "d", "}"}]}], "]"}]}], "}"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"TruncationFRGNf1", " ", "=", " ", 
    RowBox[{"{", 
@@ -152,6 +134,7 @@ Cell[BoxData[{
      RowBox[{"{", 
       RowBox[{"Psi", ",", "Psi", ",", "Psibar", ",", "Psibar"}], "}"}]}], 
     "}"}]}], ";"}]}], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.7736372469148283`*^9, 3.7736372667513313`*^9}, {
    3.774262172649588*^9, 3.774262199876032*^9}, {3.7778959933361387`*^9, 
    3.7778959937246933`*^9}, 3.777896515299904*^9, {3.8018082265710363`*^9, 
@@ -183,19 +166,25 @@ Cell[BoxData[{
    3.8051805960995903`*^9, 3.805180679003832*^9}, {3.8051809491307516`*^9, 
    3.805180950986191*^9}, 3.80518099176746*^9, {3.8051810340803394`*^9, 
    3.8051810487312946`*^9}, 3.805181233023961*^9, {3.805181341635268*^9, 
-   3.8051813550350647`*^9}, {3.805184690665142*^9, 3.805184697126114*^9}},
- CellLabel->"In[60]:=",ExpressionUUID->"f3d3bb5e-178e-4c74-aed7-99ecae6b78bb"],
+   3.8051813550350647`*^9}, {3.805184690665142*^9, 3.805184697126114*^9}, {
+   3.8075200375580263`*^9, 3.8075200483748055`*^9}, {3.8151270896842833`*^9, 
+   3.8151270938308396`*^9}, {3.8151272227086964`*^9, 3.815127230377906*^9}, {
+   3.8151273982967253`*^9, 3.8151274089413824`*^9}, {3.8175313515548725`*^9, 
+   3.81753135465177*^9}, {3.8175321297715597`*^9, 3.817532133533203*^9}, {
+   3.817533994881517*^9, 3.8175340063695927`*^9}, {3.8200453594389205`*^9, 
+   3.8200453704821167`*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"f3d3bb5e-178e-4c74-aed7-99ecae6b78bb"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{
-   RowBox[{"SetupNf1", " ", "=", " ", 
-    RowBox[{"<|", 
-     RowBox[{
-      RowBox[{"\"\<MasterEquation\>\"", "\[Rule]", " ", "FRGEq"}], ",", 
-      RowBox[{"\"\<FieldSpace\>\"", "\[Rule]", " ", "fieldsNf1"}], ",", 
-      RowBox[{"\"\<Truncation\>\"", "\[Rule]", "TruncationFRGNf1"}]}], 
-     "|>"}]}], ";"}], "\[IndentingNewLine]"}]], "Input",
+  RowBox[{"SetupNf1", " ", "=", " ", 
+   RowBox[{"<|", 
+    RowBox[{
+     RowBox[{"\"\<MasterEquation\>\"", "\[Rule]", " ", "FRGEq"}], ",", 
+     RowBox[{"\"\<FieldSpace\>\"", "\[Rule]", " ", "fieldsNf1"}], ",", 
+     RowBox[{"\"\<Truncation\>\"", "\[Rule]", "TruncationFRGNf1"}]}], 
+    "|>"}]}], ";"}]], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.7736431600665627`*^9, 3.773643224908215*^9}, {
    3.7736437626135345`*^9, 3.7736438184638596`*^9}, {3.773643909718261*^9, 
    3.773643944655748*^9}, {3.7742624212179055`*^9, 3.774262426704669*^9}, {
@@ -213,8 +202,8 @@ Cell[BoxData[
    3.8050215195427427`*^9, 3.8050215211202936`*^9}, {3.805088977927044*^9, 
    3.805089014887038*^9}, 3.8050891552271156`*^9, {3.805180654681514*^9, 
    3.805180688800662*^9}, {3.805181348705228*^9, 3.805181358075162*^9}, {
-   3.8051870842362137`*^9, 3.8051870848473196`*^9}},
- CellLabel->"In[65]:=",ExpressionUUID->"08b53ccd-9b69-4eab-91ea-29694e10b3db"]
+   3.8051870842362137`*^9, 3.8051870848473196`*^9}, 3.817531359459361*^9},
+ CellLabel->"In[20]:=",ExpressionUUID->"08b53ccd-9b69-4eab-91ea-29694e10b3db"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -227,19 +216,21 @@ Cell["FRG Equations ", "Section",
 
 Cell[CellGroupData[{
 
-Cell["Derive Flow Equation for Phi Twopoint", "Subsection",
+Cell["Derive Flow Equation for Phi two-point", "Subsection",
  CellChangeTimes->{{3.7778967928168535`*^9, 3.7778968262422132`*^9}, {
   3.8018083243891296`*^9, 3.801808328609626*^9}, {3.8051806974004583`*^9, 
-  3.8051806977028284`*^9}},ExpressionUUID->"9b813ba7-d10d-4679-b8b0-\
+  3.8051806977028284`*^9}, {3.8151272545667353`*^9, 
+  3.8151272558364077`*^9}},ExpressionUUID->"9b813ba7-d10d-4679-b8b0-\
 1b3b91d59e55"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"DeriveFunctionalEquation", "[", 
-  RowBox[{"Setup", ",", "DerivativeListBosonTwopoint", ",", 
-   RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<FullDiagrams\>\""}]}], 
-  "]"}]], "Input",
+ RowBox[{"FRGDiagramsPhiPhiNf1", " ", "=", " ", 
+  RowBox[{"DeriveFunctionalEquation", "[", 
+   RowBox[{"SetupNf1", ",", "DerivativeListScalarTwopoint", ",", 
+    RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<FullDiagrams\>\""}]}],
+    "]"}]}]], "Input",
  CellChangeTimes->{{3.777012926659101*^9, 3.777012938599561*^9}, {
    3.7770129804720187`*^9, 3.777013017008383*^9}, {3.7770131863384695`*^9, 
    3.7770131903791466`*^9}, 3.77701323765314*^9, {3.7770132769655347`*^9, 
@@ -253,218 +244,9 @@ Cell[BoxData[
    3.805180701520477*^9, 3.805180718940524*^9}, {3.8051808845395985`*^9, 
    3.8051808873287387`*^9}, {3.805181248307301*^9, 3.8051812498146725`*^9}, {
    3.805184916746381*^9, 3.8051849200479946`*^9}, {3.8051857676851683`*^9, 
-   3.805185769463391*^9}, 
-   3.8061389411722*^9},ExpressionUUID->"adea09f6-a7c6-43bc-8eef-efb1abe0a5a4"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185769744707*^9},ExpressionUUID->"cb71ccfd-226b-4df1-b7df-\
-9f5f751bd5cf"],
-
-Cell[BoxData[
- RowBox[{"{", "p$6975", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857697546206`*^9},ExpressionUUID->"a4e3b3be-b434-452f-ab0f-\
-fcdebc3126ab"],
-
-Cell[BoxData[
- RowBox[{"{", "p$6964", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857698345575`*^9},ExpressionUUID->"aff4d551-a782-4b69-8cd4-\
-677a59ca8489"],
-
-Cell[BoxData[
- RowBox[{"{", "p$6961", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185769844631*^9},ExpressionUUID->"63b3c0a6-6bab-439e-91f0-\
-3e1640e3a643"],
-
-Cell[BoxData[
- RowBox[{"{", "p$6986", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185769924244*^9},ExpressionUUID->"4fb0baf0-ff54-458b-a8ec-\
-6b568a13f272"],
-
-Cell[BoxData[
- RowBox[{"{", "p$6980", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185769935012*^9},ExpressionUUID->"1df1cfd9-e2b8-4d0b-aa54-\
-64429089164d"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857700049324`*^9},ExpressionUUID->"0bc4a072-f9d8-4520-b16b-\
-220454a393e7"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770088418*^9},ExpressionUUID->"1a2e9ea0-0328-4f56-8306-\
-87e71363cb6c"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7032", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857700949807`*^9},ExpressionUUID->"461f780c-22b5-456a-b9cb-\
-fedd2162653a"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7019", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857701750627`*^9},ExpressionUUID->"02f7c339-55ba-4e1f-9729-\
-af5fffccdce8"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7022", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770184123*^9},ExpressionUUID->"5679d237-744f-46af-8a4c-\
-f0b251f73079"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7043", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770264665*^9},ExpressionUUID->"c8f34163-22c7-4d23-9ea9-\
-b3554b757f72"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7037", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857702646756`*^9},ExpressionUUID->"d25f9f7d-9156-46c9-9f1d-\
-a7e35b249fb9"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770348363*^9},ExpressionUUID->"197ae032-2ca6-47f4-9131-\
-1cae488f0ec9"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"2", ",", "1", ",", "1", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770424798*^9},ExpressionUUID->"9dddca78-d1bf-4df4-9769-\
-485aea4818d7"],
-
-Cell[BoxData["\<\"symm length to reg\"\>"], "Echo",
- CellChangeTimes->{
-  3.805185770424798*^9},ExpressionUUID->"ae0bed45-ab18-4bb2-8720-\
-b1e4004d534e"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7085", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770484687*^9},ExpressionUUID->"cb27a0f7-2ce8-4db7-bccc-\
-2cbf57d052dc"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7080", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770544835*^9},ExpressionUUID->"037518b4-a1b6-460c-ae1f-\
-f17a97f159d8"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7077", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770554311*^9},ExpressionUUID->"a587ff41-b8dc-40ec-8595-\
-f494c13f133d"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857706047277`*^9},ExpressionUUID->"2458ed6f-1f95-43bb-9f79-\
-90e08367f38f"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857706642485`*^9},ExpressionUUID->"59270507-83de-4803-be2f-\
-d43d0d83fe81"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7136", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770674842*^9},ExpressionUUID->"cf0d89a5-e648-435c-bf2b-\
-2dd234671c5c"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7117", "}"}]], "Echo",
- CellChangeTimes->{
-  3.80518577072408*^9},ExpressionUUID->"366a15be-55b2-458b-abd6-98040403fe00"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7120", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770734453*^9},ExpressionUUID->"7f6ca0b8-e9cf-4ff0-871a-\
-a1b93db2cac3"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7125", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770784683*^9},ExpressionUUID->"52768fd7-4276-4bd6-b79a-\
-ddd450f3640f"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7131", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857707943325`*^9},ExpressionUUID->"3252e52d-97a7-49b9-aa99-\
-0258ab5645f4"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857708446856`*^9},ExpressionUUID->"3fe9281e-b6dd-4b3e-bb04-\
-99047e5d69cf"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.805185770894924*^9},ExpressionUUID->"6f106df1-b4ec-4414-8642-\
-743815c17b7f"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7193", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857709049606`*^9},ExpressionUUID->"396f9d80-bd4e-4c3b-9ba4-\
-f8edf1d26e36"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7178", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857709544277`*^9},ExpressionUUID->"cd441a37-7a24-4646-b4cb-\
-96b4526b03e9"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7175", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857709649887`*^9},ExpressionUUID->"2e62292d-e577-4a24-8baa-\
-39285b53e981"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7182", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857710143948`*^9},ExpressionUUID->"87ca101a-2e78-4715-81ee-\
-fa29c22045ab"],
-
-Cell[BoxData[
- RowBox[{"{", "p$7188", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857710648413`*^9},ExpressionUUID->"8abb87f9-22b7-41ff-b0d0-\
-b3ce305071b6"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051857711231585`*^9},ExpressionUUID->"ab0a1f71-0187-467b-ba9d-\
-ba6ca6c234b1"]
-}, Open  ]],
+   3.805185769463391*^9}, 3.8061389411722*^9, 3.807520059795566*^9, {
+   3.8151272480144825`*^9, 3.815127252167054*^9}, 3.8151274455748863`*^9},
+ CellLabel->"In[21]:=",ExpressionUUID->"adea09f6-a7c6-43bc-8eef-efb1abe0a5a4"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -475,37 +257,35 @@ Cell[BoxData[
       FractionBox["1", "2"]}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$6965", ",", "i$6965", ",", 
-        RowBox[{"-", "q"}], ",", "d$6970", ",", "i$6970"}], "}"}], "]"}], " ", 
+       RowBox[{"q", ",", "d$3007", ",", 
+        RowBox[{"-", "q"}], ",", "d$3012"}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$6987", ",", "i$6987", ",", 
-        RowBox[{"-", "q"}], ",", "d$6962", ",", "i$6962"}], "}"}], "]"}], " ", 
+       RowBox[{"q", ",", "d$3029", ",", 
+        RowBox[{"-", "q"}], ",", "d$3004"}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"p", "+", "q"}], ",", "d$6976", ",", "i$6976", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3018", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6981", ",", "i$6981"}], 
-       "}"}], "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3023"}], "}"}], "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$6962", ",", "i$6962", ",", "q", ",", 
-        "d$6965", ",", "i$6965"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$3004", ",", "q", ",", "d$3007"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "p"}], ",", "m", ",", 
-        RowBox[{"-", "q"}], ",", "d$6970", ",", "i$6970", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$6976", ",", "i$6976"}], "}"}], "]"}],
-      " ", 
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"-", "q"}], ",", "d$3012", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3018"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"p", ",", "n", ",", 
+       RowBox[{"p", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6981", ",", "i$6981", ",", 
-        "q", ",", "d$6987", ",", "i$6987"}], "}"}], "]"}]}], "}"}], ",", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3023", ",", "q", ",", 
+        "d$3029"}], "}"}], "]"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
@@ -514,35 +294,34 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7038", ",", "i$7038", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$7033", ",", "i$7033"}], "}"}], "]"}],
-      " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3084", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3079"}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$7023", ",", "i$7023", ",", "q", ",", 
-        "d$7044", ",", "i$7044"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$3069", ",", "q", ",", "d$3090"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$7027", ",", "i$7027", ",", "q", ",", 
-        "d$7020", ",", "i$7020"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$3073", ",", "q", ",", "d$3066"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$7020", ",", "i$7020", ",", 
-        RowBox[{"-", "q"}], ",", "d$7023", ",", "i$7023"}], "}"}], "]"}], " ", 
+       RowBox[{"q", ",", "d$3066", ",", 
+        RowBox[{"-", "q"}], ",", "d$3069"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "p"}], ",", "m", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$7033", ",", "i$7033", ",", 
-        RowBox[{"-", "q"}], ",", "d$7027", ",", "i$7027"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3079", ",", 
+        RowBox[{"-", "q"}], ",", "d$3073"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"p", ",", "n", ",", "q", ",", "d$7044", ",", "i$7044", ",", 
+       RowBox[{"p", ",", "q", ",", "d$3090", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7038", ",", "i$7038"}], 
-       "}"}], "]"}]}], "}"}], ",", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3084"}], "}"}], "]"}]}], 
+    "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
@@ -550,23 +329,55 @@ Cell[BoxData[
      RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "i$7078", ",", "q", ",", "i$7086"}], "}"}], 
-      "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
      RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "q"}], ",", "i$7091", ",", "q", ",", "i$7081"}], "}"}], 
-      "]"}], " ", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
      RowBox[{"RdotPhiPhi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "i$7078", ",", "q", ",", "i$7081"}], "}"}], 
-      "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPhiPhiPhi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "i$7086", ",", 
-        RowBox[{"-", "q"}], ",", "i$7091", ",", 
-        RowBox[{"-", "p"}], ",", "m", ",", "p", ",", "n"}], "}"}], "]"}]}], 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "p"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsiPsibar", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3174", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3179"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsiPsibar", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$3163", ",", "q", ",", "d$3168"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsiPsibar", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$3185", ",", "q", ",", "d$3160"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibarPsi", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$3160", ",", 
+        RowBox[{"-", "q"}], ",", "d$3163"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3179", ",", 
+        RowBox[{"-", "q"}], ",", "d$3185"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "q", ",", "d$3168", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3174"}], "}"}], "]"}]}], 
     "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
@@ -574,116 +385,63 @@ Cell[BoxData[
       FractionBox["1", "2"]}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
+       RowBox[{"q", ",", "d$3221", ",", 
+        RowBox[{"-", "q"}], ",", "d$3242"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsiPsibar", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$3225", ",", 
+        RowBox[{"-", "q"}], ",", "d$3218"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsiPsibar", "[", 
+      RowBox[{"{", 
        RowBox[{
+        RowBox[{"p", "+", "q"}], ",", "d$3236", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7132", ",", "i$7132", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$7137", ",", "i$7137"}], "}"}], "]"}],
-      " ", 
-     RowBox[{"GPsiPsibar", "[", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "q"}], ",", "d$7121", ",", "i$7121", ",", "q", ",", 
-        "d$7126", ",", "i$7126"}], "}"}], "]"}], " ", 
-     RowBox[{"GPsiPsibar", "[", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "q"}], ",", "d$7143", ",", "i$7143", ",", "q", ",", 
-        "d$7118", ",", "i$7118"}], "}"}], "]"}], " ", 
-     RowBox[{"RdotPsibarPsi", "[", 
-      RowBox[{"{", 
-       RowBox[{"q", ",", "d$7118", ",", "i$7118", ",", 
-        RowBox[{"-", "q"}], ",", "d$7121", ",", "i$7121"}], "}"}], "]"}], " ", 
-     RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "p"}], ",", "m", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$7137", ",", "i$7137", ",", 
-        RowBox[{"-", "q"}], ",", "d$7143", ",", "i$7143"}], "}"}], "]"}], " ", 
-     RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
-      RowBox[{"{", 
-       RowBox[{"p", ",", "n", ",", "q", ",", "d$7126", ",", "i$7126", ",", 
-        RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7132", ",", "i$7132"}], 
-       "}"}], "]"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"-", 
-      FractionBox["1", "2"]}], " ", 
-     RowBox[{"GPsiPsibar", "[", 
-      RowBox[{"{", 
-       RowBox[{"q", ",", "d$7179", ",", "i$7179", ",", 
-        RowBox[{"-", "q"}], ",", "d$7200", ",", "i$7200"}], "}"}], "]"}], " ", 
-     RowBox[{"GPsiPsibar", "[", 
-      RowBox[{"{", 
-       RowBox[{"q", ",", "d$7183", ",", "i$7183", ",", 
-        RowBox[{"-", "q"}], ",", "d$7176", ",", "i$7176"}], "}"}], "]"}], " ", 
-     RowBox[{"GPsiPsibar", "[", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"p", "+", "q"}], ",", "d$7194", ",", "i$7194", ",", 
-        RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7189", ",", "i$7189"}], 
-       "}"}], "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3231"}], "}"}], "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$7176", ",", "i$7176", ",", "q", ",", 
-        "d$7179", ",", "i$7179"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$3218", ",", "q", ",", "d$3221"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "p"}], ",", "m", ",", 
-        RowBox[{"-", "q"}], ",", "d$7200", ",", "i$7200", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$7194", ",", "i$7194"}], "}"}], "]"}],
-      " ", 
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"-", "q"}], ",", "d$3242", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3236"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"p", ",", "n", ",", 
+       RowBox[{"p", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7189", ",", "i$7189", ",", 
-        "q", ",", "d$7183", ",", "i$7183"}], "}"}], "]"}]}], "}"}]}], 
-  "}"}]], "Output",
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3231", ",", "q", ",", 
+        "d$3225"}], "}"}], "]"}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{
-  3.805004452951786*^9, 3.8050143806779985`*^9, 3.8050182207187767`*^9, 
-   3.805020090464872*^9, 3.805020242077813*^9, 3.8050205296472034`*^9, 
-   3.805020670916318*^9, 3.805022603746846*^9, 3.8050226422875257`*^9, 
-   3.8050888394468527`*^9, 3.805089083676278*^9, 3.805092012108536*^9, 
-   3.80509386567784*^9, 3.805102380833774*^9, 3.805102417342738*^9, {
-   3.8051807043220205`*^9, 3.805180719256422*^9}, 3.8051808877103825`*^9, 
-   3.80518095444518*^9, 3.8051810525821967`*^9, {3.8051812450415545`*^9, 
-   3.805181251859542*^9}, 3.805184920427713*^9, 3.8051857711844897`*^9},
- CellLabel->"Out[35]=",ExpressionUUID->"c9a19703-1ddc-46bb-964c-c6e1c0be242b"]
+  3.8151293451789217`*^9, 3.817531405604293*^9, {3.8175315671209755`*^9, 
+   3.8175315723616877`*^9}, 3.8175317741498413`*^9, {3.817531848752631*^9, 
+   3.817531869081399*^9}, 3.817531910487193*^9, 3.8175320508377347`*^9, {
+   3.8175321101450386`*^9, 3.817532137799455*^9}, 3.81753219726365*^9, 
+   3.8175329054188323`*^9, 3.8175340403191614`*^9, 3.8200454157779675`*^9},
+ CellLabel->"Out[21]=",ExpressionUUID->"4459599a-59da-4b88-86cf-30c4670af4e6"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"Length", "@", "%"}]], "Input",
- CellChangeTimes->{{3.805001736622326*^9, 3.8050017382172656`*^9}},
- CellLabel->"In[22]:=",ExpressionUUID->"12ee04af-8f3b-4c8a-ba78-26df0c768352"],
-
-Cell[BoxData["7"], "Output",
- CellChangeTimes->{3.8050017387081413`*^9},
- CellLabel->"Out[22]=",ExpressionUUID->"47f755b8-0462-4fbe-bf30-e8201a07b630"]
-}, Open  ]]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["Derive Flow Equation for Psi Twopoint", "Subsection",
+Cell["Derive Flow Equation for Psi two-point", "Subsection",
  CellChangeTimes->{{3.7778967928168535`*^9, 3.7778968262422132`*^9}, {
   3.8018083243891296`*^9, 3.801808328609626*^9}, {3.8051806974004583`*^9, 
-  3.8051806977028284`*^9}, {3.8051846687117414`*^9, 
-  3.8051846690630136`*^9}},ExpressionUUID->"f8260c61-3946-43d9-8da9-\
+  3.8051806977028284`*^9}, {3.8051846687117414`*^9, 3.8051846690630136`*^9}, {
+  3.8151272779266505`*^9, 
+  3.815127279047143*^9}},ExpressionUUID->"f8260c61-3946-43d9-8da9-\
 b1d9b2053799"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"DeriveFunctionalEquation", "[", 
-  RowBox[{"SetupNf1", ",", "DerivativeListFermionTwopoint", ",", 
-   RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<FullDiagrams\>\""}]}], 
-  "]"}]], "Input",
+ RowBox[{"FRGDiagramsPsibarPsiNf1", " ", "=", " ", 
+  RowBox[{"DeriveFunctionalEquation", "[", 
+   RowBox[{"SetupNf1", ",", "DerivativeListFermionTwopoint", ",", 
+    RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<FullDiagrams\>\""}]}],
+    "]"}]}]], "Input",
  CellChangeTimes->{{3.777012926659101*^9, 3.777012938599561*^9}, {
    3.7770129804720187`*^9, 3.777013017008383*^9}, {3.7770131863384695`*^9, 
    3.7770131903791466`*^9}, 3.77701323765314*^9, {3.7770132769655347`*^9, 
@@ -702,252 +460,9 @@ Cell[BoxData[
    3.805185503743589*^9, 3.8051855039346266`*^9}, 3.80518559811475*^9, {
    3.8051856291763515`*^9, 3.805185629374335*^9}, 3.805185659804555*^9, {
    3.8051856992341995`*^9, 3.805185702752804*^9}, {3.805187093465782*^9, 
-   3.805187093937539*^9}, 
-   3.8061389412034883`*^9},ExpressionUUID->"b1f77bde-a747-45fe-b430-\
-8e63a1cf7e96"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870942563834`*^9},ExpressionUUID->"c668ef72-6600-48f2-9199-\
-4a30560017dc"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17021", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870942669744`*^9},ExpressionUUID->"950a10c6-6fb8-4c84-9763-\
-d43da996786a"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17007", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870943361044`*^9},ExpressionUUID->"97e86771-1201-404e-a0c1-\
-855dc6eafd99"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17010", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870943462057`*^9},ExpressionUUID->"c869037d-3c28-4026-9a8d-\
-16bdbe858d54"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17030", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870944262133`*^9},ExpressionUUID->"124dda33-1daf-4d83-9bfb-\
-8fdf8de322a2"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17026", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870944364424`*^9},ExpressionUUID->"72ed04de-6436-438f-a3c0-\
-34c26b859ad5"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870945050097`*^9},ExpressionUUID->"869aa428-ab78-45b5-bd31-\
-4e2942e24cc3"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870945759516`*^9},ExpressionUUID->"8297383b-6461-48f9-a35b-\
-19c6a665fd02"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17077", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187094585353*^9},ExpressionUUID->"de2e16f5-0ca3-4974-b7bc-\
-7636a315234d"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17065", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870946650066`*^9},ExpressionUUID->"dbe6a4b1-32a6-4a09-9c68-\
-b862136ef081"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17068", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870946664*^9},ExpressionUUID->"e106e73a-383c-46d6-8dfc-9389979c87ea"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17089", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870947502613`*^9},ExpressionUUID->"cf1e4eb1-4f27-4af7-8cdc-\
-06735fa5c625"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17083", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870947566156`*^9},ExpressionUUID->"1000d4c0-d465-4293-9946-\
-d93f794a03e7"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870948362303`*^9},ExpressionUUID->"d1144953-e866-448a-aed5-\
-701e5491ec83"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"2", ",", "1", ",", "1", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187094906226*^9},ExpressionUUID->"918a427c-12f0-4095-b1b4-\
-f6b8653d0395"],
-
-Cell[BoxData["\<\"symm length to reg\"\>"], "Echo",
- CellChangeTimes->{
-  3.805187094916515*^9},ExpressionUUID->"834ad685-ac56-401c-85a0-\
-caee2def2049"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17131", "}"}]], "Echo",
- CellChangeTimes->{
-  3.80518709497544*^9},ExpressionUUID->"b4c690c3-40b5-4259-b8f6-e14f1d4f8fa9"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17123", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870949760027`*^9},ExpressionUUID->"17706582-42f9-4ba0-9be2-\
-967c74f16ba5"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17126", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095035823*^9},ExpressionUUID->"092d10db-6355-4363-ab4f-\
-cbb9305002d0"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870950864935`*^9},ExpressionUUID->"2d596c97-921c-440c-ab77-\
-7ec70c500a99"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"2", ",", "1", ",", "1", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.80518709513577*^9},ExpressionUUID->"aff516c6-f2ba-438b-98cb-70afea983fd5"],
-
-Cell[BoxData["\<\"symm length to reg\"\>"], "Echo",
- CellChangeTimes->{
-  3.80518709513577*^9},ExpressionUUID->"79054860-2e23-47c9-b4ac-656a353d071a"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17170", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870951960015`*^9},ExpressionUUID->"6b58e9a3-a814-430a-8495-\
-125d849340fc"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17166", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095205332*^9},ExpressionUUID->"118b5324-2857-4a63-a6fb-\
-00dfbd5526d4"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17163", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870952564487`*^9},ExpressionUUID->"fbefa549-ef00-48fa-bed0-\
-052d53b4572b"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870953063736`*^9},ExpressionUUID->"72717729-a643-4057-92f6-\
-d030775a90c0"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870953650494`*^9},ExpressionUUID->"910a4360-9f33-49b5-a5b7-\
-3e6ba8e0431b"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17221", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095366414*^9},ExpressionUUID->"dee73d6e-680d-48f0-9c2d-\
-a282765f0244"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17206", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095425856*^9},ExpressionUUID->"0d5614c5-30cb-4ee7-abaa-\
-40b8629ce333"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17203", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095436715*^9},ExpressionUUID->"5a83f5b5-58cd-401d-a171-\
-7dcc55c67e83"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17211", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870954860115`*^9},ExpressionUUID->"dadf6920-fadb-46a6-8020-\
-7e0b647d7195"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17216", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095536558*^9},ExpressionUUID->"34e33af9-0f96-46fe-a949-\
-cba11aca3869"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095586027*^9},ExpressionUUID->"e17bc698-7f30-4c6b-88b7-\
-0fa98c0f31b9"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"3", ",", "1", ",", "2", ",", "0", ",", "0"}], "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870956365147`*^9},ExpressionUUID->"47800830-d2ff-47a5-899f-\
-140d588919a9"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17280", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095645063*^9},ExpressionUUID->"b1d0e3c9-8b68-4e88-860e-\
-b0ced98a2822"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17261", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095696419*^9},ExpressionUUID->"eb0bb294-861b-404c-9581-\
-21cb3cd46bf4"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17264", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870957064133`*^9},ExpressionUUID->"d6edf3a5-1eca-4365-8396-\
-9db40ce5feb2"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17269", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870957564306`*^9},ExpressionUUID->"b722fbfd-d157-4cd0-8584-\
-1b9f42594432"],
-
-Cell[BoxData[
- RowBox[{"{", "p$17273", "}"}]], "Echo",
- CellChangeTimes->{
-  3.8051870957664204`*^9},ExpressionUUID->"c3572571-1dfb-4e76-939e-\
-1a8424217b9c"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Echo",
- CellChangeTimes->{
-  3.805187095816599*^9},ExpressionUUID->"c655f4d7-ffae-4112-bafa-\
-88db111b7f65"]
-}, Closed]],
+   3.805187093937539*^9}, 3.8061389412034883`*^9, {3.8151272753927045`*^9, 
+   3.8151272762768993`*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"b1f77bde-a747-45fe-b430-8e63a1cf7e96"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -958,36 +473,34 @@ Cell[BoxData[
       FractionBox["1", "2"]}], " ", 
      RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "i$17008", ",", 
-        RowBox[{"-", "q"}], ",", "i$17016"}], "}"}], "]"}], " ", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
      RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "i$17031", ",", 
-        RowBox[{"-", "q"}], ",", "i$17011"}], "}"}], "]"}], " ", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"p", "+", "q"}], ",", "d$17022", ",", "i$17022", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3972", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$17027", ",", "i$17027"}], 
-       "}"}], "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3977"}], "}"}], "]"}], " ", 
      RowBox[{"RdotPhiPhi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "i$17008", ",", 
-        RowBox[{"-", "q"}], ",", "i$17011"}], "}"}], "]"}], " ", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "i$17016", ",", 
-        RowBox[{"-", "p"}], ",", "d", ",", "m", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$17022", ",", "i$17022"}], "}"}], 
-      "]"}], " ", 
+        RowBox[{"-", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$3972"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "i$17031", ",", 
+       RowBox[{"q", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$17027", ",", "i$17027", ",", 
-        "p", ",", "e", ",", "n"}], "}"}], "]"}]}], "}"}], ",", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$3977", ",", "p", ",", "d"}], 
+       "}"}], "]"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
@@ -996,37 +509,34 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "i$17084", ",", 
-        RowBox[{"p", "+", "q"}], ",", "i$17078"}], "}"}], "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", 
+        RowBox[{"p", "+", "q"}]}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17069", ",", "i$17069", ",", "q", ",", 
-        "d$17090", ",", "i$17090"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4018", ",", "q", ",", "d$4037"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17073", ",", "i$17073", ",", "q", ",", 
-        "d$17066", ",", "i$17066"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4022", ",", "q", ",", "d$4015"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$17066", ",", "i$17066", ",", 
-        RowBox[{"-", "q"}], ",", "d$17069", ",", "i$17069"}], "}"}], "]"}], 
-     " ", 
+       RowBox[{"q", ",", "d$4015", ",", 
+        RowBox[{"-", "q"}], ",", "d$4018"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "i$17084", ",", "q", ",", 
-        "d$17090", ",", "i$17090", ",", "p", ",", "e", ",", "n"}], "}"}], 
-      "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "q", ",", "d$4037", ",", "p", 
+        ",", "d"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"p", "+", "q"}], ",", "i$17078", ",", 
-        RowBox[{"-", "p"}], ",", "d", ",", "m", ",", 
-        RowBox[{"-", "q"}], ",", "d$17073", ",", "i$17073"}], "}"}], "]"}]}], 
-    "}"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$4022"}], "}"}], "]"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
@@ -1034,51 +544,45 @@ Cell[BoxData[
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17127", ",", "i$17127", ",", "q", ",", 
-        "d$17132", ",", "i$17132"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4074", ",", "q", ",", "d$4079"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17139", ",", "i$17139", ",", "q", ",", 
-        "d$17124", ",", "i$17124"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4086", ",", "q", ",", "d$4071"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$17124", ",", "i$17124", ",", 
-        RowBox[{"-", "q"}], ",", "d$17127", ",", "i$17127"}], "}"}], "]"}], 
-     " ", 
+       RowBox[{"q", ",", "d$4071", ",", 
+        RowBox[{"-", "q"}], ",", "d$4074"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PsibarPsibarPsiPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$17132", ",", "i$17132", ",", 
-        RowBox[{"-", "p"}], ",", "d", ",", "m", ",", "p", ",", "e", ",", "n", 
-        ",", 
-        RowBox[{"-", "q"}], ",", "d$17139", ",", "i$17139"}], "}"}], "]"}]}], 
-    "}"}], ",", 
+       RowBox[{"q", ",", "d$4079", ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", "p", ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$4086"}], "}"}], "]"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
       FractionBox["1", "2"]}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$17167", ",", "i$17167", ",", 
-        RowBox[{"-", "q"}], ",", "d$17177", ",", "i$17177"}], "}"}], "]"}], 
-     " ", 
+       RowBox[{"q", ",", "d$4114", ",", 
+        RowBox[{"-", "q"}], ",", "d$4124"}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$17171", ",", "i$17171", ",", 
-        RowBox[{"-", "q"}], ",", "d$17164", ",", "i$17164"}], "}"}], "]"}], 
-     " ", 
+       RowBox[{"q", ",", "d$4118", ",", 
+        RowBox[{"-", "q"}], ",", "d$4111"}], "}"}], "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17164", ",", "i$17164", ",", "q", ",", 
-        "d$17167", ",", "i$17167"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4111", ",", "q", ",", "d$4114"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"\[CapitalGamma]PsibarPsibarPsiPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "p"}], ",", "d", ",", "m", ",", 
-        RowBox[{"-", "q"}], ",", "d$17177", ",", "i$17177", ",", "q", ",", 
-        "d$17171", ",", "i$17171", ",", "p", ",", "e", ",", "n"}], "}"}], 
-      "]"}]}], "}"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$4124", ",", "q", ",", "d$4118", ",", "p", 
+        ",", "d"}], "}"}], "]"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
@@ -1086,38 +590,33 @@ Cell[BoxData[
      RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "i$17204", ",", "q", ",", "i$17212"}], "}"}],
-       "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
      RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "q"}], ",", "i$17227", ",", "q", ",", "i$17207"}], "}"}],
-       "]"}], " ", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"p", "+", "q"}], ",", "d$17222", ",", "i$17222", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$4166", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$17217", ",", "i$17217"}], 
-       "}"}], "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$4161"}], "}"}], "]"}], " ", 
      RowBox[{"RdotPhiPhi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "i$17204", ",", "q", ",", "i$17207"}], "}"}],
-       "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "i$17227", ",", 
-        RowBox[{"-", "p"}], ",", "d", ",", "m", ",", 
-        RowBox[{"p", "+", "q"}], ",", "d$17222", ",", "i$17222"}], "}"}], 
-      "]"}], " ", 
+        RowBox[{"-", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$4166"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "i$17212", ",", 
+       RowBox[{"q", ",", 
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "d$17217", ",", "i$17217", ",", 
-        "p", ",", "e", ",", "n"}], "}"}], "]"}]}], "}"}], ",", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$4161", ",", "p", ",", "d"}], 
+       "}"}], "]"}]}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"-", 
@@ -1126,37 +625,35 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "i$17274", ",", 
-        RowBox[{"p", "+", "q"}], ",", "i$17281"}], "}"}], "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", 
+        RowBox[{"p", "+", "q"}]}], "}"}], "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17265", ",", "i$17265", ",", "q", ",", 
-        "d$17270", ",", "i$17270"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4208", ",", "q", ",", "d$4213"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"GPsiPsibar", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"-", "q"}], ",", "d$17287", ",", "i$17287", ",", "q", ",", 
-        "d$17262", ",", "i$17262"}], "}"}], "]"}], " ", 
+        RowBox[{"-", "q"}], ",", "d$4228", ",", "q", ",", "d$4205"}], "}"}], 
+      "]"}], " ", 
      RowBox[{"RdotPsibarPsi", "[", 
       RowBox[{"{", 
-       RowBox[{"q", ",", "d$17262", ",", "i$17262", ",", 
-        RowBox[{"-", "q"}], ",", "d$17265", ",", "i$17265"}], "}"}], "]"}], 
-     " ", 
+       RowBox[{"q", ",", "d$4205", ",", 
+        RowBox[{"-", "q"}], ",", "d$4208"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{"-", "p"}], "-", "q"}], ",", "i$17274", ",", "q", ",", 
-        "d$17270", ",", "i$17270", ",", "p", ",", "e", ",", "n"}], "}"}], 
-      "]"}], " ", 
+         RowBox[{"-", "p"}], "-", "q"}], ",", "q", ",", "d$4213", ",", "p", 
+        ",", "d"}], "}"}], "]"}], " ", 
      RowBox[{"\[CapitalGamma]PhiPsibarPsi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"p", "+", "q"}], ",", "i$17281", ",", 
-        RowBox[{"-", "p"}], ",", "d", ",", "m", ",", 
-        RowBox[{"-", "q"}], ",", "d$17287", ",", "i$17287"}], "}"}], "]"}]}], 
-    "}"}]}], "}"}]], "Output",
+        RowBox[{"p", "+", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$4228"}], "}"}], "]"}]}], "}"}]}], 
+  "}"}]], "Output",
  CellChangeTimes->{
   3.805004452951786*^9, 3.8050143806779985`*^9, 3.8050182207187767`*^9, 
    3.805020090464872*^9, 3.805020242077813*^9, 3.8050205296472034`*^9, 
@@ -1169,21 +666,11 @@ Cell[BoxData[
    3.8051852793648825`*^9, 3.8051853466349573`*^9, 3.8051854260036306`*^9, 
    3.8051855042346087`*^9, 3.8051855984249935`*^9, 3.8051856296041603`*^9, 
    3.8051856600834045`*^9, 3.8051857046649055`*^9, {3.805187080027043*^9, 
-   3.8051870958868465`*^9}},
- CellLabel->"Out[67]=",ExpressionUUID->"49bde3c4-b678-4014-b73c-2c2ab5233283"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Length", "@", "%"}]], "Input",
- CellChangeTimes->{{3.805001736622326*^9, 3.8050017382172656`*^9}},
- CellLabel->"In[68]:=",ExpressionUUID->"69954672-90e5-406b-aef3-4aa0129fb091"],
-
-Cell[BoxData["6"], "Output",
- CellChangeTimes->{3.8050017387081413`*^9, 3.805185307114758*^9, 
-  3.8051870992848067`*^9},
- CellLabel->"Out[68]=",ExpressionUUID->"1a0b8d98-2fd2-488b-a521-1aa715b21fa3"]
+   3.8051870958868465`*^9}, 3.807520289149783*^9, 3.815127369930829*^9, 
+   3.8151293453554487`*^9, 3.817531405713401*^9, 3.8175319433490753`*^9, 
+   3.817532056432969*^9, 3.8175321995345993`*^9, 3.817532905518118*^9, 
+   3.817534040417918*^9, 3.820045415870719*^9},
+ CellLabel->"Out[22]=",ExpressionUUID->"5361b90b-9513-4871-8777-5343f2951bb8"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -1232,10 +719,7 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"\"\<bosonic\>\"", " ", "\[Rule]", " ", 
        RowBox[{"{", 
-        RowBox[{"Phi", "[", 
-         RowBox[{"p", ",", 
-          RowBox[{"{", "i", "}"}]}], "]"}], "}"}]}], ",", 
-      "\[IndentingNewLine]", 
+        RowBox[{"Phi", "[", "p", "]"}], "}"}]}], ",", "\[IndentingNewLine]", 
       RowBox[{"\"\<fermionic\>\"", "\[Rule]", " ", 
        RowBox[{"{", 
         RowBox[{
@@ -1243,35 +727,26 @@ Cell[BoxData[{
           RowBox[{
            RowBox[{"Psibar1", "[", 
             RowBox[{"p", ",", 
-             RowBox[{"{", 
-              RowBox[{"d", ",", "i"}], "}"}]}], "]"}], ",", 
+             RowBox[{"{", "d", "}"}]}], "]"}], ",", 
            RowBox[{"Psi1", "[", 
             RowBox[{"p", ",", 
-             RowBox[{"{", 
-              RowBox[{"d", ",", "i"}], "}"}]}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", "d", "}"}]}], "]"}]}], "}"}], ",", 
          RowBox[{"{", 
           RowBox[{
            RowBox[{"Psibar2", "[", 
             RowBox[{"p", ",", 
-             RowBox[{"{", 
-              RowBox[{"d", ",", "i"}], "}"}]}], "]"}], ",", 
+             RowBox[{"{", "d", "}"}]}], "]"}], ",", 
            RowBox[{"Psi2", "[", 
             RowBox[{"p", ",", 
-             RowBox[{"{", 
-              RowBox[{"d", ",", "i"}], "}"}]}], "]"}]}], "}"}]}], "}"}]}]}], 
-     "|>"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+             RowBox[{"{", "d", "}"}]}], "]"}]}], "}"}]}], "}"}]}]}], "|>"}]}],
+    ";"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
-  RowBox[{"DerivativeListBosonTwopoint", " ", "=", 
+  RowBox[{"DerivativeListScalarTwopoint", " ", "=", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"Phi", "[", 
-      RowBox[{
-       RowBox[{"-", "p"}], ",", 
-       RowBox[{"{", "m", "}"}]}], "]"}], ",", 
-     RowBox[{"Phi", "[", 
-      RowBox[{"p", ",", 
-       RowBox[{"{", "n", "}"}]}], "]"}]}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
+      RowBox[{"-", "p"}], "]"}], ",", 
+     RowBox[{"Phi", "[", "p", "]"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DerivativeListFermion1Twopoint", " ", "=", 
@@ -1280,12 +755,10 @@ Cell[BoxData[{
       RowBox[{"Psibar1", "[", 
        RowBox[{
         RowBox[{"-", "p"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"d", ",", "m"}], "}"}]}], "]"}], ",", 
+        RowBox[{"{", "d", "}"}]}], "]"}], ",", 
       RowBox[{"Psi1", "[", 
        RowBox[{"p", ",", 
-        RowBox[{"{", 
-         RowBox[{"e", ",", "n"}], "}"}]}], "]"}]}], "}"}]}], ";"}], 
+        RowBox[{"{", "d", "}"}]}], "]"}]}], "}"}]}], ";"}], 
   "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"TruncationFRGNf2", " ", "=", " ", 
@@ -1312,6 +785,7 @@ Cell[BoxData[{
      RowBox[{"{", 
       RowBox[{"Psi1", ",", "Psi2", ",", "Psibar1", ",", "Psibar2"}], "}"}]}], 
     "}"}]}], ";"}]}], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.7736372469148283`*^9, 3.7736372667513313`*^9}, {
    3.774262172649588*^9, 3.774262199876032*^9}, {3.7778959933361387`*^9, 
    3.7778959937246933`*^9}, 3.777896515299904*^9, {3.8018082265710363`*^9, 
@@ -1344,19 +818,23 @@ Cell[BoxData[{
    3.805180950986191*^9}, 3.80518099176746*^9, {3.8051810340803394`*^9, 
    3.8051810487312946`*^9}, 3.805181233023961*^9, {3.8051813235147943`*^9, 
    3.805181406565258*^9}, {3.8051816127708197`*^9, 3.8051816293811736`*^9}, {
-   3.805181861791295*^9, 3.8051818675202017`*^9}},
- CellLabel->"In[38]:=",ExpressionUUID->"ca6e312f-cc7d-404c-85e1-239b2038ffe8"],
+   3.805181861791295*^9, 3.8051818675202017`*^9}, {3.8075205965532885`*^9, 
+   3.8075206087114954`*^9}, {3.8151272914000435`*^9, 3.815127310448324*^9}, 
+   3.8151274494844637`*^9, {3.817531379443952*^9, 3.817531382591014*^9}, {
+   3.817532211643864*^9, 3.8175322153199873`*^9}, {3.8175340143140535`*^9, 
+   3.817534024919594*^9}, {3.820045378088899*^9, 3.8200453927247367`*^9}},
+ CellLabel->"In[23]:=",ExpressionUUID->"ca6e312f-cc7d-404c-85e1-239b2038ffe8"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{
-   RowBox[{"SetupNf2", " ", "=", " ", 
-    RowBox[{"<|", 
-     RowBox[{
-      RowBox[{"\"\<MasterEquation\>\"", "\[Rule]", " ", "FRGEq"}], ",", 
-      RowBox[{"\"\<FieldSpace\>\"", "\[Rule]", " ", "fieldsNf2"}], ",", 
-      RowBox[{"\"\<Truncation\>\"", "\[Rule]", "TruncationFRGNf2"}]}], 
-     "|>"}]}], ";"}], "\[IndentingNewLine]"}]], "Input",
+  RowBox[{"SetupNf2", " ", "=", " ", 
+   RowBox[{"<|", 
+    RowBox[{
+     RowBox[{"\"\<MasterEquation\>\"", "\[Rule]", " ", "FRGEq"}], ",", 
+     RowBox[{"\"\<FieldSpace\>\"", "\[Rule]", " ", "fieldsNf2"}], ",", 
+     RowBox[{"\"\<Truncation\>\"", "\[Rule]", "TruncationFRGNf2"}]}], 
+    "|>"}]}], ";"}]], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.7736431600665627`*^9, 3.773643224908215*^9}, {
    3.7736437626135345`*^9, 3.7736438184638596`*^9}, {3.773643909718261*^9, 
    3.773643944655748*^9}, {3.7742624212179055`*^9, 3.774262426704669*^9}, {
@@ -1374,8 +852,8 @@ Cell[BoxData[
    3.8050215195427427`*^9, 3.8050215211202936`*^9}, {3.805088977927044*^9, 
    3.805089014887038*^9}, 3.8050891552271156`*^9, {3.805180654681514*^9, 
    3.805180688800662*^9}, {3.805181368254797*^9, 3.805181371695114*^9}, {
-   3.8051867491762977`*^9, 3.8051867497258496`*^9}},
- CellLabel->"In[45]:=",ExpressionUUID->"bf31a2de-90e0-491d-b35f-6136fe81bb9b"]
+   3.8051867491762977`*^9, 3.8051867497258496`*^9}, 3.8175313757260656`*^9},
+ CellLabel->"In[28]:=",ExpressionUUID->"bf31a2de-90e0-491d-b35f-6136fe81bb9b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1388,22 +866,21 @@ Cell["FRG Equations ", "Section",
 
 Cell[CellGroupData[{
 
-Cell["Derive Flow Equation for Phi Twopoint", "Subsection",
+Cell["Derive Flow Equation for Phi two-point", "Subsection",
  CellChangeTimes->{{3.7778967928168535`*^9, 3.7778968262422132`*^9}, {
   3.8018083243891296`*^9, 3.801808328609626*^9}, {3.8051806974004583`*^9, 
-  3.8051806977028284`*^9}},ExpressionUUID->"0e4200a1-5bb2-45ec-a348-\
+  3.8051806977028284`*^9}, {3.81512732593696*^9, 
+  3.815127327287351*^9}},ExpressionUUID->"0e4200a1-5bb2-45ec-a348-\
 f0d65a1d27a0"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{
+ RowBox[{"FRGDiagramsPhiPhiNf2", " ", "=", " ", 
   RowBox[{"DeriveFunctionalEquation", "[", 
-   RowBox[{"SetupNf2", ",", "DerivativeListBosonTwopoint", ",", 
-    RowBox[{
-    "\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<SuperindexDiagrams\>\""}]}], 
-   "]"}], "[", 
-  RowBox[{"[", "6", "]"}], "]"}]], "Input",
+   RowBox[{"SetupNf2", ",", "DerivativeListScalarTwopoint", ",", 
+    RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<FullDiagrams\>\""}]}],
+    "]"}]}]], "Input",
  CellChangeTimes->{{3.777012926659101*^9, 3.777012938599561*^9}, {
    3.7770129804720187`*^9, 3.777013017008383*^9}, {3.7770131863384695`*^9, 
    3.7770131903791466`*^9}, 3.77701323765314*^9, {3.7770132769655347`*^9, 
@@ -1418,158 +895,346 @@ Cell[BoxData[
    3.8051808873287387`*^9}, {3.805181248307301*^9, 3.8051812498146725`*^9}, {
    3.8051820804596457`*^9, 3.8051821072120485`*^9}, {3.805182560341274*^9, 
    3.805182562200967*^9}, {3.805186728136218*^9, 3.8051867596864457`*^9}, {
-   3.8051868454359665`*^9, 3.805186906816661*^9}, 
-   3.806138941234724*^9},ExpressionUUID->"021aa3c8-f683-4761-9311-\
-4bbd2cffde39"],
+   3.8051868454359665`*^9, 3.805186906816661*^9}, 3.806138941234724*^9, {
+   3.8075206177318687`*^9, 3.807520621650169*^9}, {3.8151273232627172`*^9, 
+   3.8151273240974865`*^9}, 3.8151274508847213`*^9},
+ CellLabel->"In[29]:=",ExpressionUUID->"021aa3c8-f683-4761-9311-4bbd2cffde39"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   RowBox[{"\<\"Prefactor\"\>", "\[Rule]", 
-    RowBox[{"{", 
+   RowBox[{"{", 
+    RowBox[{
      RowBox[{"-", 
-      FractionBox["1", "2"]}], "}"}]}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Regulatordot\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6596", ",", 
+        RowBox[{"-", "q"}], ",", "d$6601"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6618", ",", 
+        RowBox[{"-", "q"}], ",", "d$6593"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "j", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"p", "+", "q"}], ",", "d$6607", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6612"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "i$13527", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"nPoint\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"-", "q"}], ",", "d$6593", ",", "q", ",", "d$6596"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Phi", ",", 
-          RowBox[{"{", 
-           RowBox[{"p", ",", 
-            RowBox[{"{", "n", "}"}]}], "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "i$13527", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i$13528", "}"}]}], "}"}]}], "}"}]}], ",", 
-     RowBox[{"\<\"nPoint\"\>", "\[Rule]", "3"}], ",", 
-     RowBox[{"\<\"spec\"\>", "\[Rule]", "\<\"none\"\>"}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"-", "q"}], ",", "d$6601", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6607"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6612", ",", "q", ",", 
+        "d$6618"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6654", ",", 
+        RowBox[{"-", "q"}], ",", "d$6659"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6676", ",", 
+        RowBox[{"-", "q"}], ",", "d$6651"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i$13528", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "i$13543", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"nPoint\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"p", "+", "q"}], ",", "d$6665", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6670"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPsibar2Psi2", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Phi", ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"-", "p"}], ",", 
-            RowBox[{"{", "m", "}"}]}], "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "i$13543", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i$13544", "}"}]}], "}"}]}], "}"}]}], ",", 
-     RowBox[{"\<\"nPoint\"\>", "\[Rule]", "3"}], ",", 
-     RowBox[{"\<\"spec\"\>", "\[Rule]", "\<\"none\"\>"}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"-", "q"}], ",", "d$6651", ",", "q", ",", "d$6654"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i$13544", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "j", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}]}], "}"}]], "Output",
- CellChangeTimes->{{3.805186864586651*^9, 3.8051869071859894`*^9}},
- CellLabel->"Out[55]=",ExpressionUUID->"b50d38c1-3fc0-4d89-a494-ff79362222d3"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Length", "@", "%"}]], "Input",
- CellChangeTimes->{{3.805001736622326*^9, 3.8050017382172656`*^9}},
- CellLabel->"In[44]:=",ExpressionUUID->"1c30e345-9670-4a65-9eee-c8a9c830aab3"],
-
-Cell[BoxData["9"], "Output",
- CellChangeTimes->{3.8050017387081413`*^9, 3.805182569890853*^9, 
-  3.805186746246935*^9},
- CellLabel->"Out[44]=",ExpressionUUID->"24138c6a-e392-4096-8ed4-18962aa49a7d"]
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"-", "q"}], ",", "d$6659", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6665"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6670", ",", "q", ",", 
+        "d$6676"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6727", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6722"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6712", ",", "q", ",", "d$6733"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6716", ",", "q", ",", "d$6709"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6709", ",", 
+        RowBox[{"-", "q"}], ",", "d$6712"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6722", ",", 
+        RowBox[{"-", "q"}], ",", "d$6716"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "q", ",", "d$6733", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6727"}], "}"}], "]"}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6785", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6780"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6770", ",", "q", ",", "d$6791"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6774", ",", "q", ",", "d$6767"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6767", ",", 
+        RowBox[{"-", "q"}], ",", "d$6770"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6780", ",", 
+        RowBox[{"-", "q"}], ",", "d$6774"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "q", ",", "d$6791", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6785"}], "}"}], "]"}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
+     RowBox[{"GPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPhiPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "p"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6875", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6880"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6864", ",", "q", ",", "d$6869"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6886", ",", "q", ",", "d$6861"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6861", ",", 
+        RowBox[{"-", "q"}], ",", "d$6864"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6880", ",", 
+        RowBox[{"-", "q"}], ",", "d$6886"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "q", ",", "d$6869", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6875"}], "}"}], "]"}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6933", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6938"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6922", ",", "q", ",", "d$6927"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6944", ",", "q", ",", "d$6919"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6919", ",", 
+        RowBox[{"-", "q"}], ",", "d$6922"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6938", ",", 
+        RowBox[{"-", "q"}], ",", "d$6944"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "q", ",", "d$6927", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6933"}], "}"}], "]"}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6980", ",", 
+        RowBox[{"-", "q"}], ",", "d$7001"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$6984", ",", 
+        RowBox[{"-", "q"}], ",", "d$6977"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"p", "+", "q"}], ",", "d$6995", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6990"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$6977", ",", "q", ",", "d$6980"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"-", "q"}], ",", "d$7001", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$6995"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$6990", ",", "q", ",", 
+        "d$6984"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$7038", ",", 
+        RowBox[{"-", "q"}], ",", "d$7059"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$7042", ",", 
+        RowBox[{"-", "q"}], ",", "d$7035"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"p", "+", "q"}], ",", "d$7053", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7048"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$7035", ",", "q", ",", "d$7038"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", 
+        RowBox[{"-", "q"}], ",", "d$7059", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$7053"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$7048", ",", "q", ",", 
+        "d$7042"}], "}"}], "]"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.805186864586651*^9, 3.8051869071859894`*^9}, {
+   3.8075206135616493`*^9, 3.807520622151827*^9}, 3.815127370344723*^9, 
+   3.815129345781828*^9, 3.817531406587224*^9, {3.8175322046847963`*^9, 
+   3.81753221896157*^9}, 3.8175329057383327`*^9, 3.8175340407320433`*^9, 
+   3.8200454161931763`*^9},
+ CellLabel->"Out[29]=",ExpressionUUID->"4a420a13-4572-478b-86b5-7203afed8fa5"]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Derive Flow Equation for Psi1 Twopoint", "Subsection",
+Cell["Derive Flow Equation for Psi1 two-point", "Subsection",
  CellChangeTimes->{{3.7778967928168535`*^9, 3.7778968262422132`*^9}, {
   3.8018083243891296`*^9, 3.801808328609626*^9}, {3.8051806974004583`*^9, 
-  3.8051806977028284`*^9}, {3.805181584369914*^9, 
-  3.805181585159147*^9}},ExpressionUUID->"6515edd5-f214-46fc-a025-\
+  3.8051806977028284`*^9}, {3.805181584369914*^9, 3.805181585159147*^9}, {
+  3.8151273332668695`*^9, 
+  3.8151273355368023`*^9}},ExpressionUUID->"6515edd5-f214-46fc-a025-\
 66e42221bdb0"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Length", "@", "%"}]], "Input",
- CellLabel->"In[57]:=",ExpressionUUID->"58d9ac64-f6d4-4915-af65-70ecb194f6e4"],
-
-Cell[BoxData["8"], "Output",
- CellChangeTimes->{3.8051870587764378`*^9},
- CellLabel->"Out[57]=",ExpressionUUID->"d0c465b2-ca32-4b38-bf6c-f06bda030ef1"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
+ RowBox[{"FRGDiagramsPsibar1Psi1Nf2", " ", "=", 
   RowBox[{"DeriveFunctionalEquation", "[", 
-   RowBox[{"Setup", ",", "DerivativeListFermion1Twopoint", ",", 
-    RowBox[{
-    "\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<SuperindexDiagrams\>\""}]}], 
-   "]"}], "[", 
-  RowBox[{"[", "8", "]"}], "]"}]], "Input",
+   RowBox[{"SetupNf2", ",", "DerivativeListFermion1Twopoint", ",", 
+    RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", " ", "\"\<FullDiagrams\>\""}]}],
+    "]"}]}]], "Input",
  CellChangeTimes->{{3.777012926659101*^9, 3.777012938599561*^9}, {
    3.7770129804720187`*^9, 3.777013017008383*^9}, {3.7770131863384695`*^9, 
    3.7770131903791466`*^9}, 3.77701323765314*^9, {3.7770132769655347`*^9, 
@@ -1586,125 +1251,262 @@ Cell[BoxData[
    3.80518705522616*^9}, {3.805187164626384*^9, 3.8051871665361366`*^9}, {
    3.805187202086991*^9, 3.805187203256095*^9}, {3.8051872515671034`*^9, 
    3.805187252196635*^9}, {3.805187311676116*^9, 3.805187334696474*^9}, 
-   3.8051874343264256`*^9, 
-   3.806138941234724*^9},ExpressionUUID->"39d8f06c-507f-42f3-b3e4-\
-5de323e4390e"],
+   3.8051874343264256`*^9, 3.806138941234724*^9, {3.8075208072741175`*^9, 
+   3.8075208142216196`*^9}, {3.8151273483121405`*^9, 3.8151273489474792`*^9}},
+ CellLabel->"In[30]:=",ExpressionUUID->"39d8f06c-507f-42f3-b3e4-5de323e4390e"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   RowBox[{"\<\"Prefactor\"\>", "\[Rule]", 
-    RowBox[{"{", 
+   RowBox[{"{", 
+    RowBox[{
      RowBox[{"-", 
-      FractionBox["1", "2"]}], "}"}]}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Regulatordot\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "j", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
+     RowBox[{"GPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "i$20372", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"nPoint\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"p", "+", "q"}], ",", "d$9430", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$9435"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Phi", ",", 
-          RowBox[{"{", "i$20373", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "i$20372", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", 
-           RowBox[{"p", ",", 
-            RowBox[{"{", 
-             RowBox[{"e", ",", "n"}], "}"}]}], "}"}]}], "}"}]}], "}"}]}], ",", 
-     RowBox[{"\<\"nPoint\"\>", "\[Rule]", "3"}], ",", 
-     RowBox[{"\<\"spec\"\>", "\[Rule]", "\<\"none\"\>"}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
+        RowBox[{"-", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$9430"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$9435", ",", "p", ",", "d"}], 
+       "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPhiPhi", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Phi", ",", 
-          RowBox[{"{", "i$20373", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Phi", ",", 
-          RowBox[{"{", "i$20388", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"nPoint\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", 
+        RowBox[{"p", "+", "q"}]}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Phi", ",", 
-          RowBox[{"{", "i$20388", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"-", "p"}], ",", 
-            RowBox[{"{", 
-             RowBox[{"d", ",", "m"}], "}"}]}], "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i$20389", "}"}]}], "}"}]}], "}"}]}], ",", 
-     RowBox[{"\<\"nPoint\"\>", "\[Rule]", "3"}], ",", 
-     RowBox[{"\<\"spec\"\>", "\[Rule]", "\<\"none\"\>"}]}], 
-    "\[RightAssociation]"}], ",", 
-   RowBox[{"\[LeftAssociation]", 
-    RowBox[{
-     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
-     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"-", "q"}], ",", "d$9476", ",", "q", ",", "d$9495"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"Psi1", ",", 
-          RowBox[{"{", "i$20389", "}"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"Psibar1", ",", 
-          RowBox[{"{", "j", "}"}]}], "}"}]}], "}"}]}]}], 
-    "\[RightAssociation]"}]}], "}"}]], "Output",
+        RowBox[{"-", "q"}], ",", "d$9480", ",", "q", ",", "d$9473"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9473", ",", 
+        RowBox[{"-", "q"}], ",", "d$9476"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "q", ",", "d$9495", ",", "p", 
+        ",", "d"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"p", "+", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$9480"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9532", ",", "q", ",", "d$9537"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9544", ",", "q", ",", "d$9529"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9529", ",", 
+        RowBox[{"-", "q"}], ",", "d$9532"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]Psibar1Psibar1Psi1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9537", ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", "p", ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$9544"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["1", "2"], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9572", ",", "q", ",", "d$9577"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9584", ",", "q", ",", "d$9569"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9569", ",", 
+        RowBox[{"-", "q"}], ",", "d$9572"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]Psibar1Psibar2Psi1Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", "d", ",", "q", ",", "d$9577", ",", "p", ",", 
+        "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$9584"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9612", ",", 
+        RowBox[{"-", "q"}], ",", "d$9622"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9616", ",", 
+        RowBox[{"-", "q"}], ",", "d$9609"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9609", ",", "q", ",", "d$9612"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"\[CapitalGamma]Psibar1Psibar1Psi1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$9622", ",", "q", ",", "d$9616", ",", "p", 
+        ",", "d"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["1", "2"], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9652", ",", 
+        RowBox[{"-", "q"}], ",", "d$9662"}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi2Psibar2", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9656", ",", 
+        RowBox[{"-", "q"}], ",", "d$9649"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPsibar2Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9649", ",", "q", ",", "d$9652"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"\[CapitalGamma]Psibar1Psibar2Psi1Psi2", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$9662", ",", "p", ",", "d", ",", "q", ",", 
+        "d$9656"}], "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
+     RowBox[{"GPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"-", "q"}]}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"p", "+", "q"}], ",", "d$9704", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$9699"}], "}"}], "]"}], " ", 
+     RowBox[{"RdotPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "q"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"p", "+", "q"}], ",", "d$9704"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "d$9699", ",", "p", ",", "d"}], 
+       "}"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], " ", 
+     RowBox[{"GPhiPhi", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", 
+        RowBox[{"p", "+", "q"}]}], "}"}], "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9746", ",", "q", ",", "d$9751"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"GPsi1Psibar1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "q"}], ",", "d$9766", ",", "q", ",", "d$9743"}], "}"}], 
+      "]"}], " ", 
+     RowBox[{"RdotPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "d$9743", ",", 
+        RowBox[{"-", "q"}], ",", "d$9746"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "p"}], "-", "q"}], ",", "q", ",", "d$9751", ",", "p", 
+        ",", "d"}], "}"}], "]"}], " ", 
+     RowBox[{"\[CapitalGamma]PhiPsibar1Psi1", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"p", "+", "q"}], ",", 
+        RowBox[{"-", "p"}], ",", "d", ",", 
+        RowBox[{"-", "q"}], ",", "d$9766"}], "}"}], "]"}]}], "}"}]}], 
+  "}"}]], "Output",
  CellChangeTimes->{
   3.805183783769703*^9, {3.805187051417988*^9, 3.8051870620661836`*^9}, 
    3.8051871669067307`*^9, 3.8051872036203823`*^9, 3.8051872526304145`*^9, {
-   3.805187312206008*^9, 3.8051873350304327`*^9}, 3.805187434896263*^9},
- CellLabel->"Out[75]=",ExpressionUUID->"8f37dc36-24dd-4bce-9b19-9de83cf64a8e"]
+   3.805187312206008*^9, 3.8051873350304327`*^9}, 3.805187434896263*^9, 
+   3.8075208150215087`*^9, 3.8151273707700973`*^9, 3.8151293462700405`*^9, 
+   3.8175314068795857`*^9, 3.81753222143598*^9, 3.8175329058543243`*^9, 
+   3.817534040884671*^9, 3.820045416586282*^9},
+ CellLabel->"Out[30]=",ExpressionUUID->"412c50ca-b107-4f03-b097-611598221533"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1920, 997},
-WindowMargins->{{Automatic, 1360}, {689, Automatic}},
+WindowSize->{1368, 829},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>1.35 Inherited,
 FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
 StyleDefinitions->"Default.nb"
 ]
@@ -1720,152 +1522,62 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 202, 4, 96, "Title",ExpressionUUID->"2e8cf991-1f67-48c8-8b8e-c0d7f75d4a35"],
+Cell[580, 22, 202, 4, 132, "Title",ExpressionUUID->"2e8cf991-1f67-48c8-8b8e-c0d7f75d4a35"],
 Cell[CellGroupData[{
-Cell[807, 30, 161, 3, 67, "Section",ExpressionUUID->"e15652f7-d70a-4d54-b7cd-136d3f5a5e99"],
-Cell[971, 35, 341, 8, 28, "Input",ExpressionUUID->"8922c0fa-f8a8-4de8-9a4e-c733d6d29a1c"],
-Cell[1315, 45, 311, 4, 28, "Input",ExpressionUUID->"7c94cdba-9884-4c91-9a98-936f099fa7ab"]
+Cell[807, 30, 161, 3, 88, "Section",ExpressionUUID->"e15652f7-d70a-4d54-b7cd-136d3f5a5e99"],
+Cell[971, 35, 472, 8, 62, "Input",ExpressionUUID->"d8398d88-8904-4ec1-a35c-c2c3c5855d9b",
+ InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1663, 54, 153, 3, 67, "Chapter",ExpressionUUID->"41012434-41bc-4a96-8e03-09143a6ba7cd"],
+Cell[1480, 48, 153, 3, 92, "Chapter",ExpressionUUID->"41012434-41bc-4a96-8e03-09143a6ba7cd"],
 Cell[CellGroupData[{
-Cell[1841, 61, 162, 3, 67, "Section",ExpressionUUID->"055ab940-11c5-45a5-921c-9fae336e26a8"],
-Cell[2006, 66, 5444, 120, 218, "Input",ExpressionUUID->"f3d3bb5e-178e-4c74-aed7-99ecae6b78bb"],
-Cell[7453, 188, 1791, 28, 48, "Input",ExpressionUUID->"08b53ccd-9b69-4eab-91ea-29694e10b3db"]
+Cell[1658, 55, 162, 3, 88, "Section",ExpressionUUID->"055ab940-11c5-45a5-921c-9fae336e26a8"],
+Cell[1823, 60, 5575, 115, 380, "Input",ExpressionUUID->"f3d3bb5e-178e-4c74-aed7-99ecae6b78bb",
+ InitializationCell->True],
+Cell[7401, 177, 1797, 28, 62, "Input",ExpressionUUID->"08b53ccd-9b69-4eab-91ea-29694e10b3db",
+ InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9281, 221, 212, 4, 67, "Section",ExpressionUUID->"625123d9-5fd9-4063-adf7-5bf5473e3fb7"],
+Cell[9235, 210, 212, 4, 88, "Section",ExpressionUUID->"625123d9-5fd9-4063-adf7-5bf5473e3fb7"],
 Cell[CellGroupData[{
-Cell[9518, 229, 290, 4, 53, "Subsection",ExpressionUUID->"9b813ba7-d10d-4679-b8b0-1b3b91d59e55"],
+Cell[9472, 218, 344, 5, 72, "Subsection",ExpressionUUID->"9b813ba7-d10d-4679-b8b0-1b3b91d59e55"],
 Cell[CellGroupData[{
-Cell[9833, 237, 1250, 19, 28, "Input",ExpressionUUID->"adea09f6-a7c6-43bc-8eef-efb1abe0a5a4"],
-Cell[CellGroupData[{
-Cell[11108, 260, 203, 5, 23, "Echo",ExpressionUUID->"cb71ccfd-226b-4df1-b7df-9f5f751bd5cf"],
-Cell[11314, 267, 157, 4, 23, "Echo",ExpressionUUID->"a4e3b3be-b434-452f-ab0f-fcdebc3126ab"],
-Cell[11474, 273, 157, 4, 23, "Echo",ExpressionUUID->"aff4d551-a782-4b69-8cd4-677a59ca8489"],
-Cell[11634, 279, 155, 4, 23, "Echo",ExpressionUUID->"63b3c0a6-6bab-439e-91f0-3e1640e3a643"],
-Cell[11792, 285, 155, 4, 23, "Echo",ExpressionUUID->"4fb0baf0-ff54-458b-a8ec-6b568a13f272"],
-Cell[11950, 291, 155, 4, 23, "Echo",ExpressionUUID->"1df1cfd9-e2b8-4d0b-aa54-64429089164d"],
-Cell[12108, 297, 147, 4, 23, "Echo",ExpressionUUID->"0bc4a072-f9d8-4520-b16b-220454a393e7"],
-Cell[12258, 303, 203, 5, 23, "Echo",ExpressionUUID->"1a2e9ea0-0328-4f56-8306-87e71363cb6c"],
-Cell[12464, 310, 157, 4, 23, "Echo",ExpressionUUID->"461f780c-22b5-456a-b9cb-fedd2162653a"],
-Cell[12624, 316, 157, 4, 23, "Echo",ExpressionUUID->"02f7c339-55ba-4e1f-9729-af5fffccdce8"],
-Cell[12784, 322, 155, 4, 23, "Echo",ExpressionUUID->"5679d237-744f-46af-8a4c-f0b251f73079"],
-Cell[12942, 328, 155, 4, 23, "Echo",ExpressionUUID->"c8f34163-22c7-4d23-9ea9-b3554b757f72"],
-Cell[13100, 334, 157, 4, 23, "Echo",ExpressionUUID->"d25f9f7d-9156-46c9-9f1d-a7e35b249fb9"],
-Cell[13260, 340, 145, 4, 23, "Echo",ExpressionUUID->"197ae032-2ca6-47f4-9131-1cae488f0ec9"],
-Cell[13408, 346, 203, 5, 23, "Echo",ExpressionUUID->"9dddca78-d1bf-4df4-9769-485aea4818d7"],
-Cell[13614, 353, 153, 3, 23, "Echo",ExpressionUUID->"ae0bed45-ab18-4bb2-8720-b1e4004d534e"],
-Cell[13770, 358, 155, 4, 23, "Echo",ExpressionUUID->"cb27a0f7-2ce8-4db7-bccc-2cbf57d052dc"],
-Cell[13928, 364, 155, 4, 23, "Echo",ExpressionUUID->"037518b4-a1b6-460c-ae1f-f17a97f159d8"],
-Cell[14086, 370, 155, 4, 23, "Echo",ExpressionUUID->"a587ff41-b8dc-40ec-8595-f494c13f133d"],
-Cell[14244, 376, 147, 4, 23, "Echo",ExpressionUUID->"2458ed6f-1f95-43bb-9f79-90e08367f38f"],
-Cell[14394, 382, 205, 5, 23, "Echo",ExpressionUUID->"59270507-83de-4803-be2f-d43d0d83fe81"],
-Cell[14602, 389, 155, 4, 23, "Echo",ExpressionUUID->"cf0d89a5-e648-435c-bf2b-2dd234671c5c"],
-Cell[14760, 395, 152, 3, 23, "Echo",ExpressionUUID->"366a15be-55b2-458b-abd6-98040403fe00"],
-Cell[14915, 400, 155, 4, 23, "Echo",ExpressionUUID->"7f6ca0b8-e9cf-4ff0-871a-a1b93db2cac3"],
-Cell[15073, 406, 155, 4, 23, "Echo",ExpressionUUID->"52768fd7-4276-4bd6-b79a-ddd450f3640f"],
-Cell[15231, 412, 157, 4, 23, "Echo",ExpressionUUID->"3252e52d-97a7-49b9-aa99-0258ab5645f4"],
-Cell[15391, 418, 147, 4, 23, "Echo",ExpressionUUID->"3fe9281e-b6dd-4b3e-bb04-99047e5d69cf"],
-Cell[15541, 424, 203, 5, 23, "Echo",ExpressionUUID->"6f106df1-b4ec-4414-8642-743815c17b7f"],
-Cell[15747, 431, 157, 4, 23, "Echo",ExpressionUUID->"396f9d80-bd4e-4c3b-9ba4-f8edf1d26e36"],
-Cell[15907, 437, 157, 4, 23, "Echo",ExpressionUUID->"cd441a37-7a24-4646-b4cb-96b4526b03e9"],
-Cell[16067, 443, 157, 4, 23, "Echo",ExpressionUUID->"2e62292d-e577-4a24-8baa-39285b53e981"],
-Cell[16227, 449, 157, 4, 23, "Echo",ExpressionUUID->"87ca101a-2e78-4715-81ee-fa29c22045ab"],
-Cell[16387, 455, 157, 4, 23, "Echo",ExpressionUUID->"8abb87f9-22b7-41ff-b0d0-b3ce305071b6"],
-Cell[16547, 461, 147, 4, 23, "Echo",ExpressionUUID->"ab0a1f71-0187-467b-ba9d-ba6ca6c234b1"]
-}, Open  ]],
-Cell[16709, 468, 7488, 186, 313, "Output",ExpressionUUID->"c9a19703-1ddc-46bb-964c-c6e1c0be242b"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[24234, 659, 201, 3, 28, "Input",ExpressionUUID->"12ee04af-8f3b-4c8a-ba78-26df0c768352"],
-Cell[24438, 664, 151, 2, 32, "Output",ExpressionUUID->"47f755b8-0462-4fbe-bf30-e8201a07b630"]
+Cell[9841, 227, 1427, 21, 40, "Input",ExpressionUUID->"adea09f6-a7c6-43bc-8eef-efb1abe0a5a4"],
+Cell[11271, 250, 6252, 172, 511, "Output",ExpressionUUID->"4459599a-59da-4b88-86cf-30c4670af4e6"]
 }, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[24638, 672, 343, 5, 37, "Subsection",ExpressionUUID->"f8260c61-3946-43d9-8da9-b1d9b2053799"],
-Cell[CellGroupData[{
-Cell[25006, 681, 1614, 25, 28, "Input",ExpressionUUID->"b1f77bde-a747-45fe-b430-8e63a1cf7e96"],
-Cell[CellGroupData[{
-Cell[26645, 710, 205, 5, 23, "Echo",ExpressionUUID->"c668ef72-6600-48f2-9199-4a30560017dc"],
-Cell[26853, 717, 158, 4, 23, "Echo",ExpressionUUID->"950a10c6-6fb8-4c84-9763-d43da996786a"],
-Cell[27014, 723, 158, 4, 23, "Echo",ExpressionUUID->"97e86771-1201-404e-a0c1-855dc6eafd99"],
-Cell[27175, 729, 158, 4, 23, "Echo",ExpressionUUID->"c869037d-3c28-4026-9a8d-16bdbe858d54"],
-Cell[27336, 735, 158, 4, 23, "Echo",ExpressionUUID->"124dda33-1daf-4d83-9bfb-8fdf8de322a2"],
-Cell[27497, 741, 158, 4, 23, "Echo",ExpressionUUID->"72ed04de-6436-438f-a3c0-34c26b859ad5"],
-Cell[27658, 747, 147, 4, 23, "Echo",ExpressionUUID->"869aa428-ab78-45b5-bd31-4e2942e24cc3"],
-Cell[27808, 753, 205, 5, 23, "Echo",ExpressionUUID->"8297383b-6461-48f9-a35b-19c6a665fd02"],
-Cell[28016, 760, 156, 4, 23, "Echo",ExpressionUUID->"de2e16f5-0ca3-4974-b7bc-7636a315234d"],
-Cell[28175, 766, 158, 4, 23, "Echo",ExpressionUUID->"dbe6a4b1-32a6-4a09-9c68-b862136ef081"],
-Cell[28336, 772, 152, 3, 23, "Echo",ExpressionUUID->"e106e73a-383c-46d6-8dfc-9389979c87ea"],
-Cell[28491, 777, 158, 4, 23, "Echo",ExpressionUUID->"cf1e4eb1-4f27-4af7-8cdc-06735fa5c625"],
-Cell[28652, 783, 158, 4, 23, "Echo",ExpressionUUID->"1000d4c0-d465-4293-9946-d93f794a03e7"],
-Cell[28813, 789, 147, 4, 23, "Echo",ExpressionUUID->"d1144953-e866-448a-aed5-701e5491ec83"],
-Cell[28963, 795, 203, 5, 23, "Echo",ExpressionUUID->"918a427c-12f0-4095-b1b4-f6b8653d0395"],
-Cell[29169, 802, 153, 3, 23, "Echo",ExpressionUUID->"834ad685-ac56-401c-85a0-caee2def2049"],
-Cell[29325, 807, 153, 3, 23, "Echo",ExpressionUUID->"b4c690c3-40b5-4259-b8f6-e14f1d4f8fa9"],
-Cell[29481, 812, 158, 4, 23, "Echo",ExpressionUUID->"17706582-42f9-4ba0-9be2-967c74f16ba5"],
-Cell[29642, 818, 156, 4, 23, "Echo",ExpressionUUID->"092d10db-6355-4363-ab4f-cbb9305002d0"],
-Cell[29801, 824, 147, 4, 23, "Echo",ExpressionUUID->"2d596c97-921c-440c-ab77-7ec70c500a99"],
-Cell[29951, 830, 200, 4, 23, "Echo",ExpressionUUID->"aff516c6-f2ba-438b-98cb-70afea983fd5"],
-Cell[30154, 836, 150, 2, 23, "Echo",ExpressionUUID->"79054860-2e23-47c9-b4ac-656a353d071a"],
-Cell[30307, 840, 158, 4, 23, "Echo",ExpressionUUID->"6b58e9a3-a814-430a-8495-125d849340fc"],
-Cell[30468, 846, 156, 4, 23, "Echo",ExpressionUUID->"118b5324-2857-4a63-a6fb-00dfbd5526d4"],
-Cell[30627, 852, 158, 4, 23, "Echo",ExpressionUUID->"fbefa549-ef00-48fa-bed0-052d53b4572b"],
-Cell[30788, 858, 147, 4, 23, "Echo",ExpressionUUID->"72717729-a643-4057-92f6-d030775a90c0"],
-Cell[30938, 864, 205, 5, 23, "Echo",ExpressionUUID->"910a4360-9f33-49b5-a5b7-3e6ba8e0431b"],
-Cell[31146, 871, 156, 4, 23, "Echo",ExpressionUUID->"dee73d6e-680d-48f0-9c2d-a282765f0244"],
-Cell[31305, 877, 156, 4, 23, "Echo",ExpressionUUID->"0d5614c5-30cb-4ee7-abaa-40b8629ce333"],
-Cell[31464, 883, 156, 4, 23, "Echo",ExpressionUUID->"5a83f5b5-58cd-401d-a171-7dcc55c67e83"],
-Cell[31623, 889, 158, 4, 23, "Echo",ExpressionUUID->"dadf6920-fadb-46a6-8020-7e0b647d7195"],
-Cell[31784, 895, 156, 4, 23, "Echo",ExpressionUUID->"34e33af9-0f96-46fe-a949-cba11aca3869"],
-Cell[31943, 901, 145, 4, 23, "Echo",ExpressionUUID->"e17bc698-7f30-4c6b-88b7-0fa98c0f31b9"],
-Cell[32091, 907, 205, 5, 23, "Echo",ExpressionUUID->"47800830-d2ff-47a5-899f-140d588919a9"],
-Cell[32299, 914, 156, 4, 23, "Echo",ExpressionUUID->"b1d0e3c9-8b68-4e88-860e-b0ced98a2822"],
-Cell[32458, 920, 156, 4, 23, "Echo",ExpressionUUID->"eb0bb294-861b-404c-9581-21cb3cd46bf4"],
-Cell[32617, 926, 158, 4, 23, "Echo",ExpressionUUID->"d6edf3a5-1eca-4365-8396-9db40ce5feb2"],
-Cell[32778, 932, 158, 4, 23, "Echo",ExpressionUUID->"b722fbfd-d157-4cd0-8584-1b9f42594432"],
-Cell[32939, 938, 158, 4, 23, "Echo",ExpressionUUID->"c3572571-1dfb-4e76-939e-1a8424217b9c"],
-Cell[33100, 944, 145, 4, 23, "Echo",ExpressionUUID->"c655f4d7-ffae-4112-bafa-88db111b7f65"]
-}, Closed]],
-Cell[33260, 951, 8739, 221, 378, "Output",ExpressionUUID->"49bde3c4-b678-4014-b73c-2c2ab5233283"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42036, 1177, 201, 3, 28, "Input",ExpressionUUID->"69954672-90e5-406b-aef3-4aa0129fb091"],
-Cell[42240, 1182, 200, 3, 32, "Output",ExpressionUUID->"1a0b8d98-2fd2-488b-a521-1aa715b21fa3"]
+Cell[17572, 428, 395, 6, 72, "Subsection",ExpressionUUID->"f8260c61-3946-43d9-8da9-b1d9b2053799"],
+Cell[CellGroupData[{
+Cell[17992, 438, 1744, 26, 69, "Input",ExpressionUUID->"b1f77bde-a747-45fe-b430-8e63a1cf7e96"],
+Cell[19739, 466, 7654, 206, 521, "Output",ExpressionUUID->"5361b90b-9513-4871-8777-5343f2951bb8"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42513, 1193, 152, 3, 67, "Chapter",ExpressionUUID->"ab26ccd5-1b57-4934-9186-91e2080f3462"],
+Cell[27466, 680, 152, 3, 92, "Chapter",ExpressionUUID->"ab26ccd5-1b57-4934-9186-91e2080f3462"],
 Cell[CellGroupData[{
-Cell[42690, 1200, 162, 3, 67, "Section",ExpressionUUID->"7a7f649e-05c2-44eb-ac84-5dc445129682"],
-Cell[42855, 1205, 6270, 142, 218, "Input",ExpressionUUID->"ca6e312f-cc7d-404c-85e1-239b2038ffe8"],
-Cell[49128, 1349, 1791, 28, 48, "Input",ExpressionUUID->"bf31a2de-90e0-491d-b35f-6136fe81bb9b"]
+Cell[27643, 687, 162, 3, 88, "Section",ExpressionUUID->"7a7f649e-05c2-44eb-ac84-5dc445129682"],
+Cell[27808, 692, 6242, 133, 408, "Input",ExpressionUUID->"ca6e312f-cc7d-404c-85e1-239b2038ffe8",
+ InitializationCell->True],
+Cell[34053, 827, 1799, 28, 62, "Input",ExpressionUUID->"bf31a2de-90e0-491d-b35f-6136fe81bb9b",
+ InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[50956, 1382, 212, 4, 67, "Section",ExpressionUUID->"fade6a4e-7d49-4735-ad2d-956f256dcc40"],
+Cell[35889, 860, 212, 4, 88, "Section",ExpressionUUID->"fade6a4e-7d49-4735-ad2d-956f256dcc40"],
 Cell[CellGroupData[{
-Cell[51193, 1390, 290, 4, 53, "Subsection",ExpressionUUID->"0e4200a1-5bb2-45ec-a348-f0d65a1d27a0"],
+Cell[36126, 868, 339, 5, 72, "Subsection",ExpressionUUID->"0e4200a1-5bb2-45ec-a348-f0d65a1d27a0"],
 Cell[CellGroupData[{
-Cell[51508, 1398, 1422, 24, 28, "Input",ExpressionUUID->"021aa3c8-f683-4761-9311-4bbd2cffde39"],
-Cell[52933, 1424, 3663, 101, 98, "Output",ExpressionUUID->"b50d38c1-3fc0-4d89-a494-ff79362222d3"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[56633, 1530, 201, 3, 28, "Input",ExpressionUUID->"1c30e345-9670-4a65-9eee-c8a9c830aab3"],
-Cell[56837, 1535, 198, 3, 32, "Output",ExpressionUUID->"24138c6a-e392-4096-8ed4-18962aa49a7d"]
+Cell[36490, 877, 1561, 23, 40, "Input",ExpressionUUID->"021aa3c8-f683-4761-9311-4bbd2cffde39"],
+Cell[38054, 902, 11335, 313, 959, "Output",ExpressionUUID->"4a420a13-4572-478b-86b5-7203afed8fa5"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[57084, 1544, 340, 5, 53, "Subsection",ExpressionUUID->"6515edd5-f214-46fc-a025-66e42221bdb0"],
+Cell[49438, 1221, 394, 6, 72, "Subsection",ExpressionUUID->"6515edd5-f214-46fc-a025-66e42221bdb0"],
 Cell[CellGroupData[{
-Cell[57449, 1553, 133, 2, 28, "Input",ExpressionUUID->"58d9ac64-f6d4-4915-af65-70ecb194f6e4"],
-Cell[57585, 1557, 151, 2, 32, "Output",ExpressionUUID->"d0c465b2-ca32-4b38-bf6c-f06bda030ef1"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[57773, 1564, 1543, 26, 28, "Input",ExpressionUUID->"39d8f06c-507f-42f3-b3e4-5de323e4390e"],
-Cell[59319, 1592, 3901, 106, 98, "Output",ExpressionUUID->"8f37dc36-24dd-4bce-9b19-9de83cf64a8e"]
+Cell[49857, 1231, 1658, 24, 69, "Input",ExpressionUUID->"39d8f06c-507f-42f3-b3e4-5de323e4390e"],
+Cell[51518, 1257, 8706, 242, 745, "Output",ExpressionUUID->"412c50ca-b107-4f03-b097-611598221533"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
