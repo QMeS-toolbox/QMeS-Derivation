@@ -208,6 +208,7 @@ positionFirstVert = positionAllVertices[[irun]];
 
        leftLength = positionFirstVert-positionReg;
 rightLength =  Length@diag- positionFirstVert+positionReg;
+
 myEcho[{leftLength,rightLength},4];
 Echo[{leftLength,rightLength}];
 If[rightLength<leftLength,
@@ -667,6 +668,7 @@ posfirstDer[[1]]-2, direction =Join[Range[posfirstDer[[1]]-1,1,-1],Range[Length@
 ];];*)
 distanceright = Length@Diag-posfirstDer[[1]]+objectPositionAssoc[["Regulators",1]];
 distanceleft = posfirstDer[[1]]-objectPositionAssoc[["Regulators",1]];
+
 If[distanceright(*>*)<distanceleft,
 direction = Join[Range[posfirstDer[[1]]+1,Length@Diag],Range[1,posfirstDer[[1]]-1]];
 ,
