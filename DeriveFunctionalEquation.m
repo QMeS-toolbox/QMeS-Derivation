@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* ::Chapter:: *)
-(*Derive Flow Equation*)
+(*Derive Functional Equation*)
 
 
 (* ::Input::Initialization:: *)
@@ -9,10 +9,10 @@ BeginPackage["DeriveFunctionalEquation`"]
 
 
 (* ::Input::Initialization:: *)
-Needs["getDSE`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation-main","package","getDSE.m"}]]
-Needs["FunctionalDerivatives`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation-main","package","FunctionalDerivatives.m"}]]
-Needs["SuperindexDiagrams`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation-main","package","SuperindexDiagrams.m"}]]
-Needs["FullDiagrams`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation-main","package","FullDiagrams.m"}]]
+Needs["getDSE`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation","package","getDSE.m"}]]
+Needs["FunctionalDerivatives`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation","package","FunctionalDerivatives.m"}]]
+Needs["SuperindexDiagrams`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation","package","SuperindexDiagrams.m"}]]
+Needs["FullDiagrams`",FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation","package","FullDiagrams.m"}]]
 
 
 (* ::Input::Initialization:: *)
@@ -30,8 +30,7 @@ FRGEq = {\"Prefactor\" -> {1/2}, <|\"type\" -> \"Regulatordot\", \"indices\" -> 
 <|\"type\" -> \"Propagator\", \"indices\" -> {a, b}|>}
 
 or the mSTI:
-LHSmSTIEq = {\"Prefactor\" -> {1}, <|\"type\" -> \"nPoint\", \"indices\" -> {i}, \"nPoint\" -> 1, \"spec\" -> \"none\"|>, 
-<|\"type\" -> \"nPoint\", \"indices\" -> {Q[i]}, \"nPoint\" -> 1, \"spec\" -> \"BRST\"|>}
+LHSmSTIEq = {\"Prefactor\" -> {1}, <|\"type\" -> \"nPoint\", \"indices\" -> {Q[i]}, \"nPoint\" -> 1, \"spec\" -> \"BRST\"|>, <|\"type\" -> \"nPoint\", \"indices\" -> {i}, \"nPoint\" -> 1, \"spec\" -> \"none\"|>,}
 
 mSTIEq = {\"Prefactor\" -> {1}, <|\"type\" -> \"Regulator\", \"indices\" -> {a, b}|>, 
 <|\"type\" -> \"Propagator\", \"indices\" -> {b, c}|>, 
