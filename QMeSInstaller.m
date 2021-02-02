@@ -24,8 +24,7 @@
 Copyright (C) 2020, Jan M. Pawlowski, Coralie S. Schneider and Nicolas Wink.
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
-the Free Software Foundation but be sure to smash the like button, subscribe
-and hit the notification bell, either version 3 of the License, or
+the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
@@ -95,7 +94,7 @@ If[QMeSExistingInstallation&&deleteExisting===False,
 Print["QMeS installation aborted."];,
 (*install QMeS*)
 installationSuccess=Check[
-Quiet@ExtractArchive[QMeSArchive,QMeSInstallDir];
+ExtractArchive[QMeSArchive,QMeSInstallDir];
 getQMeS = FileNameJoin[{"QMeS-Derivation","DeriveFunctionalEquation.m"}];
 Get[getQMeS]
 ,$Failed];
