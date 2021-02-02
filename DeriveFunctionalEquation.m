@@ -81,17 +81,6 @@ $DebugLevel =0;
 myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 
 
-(* ::Text:: *)
-(*Run the notebooks:*)
-(*	- Setup*)
-(*	- FunctionalDerivatives*)
-(*	- ....*)
-
-
-(* ::Input:: *)
-(**)
-
-
 (* ::Input::Initialization:: *)
 Clear[DeriveFunctionalEquation]
 DeriveFunctionalEquation[setupAssoc_,derivativeList_,OptionsPattern[]] := Module[{masterEq,derivativeListnew, dse = False, classicalAction, fields, truncation, outputLevel,loopIndex, funcDerDiagrams,replacementList,superindexReplacementList, superindexDiags,allVars,fullDiags},
