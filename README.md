@@ -6,6 +6,6 @@ QMeS-derivation has been developed by
 If used in scientific publications, please cite the corresponding paper,
 
     Jan M. Pawlowski, Coralie Schneider and Nicolas Wink.
-    arXiv:2020.????? [hep-ph].
+    arXiv:2102.01410 [hep-ph].
 
 QMeS-derivation is maintained by selected members of the fQCD collaboration.
