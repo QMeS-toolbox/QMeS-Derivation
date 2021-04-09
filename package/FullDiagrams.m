@@ -4,7 +4,7 @@
 (*Insert Feynman rules and get momentum rooting*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Aux Functions*)
 
 
@@ -644,7 +644,7 @@ Return[Diag/.momConsListnew];
 
 (* ::Input::Initialization:: *)
 Clear[shiftLoopFromFirstVertex]
-shiftLoopFromFirstVertex[Diag_,objectPositionAssoc_,derivativeList_,loopIndex_] := Module[{posfirstDer,direction, iter = 2,loopDirIndex,momConsList,momConsListnew,distanceright,distanceleft},
+shiftLoopFromFirstVertex[Diag_,objectPositionAssoc_,derivativeList_,loopIndex_] := Module[{posfirstDer,direction, iter = 2,loopDirIndex,momConsList,momConsListnew,distanceright,distanceleft,IndexDiag},
 posfirstDer = (Position[Diag[[All,"indices"]],{Head[derivativeList[[1]]],List@@(derivativeList[[1]])}])[[1]];
 
 (*unique tad direction*)
@@ -670,26 +670,32 @@ distanceright = Length@Diag-posfirstDer[[1]]+objectPositionAssoc[["Regulators",1
 distanceleft = posfirstDer[[1]]-objectPositionAssoc[["Regulators",1]];
 
 If[distanceright(*>*)<distanceleft,
-direction = Join[Range[posfirstDer[[1]]+1,Length@Diag],Range[1,posfirstDer[[1]]-1]];
+direction = (*Join[Range[posfirstDer[[1]]+1,Length@Diag],Range[1,posfirstDer[[1]]-1]]*)Join[Range[objectPositionAssoc[["Regulators",1]],Length@Diag],Range[1,objectPositionAssoc[["Regulators",1]]]];
+
 ,
 If[distanceright == distanceleft,
-direction = Join[Range[posfirstDer[[1]]+1,Length@Diag],Range[1,posfirstDer[[1]]-1]];
+direction = (*Join[Range[posfirstDer[[1]]+1,Length@Diag],Range[1,posfirstDer[[1]]-1]]*)Join[Range[objectPositionAssoc[["Regulators",1]],Length@Diag],Range[1,objectPositionAssoc[["Regulators",1]]]];
+
 ,
 If[distanceright(*<*)>distanceleft,
-direction =Join[Range[posfirstDer[[1]]-1,1,-1],Range[Length@Diag,posfirstDer[[1]]+1,-1]];
+direction =(*Join[Range[posfirstDer[[1]]-1,1,-1],Range[Length@Diag,posfirstDer[[1]]+1,-1]]*)Join[Range[objectPositionAssoc[["Regulators",1]],1,-1],Range[Length@Diag,objectPositionAssoc[["Regulators",1]],-1]];
+
 ,
-direction =Join[Range[posfirstDer[[1]]-1,1,-1],Range[Length@Diag,posfirstDer[[1]]+1,-1]];
+direction =(*Join[Range[posfirstDer[[1]]-1,1,-1],Range[Length@Diag,posfirstDer[[1]]+1,-1]]*)Join[Range[objectPositionAssoc[["Regulators",1]],1,-1],Range[Length@Diag,objectPositionAssoc[["Regulators",1]],-1]];
+
 ];
 ];
 ];
 
-loopDirIndex = FindMatchingIndex[Diag[[posfirstDer[[1]]]],Diag[[direction[[1]]]]];
+(*loopDirIndex = FindMatchingIndex[Diag[[posfirstDer[[1]]]],Diag[[direction[[1]]]]];*)
+
+loopDirIndex = FindMatchingIndex[Diag[[objectPositionAssoc[["Regulators",1]]]],Diag[[direction[[1]]]]];
 
 momConsList = {loopDirIndex->-loopIndex};
 
 
 
-momConsListnew = conserveOneObjectMomentum[Diag[[posfirstDer[[1]]]],momConsList,loopIndex];
+momConsListnew = conserveOneObjectMomentum[Diag[[(*posfirstDer[[1]]*)objectPositionAssoc[["Regulators",1]]]],momConsList,loopIndex];
 
 
 
@@ -698,6 +704,8 @@ momConsListnew = conserveOneObjectMomentum[Diag[[posfirstDer[[1]]]],momConsList,
 
 Return[Diag/.momConsListnew];
 ]
+
+
 
 
 (* ::Input::Initialization:: *)
@@ -837,7 +845,7 @@ Return[newindices]
 (*(List@@({{Q[A],{p$68351,{mu$68352,i$68352}}},{cbar,{-p,{m}}},{c,{p$68369,i$68370}}}[[1,1]]))[[1]]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Main Function*)
 
 
