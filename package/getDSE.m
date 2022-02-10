@@ -85,10 +85,12 @@ Return[actionList]
 
 
 (* ::Input:: *)
-(*generateClassicalAction[{{A,A},{c,cbar},{A,A,A},{A,A,A,A},{A,c,cbar}}]*)
+(*generateClassicalAction[{{A,A},{c,cbar},{qbar,q},{A,A,A},{A,A,A,A},{A,c,cbar}}]*)
 
 
 (* ::Input::Initialization:: *)
+(*OLD PREFACTOR CONVENTION
+
 (*transform list of vertices into objects*)
 Clear[transformToClassicalObject]
 transformToClassicalObject[classicalActionEntry_] := Module[{objectList,fullObjectList},
@@ -97,14 +99,109 @@ fullObjectList = Join[{"Prefactor"-> {1},<|"type"->"nPoint","indices"->Evaluate[
 
 Return[fullObjectList]
 ]
+*)
+
+(*(*transform list of vertices into objects*)
+Clear[transformToClassicalObject]
+transformToClassicalObject[classicalActionEntry_] := Module[{objectList,objectsIndices,fullObjectList, prefac,sign,fullPrefac},
+objectList =  (<|"type"-> "classicalField", "indices"-> {classicalActionEntry[[#]][Unique[Global`a83]]}|>)&/@Range[Length@classicalActionEntry];
+
+objectsIndices = Evaluate[objectList[[All,"indices"]]][[All,1]];
+
+
+sign  = getSign[objectsIndices];
+
+prefac = getPrefactor[classicalActionEntry];
+fullPrefac = Join[{prefac},sign];
+fullObjectList = Join[{"Prefactor"-> fullPrefac,<|"type"->"nPoint","indices"->objectsIndices,"nPoint"-> Length@objectList,"spec"->"classical"|>},objectList];
+
+Return[fullObjectList]
+]*)
+
+(*transform list of vertices into objects*)
+Clear[transformToClassicalObject]
+transformToClassicalObject[classicalActionEntry_] := Module[{objectList,objectsIndices,fullObjectList, prefac},
+objectList =  (<|"type"-> "classicalField", "indices"-> {classicalActionEntry[[#]][Unique[Global`a83]]}|>)&/@Range[Length@classicalActionEntry];
+
+objectsIndices = Evaluate[Reverse@objectList[[All,"indices"]]][[All,1]];
+
+
+
+
+prefac = getPrefactor[classicalActionEntry];
+
+fullObjectList = Join[{"Prefactor"-> {prefac},<|"type"->"nPoint","indices"->objectsIndices,"nPoint"-> Length@objectList,"spec"->"classical"|>},objectList];
+
+Return[fullObjectList]
+]
 
 
 
 (* ::Input:: *)
 (*transformToClassicalObject[{Phi,Phi}]*)
+(*transformToClassicalObject[{c,cbar}]*)
 
 
-(* ::Subsection:: *)
+(* ::Input::Initialization:: *)
+(*get correct 1/n! prefactors*)
+Clear[getPrefactor]
+getPrefactor[classicalActionEntry_] := Module[{modFieldList,prefacList,prefac},
+
+modFieldList = Split[classicalActionEntry];
+prefacList = 1/((Length[#]&/@modFieldList)!);
+prefac = Times@@prefacList;
+Return[prefac]
+]
+
+
+
+(* ::Input:: *)
+(*getPrefactor[{Phi,Phi,A,A,A}]*)
+
+
+(* ::Input::Initialization:: *)
+(*get correct 1/n! prefactors*)
+Clear[getSign]
+getSign[classicalActionEntry_] := Module[{sign},
+
+sign = generatePrefacCombinations[classicalActionEntry];
+
+Return[sign]
+]
+
+
+
+(* ::Input:: *)
+(*getSign[{A,B,C,D}]*)
+
+
+(* ::Input::Initialization:: *)
+(*generate the classical action in operator and list form form with superfield indices*)
+Clear[generatePrefacCombinations]
+generatePrefacCombinations[classicalActionEntry_] := Module[{},
+generatePrefacCombinations[classicalActionEntry,{}]
+]
+generatePrefacCombinations[classicalActionEntry_,prefac_] := Module[{newCombinations,newactionList,combinations},
+
+newactionList= classicalActionEntry[[1;;-2]];
+
+newCombinations = Tuples[{newactionList,classicalActionEntry[[{-1}]]}];
+
+combinations  = Join[prefac,newCombinations];
+
+
+generatePrefacCombinations[newactionList,combinations]
+]
+generatePrefacCombinations[{},actionList_] := Module[{},
+Return[actionList]
+]
+
+
+(* ::Input:: *)
+(*generatePrefacCombinations[{A,B}]*)
+
+
+(* ::Subsection::Closed:: *)
 (*take first field derivative*)
 
 
@@ -194,7 +291,7 @@ Return[derAction]
 (*takeOneFieldDerivative[{"Prefactor"->{1},<|"type"->"nPoint","indices"->{c[a$2353],cbar[a$2354]},"nPoint"->2,"spec"->"classical"|>,<|"type"->"classicalField","indices"->{c[a$2353]}|>,<|"type"->"classicalField","indices"->{cbar[a$2354]}|>},c[-p1-p2,o]]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*replace with expectation value*)
 
 
@@ -314,7 +411,7 @@ Return[newActionTerms]
 (*scanForFirstClassicalFieldAndReplace[{"Prefactor"->1,<|"type"->"nPoint","indices"->{Phi[a],Phi[a$148055]},"nPoint"->2,"spec"->"classical"|>,<|"type"->"classicalField","indices"->{Phi[a$148055]}|>}]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*take final derivatives*)
 
 
@@ -528,3 +625,6 @@ Return[newActionTerms]
 (* ::Input::Initialization:: *)
 End[]
 EndPackage[]
+
+
+

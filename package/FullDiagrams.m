@@ -4,7 +4,7 @@
 (*Insert Feynman rules and get momentum rooting*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Aux Functions*)
 
 
@@ -845,7 +845,7 @@ Return[newindices]
 (*(List@@({{Q[A],{p$68351,{mu$68352,i$68352}}},{cbar,{-p,{m}}},{c,{p$68369,i$68370}}}[[1,1]]))[[1]]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Main Function*)
 
 
@@ -890,7 +890,7 @@ dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
 
 If[(Length@objectPositionAssoc["Propagators"])-(Length@objectPositionAssoc["Regulators"])> ((Length@objectPositionAssoc["Vertices"])+(Length@objectPositionAssoc["classicalVertices"])+(Length@objectPositionAssoc["BRSTVertices"])),
 (* more than 1-loop *)
-Echo["more than one loop"];
+(*Echo["more than one loop"];*)
 shiftedDiagObj = dummyDiagObj;
 ,
 (* if no loop, simply conserve external momenta *)
