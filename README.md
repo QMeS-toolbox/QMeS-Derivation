@@ -1,4 +1,6 @@
 # QMeS-Derivation
+QMeS-derivation is a package to take functional derivatives of functional renormalization group, Dyson-Schwinger, mSTI and similar master equations in the context of Quantum Field Theories.
+
 QMeS-derivation has been developed by
 
      Jan M. Pawlowski, Coralie S. Schneider and Nicolas Wink.
