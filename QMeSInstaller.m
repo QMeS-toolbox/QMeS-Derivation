@@ -55,7 +55,7 @@ QMeSRepositoryAddress=(*"https://raw.githubusercontent.com/CoralieSchneider/QMeS
 
 
 (* ::Input::Initialization:: *)
-(*If[Head[QMeSZipLocation]=!=String,*)QMeSZipLocation=QMeSRepositoryAddress<>"QMeS-Derivation.zip"(*]*);
+(*If[Head[QMeSZipLocation]=!=String,*)QMeSZipLocation=QMeSRepositoryAddress<>"QMeSderivation.zip"(*]*);
 
 QMeSInstallDir=FileNameJoin[{$UserBaseDirectory,"Applications"}];
 
@@ -65,7 +65,7 @@ QMeSInstaller::zipdownloadfailed="Download from "<>QMeSZipLocation<>" failed.";
 QMeSInstaller::installationfailed="\nInstallation failed. Please read the error messages for more information!";
 
 Print["Downloading QMeS ..."];
-QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeS-Derivation.zip"}];
+QMeSArchive=FileNameJoin[{$TemporaryDirectory,"QMeSderivation.zip"}];
 URLDownload[QMeSZipLocation,QMeSArchive]
 
 tmpQMeSImport=Import[QMeSArchive];
