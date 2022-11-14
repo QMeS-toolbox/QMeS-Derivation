@@ -71,11 +71,11 @@ URLDownload[QMeSZipLocation,QMeSArchive]
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
 
-newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeS-Derivation","QMeSderivation_PacletInfo.m"}]];
+newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeSderivation","QMeSderivation_PacletInfo.m"}]];
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
-QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeS-Derivation","QMeSderivation_PacletInfo.m"}];
+QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeSderivation","QMeSderivation_PacletInfo.m"}];
 QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
 
 
