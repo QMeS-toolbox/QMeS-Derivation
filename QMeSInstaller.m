@@ -102,7 +102,7 @@ If[installationSuccess===$Failed,
 (*installation failed*)
 Message[QMeSInstaller::installationfailed];,
 (*installation successful*)
-RebuildPacletData[];
+PacletDataRebuild[];
 Print["
 Installation was successful. Have fun deriving diagrams!
 "];
