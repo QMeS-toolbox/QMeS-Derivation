@@ -63,7 +63,11 @@ DerivativeList1 works with the first two output levels, DerivativeList2 with the
 
 
 (* ::Input::Initialization:: *)
-getDSE::usage = "DeriveFlowEquation[setup, derivativelist, options]";
+getDSE::usage = "getDSE[classicalAction, firstDerivative]
+
+Derive the DSE for a given classical action. A simple example is
+getDSE[{{phi,phi},{phi,phi,phi,phi}}, phi[a]]
+";
 
 
 (* ::Input::Initialization:: *)
@@ -74,20 +78,13 @@ Begin["`Private`"]
 (*Load*)
 
 
-(* ::Input::Initialization:: *)
-qmesDerivationDirectory=SelectFirst[
-Join[
-{FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$BaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Packages","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","ExtraPackages","QMeS-Derivation"}]
-},
-Select[$Path,StringContainsQ[#,"QMeS-Derivation"]&]
-],DirectoryQ[#]&];
-
-
-(* ::Input::Initialization:: *)
-(*Needs["getDSE`",FileNameJoin[{qmesDerivationDirectory,"package","getDSE.m"}]]
-Needs["FunctionalDerivatives`",FileNameJoin[{qmesDerivationDirectory,"package","FunctionalDerivatives.m"}]]
-Needs["SuperindexDiagrams`",FileNameJoin[{qmesDerivationDirectory,"package","SuperindexDiagrams.m"}]]
-Needs["FullDiagrams`",FileNameJoin[{qmesDerivationDirectory,"package","FullDiagrams.m"}]]*)
+(* ::Input:: *)
+(*qmesDerivationDirectory=SelectFirst[*)
+(*Join[*)
+(*{FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$BaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Packages","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","ExtraPackages","QMeS-Derivation"}]*)
+(*},*)
+(*Select[$Path,StringContainsQ[#,"QMeS-Derivation"]&]*)
+(*],DirectoryQ[#]&];*)
 
 
 (* ::Section:: *)
@@ -102,11 +99,11 @@ $DebugLevel =0;
 myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Get DSE*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Main*)
 
 
@@ -124,7 +121,7 @@ Return[rhsDSE]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Generate Classical Action*)
 
 
@@ -537,11 +534,11 @@ Return[newActionTerms]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Functional Derivatives*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Multiple Functional Derivatives*)
 
 
@@ -773,7 +770,7 @@ Return[{AllDerivatives, replacementList}]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Main*)
 
 
@@ -825,11 +822,11 @@ Return[{finalRHSlist,newreplacementList}]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Superindex Diagrams*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Get Fields and Misc*)
 
 
@@ -870,7 +867,7 @@ Return[fullList]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Possible Configs*)
 
 
@@ -1692,7 +1689,7 @@ Return[{totalDiagPref}];
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Trace over Fields*)
 
 
@@ -1813,7 +1810,7 @@ Return[superindexReplacementList]
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Full Diagrams*)
 
 
@@ -2256,7 +2253,7 @@ Return[positionAssoc]
 ]                                                                                       
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Helper*)
 
 
