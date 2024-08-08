@@ -71,12 +71,12 @@ URLDownload[QMeSZipLocation,QMeSArchive]
 tmpQMeSImport=Import[QMeSArchive];
 If[tmpQMeSImport==="{\"error\":\"Not Found\"}"||tmpQMeSImport==="404: Not Found",Message[QMeSInstaller::zipdownloadfailed];Abort[];];
 
-newVersionString=Version/.List@@Import[QMeSArchive,FileNameJoin[{"QMeSderivation","QMeSderivation_PacletInfo.m"}]];
+newVersionString=(List@@Import[QMeSArchive,FileNameJoin[{"QMeSderivation","PacletInfo.m"}]])[[1]]["Version"];
 QMeSFiles=FileNameJoin[{QMeSInstallDir,#}]&/@Import[QMeSArchive];
 QMeSFilesExist=FileExistsQ/@QMeSFiles;
 QMeSExistingInstallation=Or@@QMeSFilesExist;
-QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeSderivation","QMeSderivation_PacletInfo.m"}];
-QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],Version/.List@@Import[QMeSExistingPacletInfo],"unknown"];
+QMeSExistingPacletInfo=FileNameJoin[{QMeSInstallDir,"QMeSderivation","PacletInfo.m"}];
+QMeSExistingVersionString=If[FileExistsQ[QMeSExistingPacletInfo],(List@@Import[QMeSArchive,FileNameJoin[{"QMeSderivation","PacletInfo.m"}]])[[1]]["Version"],"unknown"];
 
 
 (* ::Input::Initialization:: *)
