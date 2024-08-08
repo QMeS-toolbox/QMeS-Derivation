@@ -5,7 +5,15 @@
 
 
 (* ::Input::Initialization:: *)
+Needs["QMeSderivation`Tools`"]
+
+
+(* ::Input::Initialization:: *)
 BeginPackage["QMeSderivation`"]
+
+
+(* ::Section:: *)
+(*Exports*)
 
 
 (* ::Input::Initialization:: *)
@@ -75,20 +83,23 @@ Begin["`Private`"]
 
 
 (* ::Section:: *)
-(*Load*)
-
-
-(* ::Input:: *)
-(*qmesDerivationDirectory=SelectFirst[*)
-(*Join[*)
-(*{FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$BaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Packages","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","ExtraPackages","QMeS-Derivation"}]*)
-(*},*)
-(*Select[$Path,StringContainsQ[#,"QMeS-Derivation"]&]*)
-(*],DirectoryQ[#]&];*)
-
-
-(* ::Section:: *)
 (*Debug*)
+
+
+(* ::Input::Initialization:: *)
+qmesDerivationDirectory=SelectFirst[
+Join[
+{
+FileNameJoin[{$UserBaseDirectory,"Applications","QMeSderivation"}],
+FileNameJoin[{$BaseDirectory,"Applications","QMeSderivation"}],
+FileNameJoin[{$InstallationDirectory,"AddOns","Applications","QMeSderivation"}],
+FileNameJoin[{$InstallationDirectory,"AddOns","Packages","QMeSderivation"}],
+FileNameJoin[{$InstallationDirectory,"AddOns","ExtraPackages","QMeSderivation"}]
+},
+Select[$Path,StringContainsQ[#,"QMeS-Derivation"]&]
+],
+DirectoryQ[#]&
+];
 
 
 (* ::Input::Initialization:: *)
@@ -99,7 +110,7 @@ $DebugLevel =0;
 myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Get DSE*)
 
 
@@ -534,7 +545,7 @@ Return[newActionTerms]
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Functional Derivatives*)
 
 
@@ -822,7 +833,7 @@ Return[{finalRHSlist,newreplacementList}]
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Superindex Diagrams*)
 
 
@@ -2725,6 +2736,11 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
 
                 {allVars, fullDiags} = InsertFeynRulesAllDiags[superindexDiags, derivativeList, fields, loopIndex] /. QMeSderivation`Private`q->Global`q;
 
+                If[OptionValue["ReturnAll"] == False,
+                    Return[fullDiags],
+                    Return[{superindexDiags, fullDiags}]
+                ];
+
                 If[OptionValue["DummyVarList"] == False,
                     Return[fullDiags],
                     Return[{allVars, fullDiags}]
@@ -2733,7 +2749,7 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
     ]
 
 Options[DeriveFunctionalEquation] = {"OutputLevel" -> "FunctionalDerivatives",
-     "LoopIndex" -> q, "DummyVarList" -> False};
+     "LoopIndex" -> q, "DummyVarList" -> False,"ReturnAll"->False};
 
 
 (* ::Input::Initialization:: *)

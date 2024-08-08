@@ -13,6 +13,7 @@ PacletObject[
                     "Kernel",
                     "Context" -> {
                         { "QMeSderivation`" , "QMeSderivation.m" }
+                        { "QMeSderivation`Tools`" , "QMeSTools.m" }
                     }
                 },
                 {

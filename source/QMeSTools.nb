@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     53389,       1380]
-NotebookOptionsPosition[     50572,       1325]
-NotebookOutlinePosition[     50968,       1341]
-CellTagsIndexPosition[     50925,       1338]
+NotebookDataLength[     54167,       1402]
+NotebookOptionsPosition[     51098,       1342]
+NotebookOutlinePosition[     51494,       1358]
+CellTagsIndexPosition[     51451,       1355]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1320,6 +1320,23 @@ Cell[BoxData[
  CellLabel->
   "Out[121]=",ExpressionUUID->"a9da0767-951a-4cfd-9354-99df4d63296d"]
 }, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["End  the package", "Section",
+ CellChangeTimes->{{3.932115978898404*^9, 
+  3.93211598276877*^9}},ExpressionUUID->"a050d20b-95f9-486c-b9dd-\
+e6873cd69f9a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"End", "[", "]"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"EndPackage", "[", "]"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.932115983740492*^9, 3.932115988245764*^9}, 
+   3.9321160408593388`*^9},ExpressionUUID->"65650d74-3ea4-46f4-a607-\
+7bac0b962249"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -1380,6 +1397,11 @@ Cell[CellGroupData[{
 Cell[45939, 1194, 152, 3, 29, "Input",ExpressionUUID->"53260d17-988a-41af-9535-a95378667e5a"],
 Cell[46094, 1199, 4438, 121, 97, "Output",ExpressionUUID->"a9da0767-951a-4cfd-9354-99df4d63296d"]
 }, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50581, 1326, 160, 3, 66, "Section",ExpressionUUID->"a050d20b-95f9-486c-b9dd-e6873cd69f9a"],
+Cell[50744, 1331, 326, 7, 87, "Input",ExpressionUUID->"65650d74-3ea4-46f4-a607-7bac0b962249",
+ InitializationCell->True]
 }, Open  ]]
 }, Open  ]]
 }
