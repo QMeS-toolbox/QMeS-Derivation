@@ -1,0 +1,1388 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     53389,       1380]
+NotebookOptionsPosition[     50572,       1325]
+NotebookOutlinePosition[     50968,       1341]
+CellTagsIndexPosition[     50925,       1338]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Derive Functional Equation Tools", "Chapter",
+ CellChangeTimes->{{3.93209220263177*^9, 
+  3.93209220350491*^9}},ExpressionUUID->"aede59b2-194f-46df-ac63-\
+25a1e4e2fbde"],
+
+Cell[BoxData[
+ RowBox[{"BeginPackage", "[", "\"\<QMeSderivation`Tools`\>\"", "]"}]], "Input",\
+
+ InitializationCell->True,
+ CellChangeTimes->{{3.932092206781699*^9, 
+  3.9320922086022043`*^9}},ExpressionUUID->"26b1bd1d-881b-4710-9df9-\
+68606cbb6f63"],
+
+Cell[CellGroupData[{
+
+Cell["Exports", "Section",
+ CellChangeTimes->{{3.925554935377668*^9, 
+  3.925554956974764*^9}},ExpressionUUID->"66d3b196-e162-4109-9eae-\
+736f9d47bb81"],
+
+Cell[BoxData[
+ RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"3ec6060e-25c6-41bf-bcdb-f69c8d8cb5cb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Debug", "Section",
+ CellChangeTimes->{{3.925555181021306*^9, 
+  3.925555190406625*^9}},ExpressionUUID->"c860513e-188c-43ef-9b76-\
+1b904d2adeae"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"qmesDerivationDirectory", "=", 
+   RowBox[{"SelectFirst", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Join", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "$UserBaseDirectory", ",", "\"\<Applications\>\"", ",", 
+            "\"\<QMeSderivation\>\""}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "$BaseDirectory", ",", "\"\<Applications\>\"", ",", 
+            "\"\<QMeSderivation\>\""}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "$InstallationDirectory", ",", "\"\<AddOns\>\"", ",", 
+            "\"\<Applications\>\"", ",", "\"\<QMeSderivation\>\""}], "}"}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "$InstallationDirectory", ",", "\"\<AddOns\>\"", ",", 
+            "\"\<Packages\>\"", ",", "\"\<QMeSderivation\>\""}], "}"}], "]"}],
+          ",", "\[IndentingNewLine]", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "$InstallationDirectory", ",", "\"\<AddOns\>\"", ",", 
+            "\"\<ExtraPackages\>\"", ",", "\"\<QMeSderivation\>\""}], "}"}], 
+          "]"}]}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Select", "[", 
+        RowBox[{"$Path", ",", 
+         RowBox[{
+          RowBox[{"StringContainsQ", "[", 
+           RowBox[{"#", ",", "\"\<QMeS-Derivation\>\""}], "]"}], "&"}]}], 
+        "]"}]}], "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"DirectoryQ", "[", "#", "]"}], "&"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.925554963689718*^9, 3.925555018648334*^9}, {
+  3.925555067350979*^9, 3.925555091557687*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"7ede315f-61cb-40ab-b138-db43ae7b29f0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$DebugLevel", " ", "=", "0"}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"e28b94f8-4ec5-4d82-95fc-59ffaf4ac5c9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myEcho", "[", 
+   RowBox[{"msg_", ",", "lvl_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"$DebugLevel", " ", ">=", "lvl"}], ",", " ", 
+    RowBox[{
+     RowBox[{"Echo", "[", "msg", "]"}], ";"}], ",", " ", 
+    RowBox[{"Nothing", ";"}]}], "]"}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"ab76e3eb-0df2-489c-90da-b0c1149e7958"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Testing", "Section",
+ CellChangeTimes->{{3.9320922879563427`*^9, 
+  3.9320922973553762`*^9}},ExpressionUUID->"e2afeeb3-8efa-4a86-8628-\
+128a46491974"],
+
+Cell[BoxData[{
+ RowBox[{"Get", "[", "\"\<QMeSderivation`\>\"", "]"}], "\[IndentingNewLine]", 
+
+ RowBox[{
+  RowBox[{
+   RowBox[{"fRGEq", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<Prefactor\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"1", "/", "2"}], "}"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<type\>\"", "\[Rule]", "\"\<Regulatordot\>\""}], ",", " ", 
+        RowBox[{"\"\<indices\>\"", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "j"}], "}"}]}]}], "|>"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<type\>\"", "\[Rule]", "\"\<Propagator\>\""}], ",", " ", 
+        RowBox[{"\"\<indices\>\"", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "j"}], "}"}]}]}], "|>"}]}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fieldsNf2p1", " ", "=", " ", 
+    RowBox[{"<|", 
+     RowBox[{
+      RowBox[{"\"\<bosonic\>\"", "\[Rule]", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[Sigma]", "[", "p", "]"}], ",", 
+         RowBox[{"\[CapitalPi]", "[", 
+          RowBox[{"p", ",", 
+           RowBox[{"{", "a", "}"}]}], "]"}], ",", " ", 
+         RowBox[{"A", "[", 
+          RowBox[{"p", ",", 
+           RowBox[{"{", 
+            RowBox[{"v", ",", " ", "c"}], "}"}]}], "]"}]}], "}"}]}], ",", 
+      "\[IndentingNewLine]", "                 ", 
+      RowBox[{"\"\<fermionic\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"sb", "[", 
+            RowBox[{"p", ",", 
+             RowBox[{"{", 
+              RowBox[{"d", ",", "c"}], "}"}]}], "]"}], ",", 
+           RowBox[{"s", "[", 
+            RowBox[{"p", ",", 
+             RowBox[{"{", 
+              RowBox[{"d", ",", "c"}], "}"}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"qb", "[", 
+            RowBox[{"p", ",", 
+             RowBox[{"{", 
+              RowBox[{"d", ",", "c", ",", "f"}], "}"}]}], "]"}], ",", 
+           RowBox[{"q", "[", 
+            RowBox[{"p", ",", 
+             RowBox[{"{", 
+              RowBox[{"d", ",", "c", ",", "f"}], "}"}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"cb", "[", 
+            RowBox[{"p", ",", 
+             RowBox[{"{", "c", "}"}]}], "]"}], ",", 
+           RowBox[{"c", "[", 
+            RowBox[{"p", ",", 
+             RowBox[{"{", "c", "}"}]}], "]"}]}], "}"}]}], "}"}]}]}], "|>"}]}],
+    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TruncationNf2p1", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Sigma]", ",", "\[Sigma]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[CapitalPi]", ",", "\[CapitalPi]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "qb"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"s", ",", "sb"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "A"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"c", ",", "cb"}], "}"}], ",", 
+      RowBox[{"(*", " ", "propagators", " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"qb", ",", "q", ",", "A"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"cb", ",", "c", ",", "A"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"sb", ",", "s", ",", "A"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "A", ",", "A"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "A", ",", "A", ",", "A"}], "}"}], ",", 
+      RowBox[{"(*", " ", 
+       RowBox[{"gluon", " ", "sector", " ", "scatterings"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"qb", ",", "qb", ",", "q", ",", "q"}], "}"}], ","}], "*)"}], 
+      
+      RowBox[{"(*", " ", 
+       RowBox[{"four", "-", 
+        RowBox[{"quark", " ", "scatterings"}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"qb", ",", "q", ",", "\[Sigma]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"qb", ",", "q", ",", "\[CapitalPi]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"qb", ",", "q", ",", "\[Sigma]", ",", "\[Sigma]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"qb", ",", "q", ",", "\[CapitalPi]", ",", "\[CapitalPi]"}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"qb", ",", "q", ",", "\[Sigma]", ",", "\[CapitalPi]"}], "}"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "qb", ",", "q", ",", "\[Sigma]", ",", "\[Sigma]", ",", "\[Sigma]"}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "qb", ",", "q", ",", "\[Sigma]", ",", "\[Sigma]", ",", 
+        "\[CapitalPi]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "qb", ",", "q", ",", "\[Sigma]", ",", "\[CapitalPi]", ",", 
+        "\[CapitalPi]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "qb", ",", "q", ",", "\[CapitalPi]", ",", "\[CapitalPi]", ",", 
+        "\[CapitalPi]"}], "}"}], ",", " ", 
+      RowBox[{"(*", " ", 
+       RowBox[{"quark", "-", 
+        RowBox[{"meson", " ", "scatterings"}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", " ", 
+      RowBox[{"{", 
+       RowBox[{"\[Sigma]", ",", "\[Sigma]", ",", "\[Sigma]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Sigma]", ",", "\[CapitalPi]", ",", "\[CapitalPi]"}], "}"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\[Sigma]", ",", "\[Sigma]", ",", "\[Sigma]", ",", "\[Sigma]"}], "}"}],
+       ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\[Sigma]", ",", "\[Sigma]", ",", "\[CapitalPi]", ",", 
+        "\[CapitalPi]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\[CapitalPi]", ",", "\[CapitalPi]", ",", "\[CapitalPi]", ",", 
+        "\[CapitalPi]"}], "}"}]}], 
+     RowBox[{"(*", " ", 
+      RowBox[{"meson", " ", "scatterings"}], " ", "*)"}], 
+     "\[IndentingNewLine]", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetupfRG", "=", " ", 
+   RowBox[{"<|", 
+    RowBox[{
+     RowBox[{"\"\<MasterEquation\>\"", "\[Rule]", "fRGEq"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\"\<FieldSpace\>\"", "\[Rule]", "fieldsNf2p1"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\"\<Truncation\>\"", "\[Rule]", "TruncationNf2p1"}]}], "|>"}]}],
+   ";"}]}], "Input",
+ CellChangeTimes->{
+  3.903251165586019*^9, {3.9068258986408787`*^9, 3.906825911634159*^9}, {
+   3.906826033650765*^9, 3.906826034681692*^9}, {3.906826184986546*^9, 
+   3.906826186545793*^9}, {3.907313731747599*^9, 3.907313731907217*^9}, {
+   3.907313818897386*^9, 3.907313823096096*^9}, 3.907314075318757*^9, {
+   3.93209233794406*^9, 3.932092359008573*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"28f1efa9-7def-4cfa-81f0-22b832df0909"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DerivativeListqbq", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"qb", "[", 
+      RowBox[{
+       RowBox[{"-", "p"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"d2", ",", "c2", ",", "f2"}], "}"}]}], "]"}], ",", 
+     RowBox[{"q", "[", 
+      RowBox[{"p", ",", 
+       RowBox[{"{", 
+        RowBox[{"d1", ",", "c1", ",", "f1"}], "}"}]}], "]"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Diagramsqbq", " ", "=", " ", 
+   RowBox[{"DeriveFunctionalEquation", "[", 
+    RowBox[{"SetupfRG", ",", "DerivativeListqbq", ",", 
+     RowBox[{"\"\<OutputLevel\>\"", "\[Rule]", "\"\<FullDiagrams\>\""}], ",", 
+     
+     RowBox[{"\"\<ReturnAll\>\"", "->", "True"}]}], "]"}]}], ";"}]}], "Input",\
+
+ CellChangeTimes->{{3.932091791013105*^9, 3.932091808705718*^9}, {
+   3.932091847646219*^9, 3.932091852236916*^9}, {3.932091894107774*^9, 
+   3.932091935232827*^9}, {3.932091970977978*^9, 3.93209198102423*^9}, {
+   3.932092077081698*^9, 3.932092079108073*^9}, {3.9320923688236933`*^9, 
+   3.932092396738878*^9}, 3.932092432712271*^9},
+ CellLabel->"In[6]:=",ExpressionUUID->"cfb5bce6-c727-478c-ab81-7fccfd36c1bb"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TestIsSuperindexDiagram", "[", "diag_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"hasPrefactor", ",", "hasAssociations"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{
+         RowBox[{"ListQ", "[", "diag", "]"}], "&&", 
+         RowBox[{
+          RowBox[{"Length", "[", "diag", "]"}], ">", "1"}]}], "]"}], ",", 
+       RowBox[{"Return", "[", "False", "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"hasAssociations", "=", 
+      RowBox[{
+       RowBox[{"AllTrue", "[", 
+        RowBox[{
+         RowBox[{"Map", "[", 
+          RowBox[{"AssociationQ", ",", 
+           RowBox[{"Flatten", "@", 
+            RowBox[{"diag", "[", 
+             RowBox[{"[", 
+              RowBox[{"2", ";;"}], "]"}], "]"}]}]}], "]"}], ",", "Identity"}],
+         "]"}], "&&", 
+       RowBox[{
+        RowBox[{"Length", "[", 
+         RowBox[{"Flatten", "@", 
+          RowBox[{"diag", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ";;"}], "]"}], "]"}]}], "]"}], ">", "0"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"hasPrefactor", "=", 
+      RowBox[{
+       RowBox[{"Extract", "[", 
+        RowBox[{
+         RowBox[{"diag", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", "1"}], "]"}], "==", 
+       "\"\<Prefactor\>\""}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"hasAssociations", "&&", "hasPrefactor"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"AssertIsSuperIndexDiagram", "[", 
+    RowBox[{"diag_", ",", 
+     RowBox[{"context_String", ":", "\"\<\>\""}]}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"Not", "@", 
+      RowBox[{"TestIsSuperindexDiagram", "[", "diag", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{
+       "context", ",", "\"\< Argument is not a SuperIndexDiagram.\>\""}], 
+       "]"}], ";", 
+      RowBox[{"Abort", "[", "]"}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"AssertAllSuperIndexDiagrams", "[", 
+    RowBox[{"diags_List", ",", 
+     RowBox[{"context_String", ":", "\"\<\>\""}]}], "]"}], ":=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"AssertIsSuperIndexDiagram", "[", 
+       RowBox[{"#", ",", "context"}], "]"}], "&"}], ",", "diags"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.932092499302857*^9, 3.93209265608632*^9}, {
+  3.9320928837132473`*^9, 3.932093086289074*^9}, {3.9320931397015963`*^9, 
+  3.932093172331933*^9}, {3.932093221617383*^9, 3.932093235833461*^9}, {
+  3.932093268583647*^9, 3.932093290189995*^9}, {3.932094675034731*^9, 
+  3.932094796543549*^9}, {3.932094852173008*^9, 3.932094902480122*^9}, {
+  3.932094939689563*^9, 3.932094944254856*^9}, {3.932095729312064*^9, 
+  3.9320957297449923`*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"c01afb9a-ad61-4425-889a-03c87ac316aa"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetIndices", "[", "diag_List", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"AssertIsSuperIndexDiagram", "[", 
+       RowBox[{"diag", ",", "\"\<TestIsOneLoop:\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", "\"\<indices\>\"", "]"}], "&"}], ",", 
+          RowBox[{"diag", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ";;"}], "]"}], "]"}]}], "]"}], ",", "1"}], "]"}]}]}],
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetExternalIndices", "[", "diag_List", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "allIndices", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"AssertIsSuperIndexDiagram", "[", 
+       RowBox[{"diag", ",", "\"\<TestIsOneLoop:\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"allIndices", "=", 
+       RowBox[{"GetIndices", "[", "diag", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Keys", "@", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"Counts", "[", "allIndices", "]"}], ",", 
+         RowBox[{
+          RowBox[{"#", "==", "1"}], "&"}]}], "]"}]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetInternalIndices", "[", "diag_List", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "allIndices", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AssertIsSuperIndexDiagram", "[", 
+        RowBox[{"diag", ",", "\"\<TestIsOneLoop:\>\""}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"allIndices", "=", 
+        RowBox[{"GetIndices", "[", "diag", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Keys", "@", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Counts", "[", "allIndices", "]"}], ",", 
+          RowBox[{
+           RowBox[{"#", ">", "1"}], "&"}]}], "]"}]}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetIndices", "[", "obj_Association", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"obj", "[", "\"\<indices\>\"", "]"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetExternalIndices", "[", 
+    RowBox[{"diag_List", ",", "obj_Association"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"allIndices", ",", "externalIndices"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"allIndices", "=", 
+       RowBox[{"GetIndices", "[", "obj", "]"}]}], ";", "\[IndentingNewLine]", 
+      
+      RowBox[{"externalIndices", "=", 
+       RowBox[{"GetExternalIndices", "[", "diag", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Select", "[", 
+       RowBox[{"allIndices", ",", 
+        RowBox[{
+         RowBox[{"MemberQ", "[", 
+          RowBox[{"externalIndices", ",", "#"}], "]"}], "&"}]}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetInternalIndices", "[", 
+    RowBox[{"diag_List", ",", "obj_Association"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"allIndices", ",", "internalIndices"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"AssertIsSuperIndexDiagram", "[", 
+       RowBox[{"diag", ",", "\"\<TestIsOneLoop:\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"allIndices", "=", 
+       RowBox[{"GetIndices", "[", "obj", "]"}]}], ";", "\[IndentingNewLine]", 
+      
+      RowBox[{"internalIndices", "=", 
+       RowBox[{"GetInternalIndices", "[", "diag", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Select", "[", 
+       RowBox[{"allIndices", ",", 
+        RowBox[{
+         RowBox[{"MemberQ", "[", 
+          RowBox[{"internalIndices", ",", "#"}], "]"}], "&"}]}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.932096846745219*^9, 3.932096941706905*^9}, {
+   3.932097325018382*^9, 3.932097376088599*^9}, {3.9320974382040777`*^9, 
+   3.9320975220818443`*^9}, {3.93209762404568*^9, 3.932097627406646*^9}, 
+   3.9320982089641047`*^9, {3.9321096718942823`*^9, 3.932109854152437*^9}, {
+   3.9321099090912113`*^9, 3.932109940172472*^9}},
+ CellLabel->
+  "In[155]:=",ExpressionUUID->"a68ab892-1d13-4fae-8dd2-fccfec36b491"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"TestIsOneLoop", "[", "diag_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "internalIndices", ",", "objectIndices", ",", "assignNumber", ",", 
+       "mapAssignNumber", ",", "testNumbers"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"AssertIsSuperIndexDiagram", "[", 
+       RowBox[{"diag", ",", "\"\<TestIsOneLoop:\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"An", " ", "expression", " ", "is", " ", "one"}], "-", 
+         RowBox[{"loop", " ", "if", " ", "every", " ", "object", " ", 
+          RowBox[{"(", 
+           RowBox[{"vertex", " ", "or", " ", "propagator"}], ")"}], " ", 
+          "has", " ", "only", " ", "one", " ", "incoming", " ", "and", " ", 
+          "one", " ", "outgoing", " ", 
+          RowBox[{"index", ".", "\[IndentingNewLine]", "Therefore"}]}]}], ",",
+         " ", 
+        RowBox[{
+        "what", " ", "we", " ", "do", " ", "here", " ", "is", " ", "to", " ", 
+         "check", " ", "the", " ", "number", " ", "of", " ", "internal", " ", 
+         "indices", " ", "of", " ", "any", " ", "object", " ", "in", " ", 
+         "the", " ", "diagram", " ", "and", " ", "testing", " ", "whether", 
+         " ", "this", " ", "is", " ", "exactly", " ", "2", " ", "for", " ", 
+         "all", " ", 
+         RowBox[{"objects", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"internalIndices", "=", 
+       RowBox[{"GetInternalIndices", "[", "diag", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"objectIndices", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", "\"\<indices\>\"", "]"}], "&"}], ",", 
+         RowBox[{"diag", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ";;"}], "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"assignNumber", "=", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"MemberQ", "[", 
+           RowBox[{"internalIndices", ",", "#"}], "]"}], ",", "1", ",", "0"}],
+          "]"}], "&"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"mapAssignNumber", "=", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"assignNumber", ",", "#"}], "]"}], "&"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"testNumbers", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Total", "[", 
+           RowBox[{"mapAssignNumber", "[", "#", "]"}], "]"}], "&"}], ",", 
+         "objectIndices"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", 
+       RowBox[{"AllTrue", "[", 
+        RowBox[{"testNumbers", ",", 
+         RowBox[{
+          RowBox[{"#", "==", "2"}], "&"}]}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"AssertIsOneLoop", "[", 
+     RowBox[{"diag_List", ",", 
+      RowBox[{"context_String", ":", "\"\<\>\""}]}], "]"}], ":=", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"Not", "@", 
+       RowBox[{"TestIsOneLoop", "[", "diag", "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"Print", "[", 
+        RowBox[{"context", ",", "\"\< Diagram is not one-loop.\>\""}], "]"}], 
+       ";", 
+       RowBox[{"Abort", "[", "]"}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TestIsFlowDiagram", "[", "diag_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"content", ",", "regulatordotMatch"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"content", "=", 
+       RowBox[{"SuperIndexDiagramContent", "[", "diag", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"regulatordotMatch", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"content", ",", 
+         RowBox[{
+          RowBox[{"StringMatchQ", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"\"\<Regulatordot\>\"", "~~", "___"}]}], "]"}], "&"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "regulatordotMatch", "]"}], "==", "1"}], ",", 
+        "True", ",", "False"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"AssertIsFlowDiagram", "[", 
+    RowBox[{"diag_List", ",", 
+     RowBox[{"context_String", ":", "\"\<\>\""}]}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"Not", "@", 
+      RowBox[{"TestIsFlowDiagram", "[", "diag", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{"context", ",", "\"\< Diagram is not a flow diagram.\>\""}], 
+       "]"}], ";", 
+      RowBox[{"Abort", "[", "]"}]}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.932096757696724*^9, 3.932096786432174*^9}, {
+  3.932097595895443*^9, 3.932097745029286*^9}, {3.932097808685877*^9, 
+  3.932098202621862*^9}, {3.932108238419031*^9, 3.932108311419837*^9}, {
+  3.932108341610519*^9, 3.9321084646227303`*^9}},
+ CellLabel->"In[44]:=",ExpressionUUID->"0a58cf74-2354-4fca-bb76-5ece6df41991"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetObjectIdentifier", "[", "ob_Association", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ob", "[", "\"\<type\>\"", "]"}], "<>", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}], "&"}], ",", 
+         RowBox[{"ob", "[", "\"\<indices\>\"", "]"}]}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SuperIndexDiagramContent", "[", "diag_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"AssertIsSuperIndexDiagram", "[", 
+       RowBox[{"diag", ",", "\"\<SuperIndexDiagramContent:\>\""}], "]"}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"Sort", "[", 
+       RowBox[{"Map", "[", 
+        RowBox[{"GetObjectIdentifier", ",", 
+         RowBox[{"diag", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ";;"}], "]"}], "]"}]}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SeparateSuperIndexDiagramGroups", "[", "diags_List", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"identifierRep", ",", "removeFirsts", ",", "groupedDiagrams"}],
+        "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AssertAllSuperIndexDiagrams", "[", 
+        RowBox[{"diags", ",", "\"\<SeparateSubdiagramGroups:\>\""}], "]"}], 
+       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{
+         "We", " ", "group", " ", "all", " ", "diagrams", " ", "into", " ", 
+          "groups", " ", "that", " ", "could", " ", "be", " ", "potentially", 
+          " ", 
+          RowBox[{"identical", ".", " ", "\[IndentingNewLine]", "We"}], " ", 
+          "simply", " ", "make", " ", "sure", " ", "that", " ", "in", " ", 
+          "each", " ", "group", " ", "all", " ", "diagrams", " ", "have", " ",
+           "the", " ", "same", " ", "objects"}], ",", " ", 
+         RowBox[{"ignoring", " ", 
+          RowBox[{"topology", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"identifierRep", "=", 
+        RowBox[{"Map", "[", 
+         RowBox[{"SuperIndexDiagramContent", ",", "diags"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"identifierRep", "=", 
+        RowBox[{"Thread", "[", 
+         RowBox[{"{", 
+          RowBox[{"identifierRep", ",", "diags"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"removeFirsts", "[", "ex_", "]"}], ":=", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "&"}], ",", "ex"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"groupedDiagrams", "=", 
+        RowBox[{"Map", "[", 
+         RowBox[{"removeFirsts", ",", 
+          RowBox[{"GatherBy", "[", 
+           RowBox[{"identifierRep", ",", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "&"}]}], "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "groupedDiagrams", "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetBosons", "[", "setup_Association", "]"}], ":=", 
+   RowBox[{"Map", "[", 
+    RowBox[{"Head", ",", 
+     RowBox[{
+      RowBox[{"setup", "[", "\"\<FieldSpace\>\"", "]"}], "[", 
+      "\"\<bosonic\>\"", "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetFermions", "[", "setup_Association", "]"}], ":=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Head", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}], ",", 
+     RowBox[{
+      RowBox[{"setup", "[", "\"\<FieldSpace\>\"", "]"}], "[", 
+      "\"\<fermionic\>\"", "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetAntiFermions", "[", "setup_Association", "]"}], ":=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Head", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "]"}], "&"}], ",", 
+     RowBox[{
+      RowBox[{"setup", "[", "\"\<FieldSpace\>\"", "]"}], "[", 
+      "\"\<fermionic\>\"", "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.932094360034514*^9, 3.9320945869988747`*^9}, {
+   3.932094898582568*^9, 3.932094915857913*^9}, {3.932094949436166*^9, 
+   3.932095163541043*^9}, {3.932095246899137*^9, 3.932095282235204*^9}, {
+   3.9320953138126*^9, 3.932095715386652*^9}, {3.932095753137054*^9, 
+   3.932095762935883*^9}, 3.932095817128111*^9, {3.932095851125954*^9, 
+   3.932095910672982*^9}, {3.932096619485327*^9, 3.93209673954096*^9}, {
+   3.932098243059964*^9, 3.932098315705807*^9}, 3.932108683236912*^9, 
+   3.932108797687089*^9, {3.9321100921939087`*^9, 3.932110096810781*^9}},
+ CellLabel->
+  "In[161]:=",ExpressionUUID->"e0663f80-523c-46ae-abb0-036375dcc9c5"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.932098389487211*^9, 
+  3.9320983920256233`*^9}},ExpressionUUID->"80810d78-5fc2-4366-9145-\
+d94411ff8787"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GetRegulatordot", "[", "diag_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"AssertIsFlowDiagram", "[", 
+      RowBox[{"diag", ",", "\"\<GetRegulatordot:\>\""}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{"diag", ",", 
+        RowBox[{
+         RowBox[{"MemberQ", "[", 
+          RowBox[{"#", ",", "\"\<Regulatordot\>\"", ",", "Infinity"}], "]"}], 
+         "&"}]}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.932108475221582*^9, 3.932108601839507*^9}},
+ CellLabel->"In[57]:=",ExpressionUUID->"4bd8ae76-2d80-4725-892a-4bfbce55210f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"IterateDiagram", "[", 
+     RowBox[{"diag_", ",", "curPos_", ",", "entryIdx_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "curIdxs", ",", "exitIdx", ",", "nextPos", ",", "externalIndices", ",",
+         "i", ",", "candidates"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"curIdxs", "=", 
+        RowBox[{"curPos", "[", "\"\<indices\>\"", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"Not", "@", 
+          RowBox[{"MemberQ", "[", 
+           RowBox[{"curIdxs", ",", "entryIdx"}], "]"}]}], ",", 
+         RowBox[{
+          RowBox[{
+          "Print", "[", "\"\<IterateDiagram: Invalid entryIdx\>\"", "]"}], 
+          ";", 
+          RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"externalIndices", "=", 
+        RowBox[{"GetExternalIndices", "[", "diag", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "<=", 
+          RowBox[{"Length", "[", "externalIndices", "]"}]}], ",", 
+         RowBox[{"i", "++"}], ",", 
+         RowBox[{"curIdxs", "=", 
+          RowBox[{"DeleteCases", "[", 
+           RowBox[{"curIdxs", ",", 
+            RowBox[{"externalIndices", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"exitIdx", "=", 
+        RowBox[{
+         RowBox[{"DeleteCases", "[", 
+          RowBox[{"curIdxs", ",", "entryIdx"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"candidates", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"diag", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ";;"}], "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"MemberQ", "[", 
+            RowBox[{"#", ",", "exitIdx", ",", "Infinity"}], "]"}], "&"}]}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "candidates", "]"}], "!=", "2"}], ",", 
+         RowBox[{
+          RowBox[{"Print", "[", "\"\<IterateDiagram: Logic Error\>\"", "]"}], 
+          ";", 
+          RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"nextPos", "=", 
+        RowBox[{
+         RowBox[{"DeleteCases", "[", 
+          RowBox[{"candidates", ",", "curPos"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", 
+         RowBox[{"nextPos", ",", "exitIdx"}], "}"}], "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"CheckOneLoopDiagramIdentity", "[", 
+     RowBox[{"diag1_", ",", "diag2_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"startPos", ",", "entryIdx"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AssertIsOneLoop", "[", 
+        RowBox[{"diag1", ",", "\"\<CheckDiagramIdentity:\>\""}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AssertIsOneLoop", "[", 
+        RowBox[{"diag2", ",", "\"\<CheckDiagramIdentity:\>\""}], "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"startPos", "=", 
+        RowBox[{"Map", "[", 
+         RowBox[{"GetRegulatordot", ",", 
+          RowBox[{"{", 
+           RowBox[{"diag1", ",", "diag2"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"CheckIteration", "[", "entry_", "]"}], ":=", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"curPos", ",", "curIdx", ",", "iter", ",", 
+            RowBox[{"externalIndices", "=", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+            RowBox[{"objectIdentifiers", "=", 
+             RowBox[{"{", 
+              RowBox[{"\"\<\>\"", ",", "\"\<\>\""}], "}"}]}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"curPos", "=", "startPos"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"curIdx", "=", "entry"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"iter", "=", "0"}], ";", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", 
+           RowBox[{"While", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"iter", "==", "0"}], "||", 
+                RowBox[{"curPos", "!=", "startPos"}]}], ")"}], "&&", 
+              RowBox[{"iter", "<", "50"}]}], ",", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"externalIndices", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "=", 
+               RowBox[{"GetExternalIndices", "[", 
+                RowBox[{"diag1", ",", 
+                 RowBox[{"curPos", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"externalIndices", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "=", 
+               RowBox[{"GetExternalIndices", "[", 
+                RowBox[{"diag2", ",", 
+                 RowBox[{"curPos", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"objectIdentifiers", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "=", 
+               RowBox[{"GetObjectIdentifier", "[", 
+                RowBox[{"curPos", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"objectIdentifiers", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "=", 
+               RowBox[{"GetObjectIdentifier", "[", 
+                RowBox[{"curPos", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"externalIndices", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "!=", 
+                 RowBox[{"externalIndices", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"\"\<Diff: \>\"", ",", 
+                  RowBox[{"externalIndices", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], ",", "\"\< vs \>\"", ",", 
+                  RowBox[{"externalIndices", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"objectIdentifiers", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "!=", 
+                 RowBox[{"objectIdentifiers", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"\"\<Diff: \>\"", ",", 
+                  RowBox[{"objectIdentifiers", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], ",", "\"\< vs \>\"", ",", 
+                  RowBox[{"objectIdentifiers", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "]"}], ";", 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"curPos", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", 
+                 RowBox[{"curIdx", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], "}"}], "=", 
+               RowBox[{"IterateDiagram", "[", 
+                RowBox[{"diag1", ",", 
+                 RowBox[{"curPos", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", 
+                 RowBox[{"curIdx", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"curPos", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ",", 
+                 RowBox[{"curIdx", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "=", 
+               RowBox[{"IterateDiagram", "[", 
+                RowBox[{"diag2", ",", 
+                 RowBox[{"curPos", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ",", 
+                 RowBox[{"curIdx", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"iter", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"iter", ">=", "50"}], ",", 
+             RowBox[{"Return", "[", "False", "]"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"Return", "[", "True", "]"}]}]}], "\[IndentingNewLine]", 
+         "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"entryIdx", "=", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", "\"\<indices\>\"", "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "&"}], ",", "startPos"}], "]"}]}],
+        ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"entryIdx", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "1"}], "]"}], "]"}], "==", 
+          RowBox[{"entryIdx", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"CheckIteration", "[", "entryIdx", "]"}], ",", 
+            RowBox[{"Return", "[", "True", "]"}]}], "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"entryIdx", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"startPos", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "[", "\"\<indices\>\"", "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"entryIdx", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "1"}], "]"}], "]"}], "==", 
+          RowBox[{"entryIdx", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"CheckIteration", "[", "entryIdx", "]"}], ",", 
+            RowBox[{"Return", "[", "True", "]"}]}], "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "False", "]"}]}]}], "\[IndentingNewLine]", 
+     "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"seps", "=", 
+   RowBox[{
+    RowBox[{"Diagramsqbq", "[", 
+     RowBox[{"[", "1", "]"}], "]"}], "//", 
+    "SeparateSuperIndexDiagramGroups"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"CheckOneLoopDiagramIdentity", "[", 
+  RowBox[{
+   RowBox[{"seps", "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ",", "1"}], "]"}], "]"}], ",", 
+   RowBox[{"seps", "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ",", "2"}], "]"}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.932098447635262*^9, 3.93209852143389*^9}, {
+  3.932098739216712*^9, 3.932098779668036*^9}, {3.932098846763782*^9, 
+  3.932098852743802*^9}, {3.932098999787578*^9, 3.932099297131016*^9}, {
+  3.932108028717169*^9, 3.932108201596019*^9}, {3.932108624829434*^9, 
+  3.932108807475878*^9}, {3.932108838489593*^9, 3.932109169409595*^9}, {
+  3.932109212016754*^9, 3.932109344892893*^9}, {3.932109379710291*^9, 
+  3.932109391918079*^9}, {3.9321094463395023`*^9, 3.932109659494432*^9}, {
+  3.932109955423258*^9, 3.932110075897533*^9}, {3.932110108381598*^9, 
+  3.932110145070335*^9}, {3.9321102537284193`*^9, 3.932110415030889*^9}},
+ CellLabel->
+  "In[187]:=",ExpressionUUID->"a6191ded-d4cf-4a87-8cba-d76cf1e3ac3f"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{
+  3.932109585390709*^9, {3.9321103209244413`*^9, 3.932110344092598*^9}, {
+   3.932110400298216*^9, 3.932110415556981*^9}},
+ CellLabel->
+  "Out[190]=",ExpressionUUID->"13846cc6-6fe1-495e-a064-bae6dc84f760"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"seps", "[", 
+  RowBox[{"[", 
+   RowBox[{"1", ",", "1", ",", "2"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.9321098739349737`*^9, 3.93210987445779*^9}},
+ CellLabel->
+  "In[119]:=",ExpressionUUID->"16c6e04b-3248-4aa9-8ea6-d86caf974c0f"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Regulatordot\"\>"}], ",", 
+   RowBox[{"\<\"indices\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"A", ",", 
+        RowBox[{"{", "i", "}"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", 
+        RowBox[{"{", "j", "}"}]}], "}"}]}], "}"}]}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{{3.932109871427576*^9, 3.93210987478621*^9}},
+ CellLabel->
+  "Out[119]=",ExpressionUUID->"a2a9e8ce-758b-4e74-8494-9c7ab6c3737a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.932109862690723*^9, 
+  3.932109905332841*^9}},ExpressionUUID->"53260d17-988a-41af-9535-\
+a95378667e5a"],
+
+Cell[BoxData[
+ RowBox[{"GetInternalIndices", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"Prefactor\"\>", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"-", 
+        FractionBox["1", "2"]}], "}"}]}], ",", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Regulatordot\"\>"}], ",", 
+       RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "i", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "j", "}"}]}], "}"}]}], "}"}]}]}], 
+      "\[RightAssociation]"}], ",", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
+       RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "a83$4174", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "i", "}"}]}], "}"}]}], "}"}]}]}], 
+      "\[RightAssociation]"}], ",", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"nPoint\"\>"}], ",", 
+       RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "a83$4174", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"qb", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "p"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"d2", ",", "c2", ",", "f2"}], "}"}]}], "}"}]}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"q", ",", 
+            RowBox[{"{", "a83$4175", "}"}]}], "}"}]}], "}"}]}], ",", 
+       RowBox[{"\<\"nPoint\"\>", "\[Rule]", "3"}], ",", 
+       RowBox[{"\<\"spec\"\>", "\[Rule]", "\<\"none\"\>"}]}], 
+      "\[RightAssociation]"}], ",", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
+       RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"q", ",", 
+            RowBox[{"{", "a83$4175", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"qb", ",", 
+            RowBox[{"{", "a83$4164", "}"}]}], "}"}]}], "}"}]}]}], 
+      "\[RightAssociation]"}], ",", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"nPoint\"\>"}], ",", 
+       RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "a83$4165", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"qb", ",", 
+            RowBox[{"{", "a83$4164", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"q", ",", 
+            RowBox[{"{", 
+             RowBox[{"p", ",", 
+              RowBox[{"{", 
+               RowBox[{"d1", ",", "c1", ",", "f1"}], "}"}]}], "}"}]}], 
+           "}"}]}], "}"}]}], ",", 
+       RowBox[{"\<\"nPoint\"\>", "\[Rule]", "3"}], ",", 
+       RowBox[{"\<\"spec\"\>", "\[Rule]", "\<\"none\"\>"}]}], 
+      "\[RightAssociation]"}], ",", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Propagator\"\>"}], ",", 
+       RowBox[{"\<\"indices\"\>", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "a83$4165", "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{"{", "j", "}"}]}], "}"}]}], "}"}]}]}], 
+      "\[RightAssociation]"}]}], "}"}], ",", 
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"Regulatordot\"\>"}], ",", 
+     RowBox[{"\<\"indices\"\>", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"A", ",", 
+          RowBox[{"{", "i", "}"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"A", ",", 
+          RowBox[{"{", "j", "}"}]}], "}"}]}], "}"}]}]}], 
+    "\[RightAssociation]"}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.932109867595257*^9, 3.9321098928943996`*^9}},
+ CellLabel->
+  "Out[121]=",ExpressionUUID->"a9da0767-951a-4cfd-9354-99df4d63296d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1800, 1012.5},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.0 for Linux x86 (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f8e9dfa9-fa21-4fe2-826e-9ba3a99be3a5"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 175, 3, 67, "Chapter",ExpressionUUID->"aede59b2-194f-46df-ac63-25a1e4e2fbde"],
+Cell[758, 27, 250, 6, 45, "Input",ExpressionUUID->"26b1bd1d-881b-4710-9df9-68606cbb6f63",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1033, 37, 152, 3, 66, "Section",ExpressionUUID->"66d3b196-e162-4109-9eae-736f9d47bb81"],
+Cell[1188, 42, 159, 3, 45, "Input",ExpressionUUID->"3ec6060e-25c6-41bf-bcdb-f69c8d8cb5cb",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1384, 50, 150, 3, 66, "Section",ExpressionUUID->"c860513e-188c-43ef-9b76-1b904d2adeae"],
+Cell[1537, 55, 2204, 51, 294, "Input",ExpressionUUID->"7ede315f-61cb-40ab-b138-db43ae7b29f0",
+ InitializationCell->True],
+Cell[3744, 108, 167, 4, 45, "Input",ExpressionUUID->"e28b94f8-4ec5-4d82-95fc-59ffaf4ac5c9",
+ InitializationCell->True],
+Cell[3914, 114, 406, 11, 48, "Input",ExpressionUUID->"ab76e3eb-0df2-489c-90da-b0c1149e7958",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4357, 130, 156, 3, 66, "Section",ExpressionUUID->"e2afeeb3-8efa-4a86-8628-128a46491974"],
+Cell[4516, 135, 6872, 183, 390, "Input",ExpressionUUID->"28f1efa9-7def-4cfa-81f0-22b832df0909"],
+Cell[11391, 320, 1166, 28, 51, "Input",ExpressionUUID->"cfb5bce6-c727-478c-ab81-7fccfd36c1bb"],
+Cell[12560, 350, 3035, 80, 176, "Input",ExpressionUUID->"c01afb9a-ad61-4425-889a-03c87ac316aa"],
+Cell[15598, 432, 4771, 123, 608, "Input",ExpressionUUID->"a68ab892-1d13-4fae-8dd2-fccfec36b491"],
+Cell[20372, 557, 5301, 132, 495, "Input",ExpressionUUID->"0a58cf74-2354-4fca-bb76-5ece6df41991"],
+Cell[25676, 691, 5365, 131, 508, "Input",ExpressionUUID->"e0663f80-523c-46ae-abb0-036375dcc9c5"],
+Cell[31044, 824, 154, 3, 29, "Input",ExpressionUUID->"80810d78-5fc2-4366-9145-d94411ff8787"],
+Cell[31201, 829, 792, 20, 92, "Input",ExpressionUUID->"4bd8ae76-2d80-4725-892a-4bfbce55210f"],
+Cell[CellGroupData[{
+Cell[32018, 853, 12738, 300, 1270, "Input",ExpressionUUID->"a6191ded-d4cf-4a87-8cba-d76cf1e3ac3f"],
+Cell[44759, 1155, 257, 5, 33, "Output",ExpressionUUID->"13846cc6-6fe1-495e-a064-bae6dc84f760"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45053, 1165, 264, 6, 29, "Input",ExpressionUUID->"16c6e04b-3248-4aa9-8ea6-d86caf974c0f"],
+Cell[45320, 1173, 582, 16, 33, "Output",ExpressionUUID->"a2a9e8ce-758b-4e74-8494-9c7ab6c3737a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45939, 1194, 152, 3, 29, "Input",ExpressionUUID->"53260d17-988a-41af-9535-a95378667e5a"],
+Cell[46094, 1199, 4438, 121, 97, "Output",ExpressionUUID->"a9da0767-951a-4cfd-9354-99df4d63296d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
