@@ -79,6 +79,13 @@ getDSE[{{phi,phi},{phi,phi,phi,phi}}, phi[a]]
 
 
 (* ::Input::Initialization:: *)
+SuperindexToFullDiagrams::usage = "SuperindexToFullDiagrams[diagrams,setup, derivativelist, options]
+
+Insert the physical indices and momentum routing into a list of superindex diagrams.
+";
+
+
+(* ::Input::Initialization:: *)
 Begin["`Private`"]
 
 
@@ -2750,6 +2757,15 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
 
 Options[DeriveFunctionalEquation] = {"OutputLevel" -> "FunctionalDerivatives",
      "LoopIndex" -> q, "DummyVarList" -> False,"ReturnAll"->False};
+
+
+(* ::Input::Initialization:: *)
+SuperindexToFullDiagrams[diags_,derivativeList_,setupAssoc_]:=Module[{fields,loopIndex,allVars, fullDiags},
+fields =Association["bosonic"->{},"fermionic"->{},setupAssoc[["FieldSpace"]]];
+     loopIndex = Global`q;
+ {allVars, fullDiags} = InsertFeynRulesAllDiags[diags, derivativeList,fields, loopIndex] /. QMeSderivation`Private`q->Global`q;
+Return[fullDiags]
+]
 
 
 (* ::Input::Initialization:: *)
