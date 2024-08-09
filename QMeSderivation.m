@@ -12,7 +12,11 @@ Needs["QMeSderivation`Tools`"]
 BeginPackage["QMeSderivation`"]
 
 
-(* ::Section:: *)
+(* ::Input::Initialization:: *)
+$DistributedContexts:={$Context,"QMeSderivation`","QMeSderivation`Private`"};
+
+
+(* ::Section::Closed:: *)
 (*Exports*)
 
 
@@ -89,7 +93,7 @@ Insert the physical indices and momentum routing into a list of superindex diagr
 Begin["`Private`"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Debug*)
 
 
@@ -552,7 +556,7 @@ Return[newActionTerms]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Functional Derivatives*)
 
 
@@ -801,7 +805,7 @@ truefieldlist =fieldlist[["FieldDerivatives"]];
 MultipleFuncDer[RHSlist,truefieldlist, {},indexOptions]
 ]*)
 MultipleFuncDer[RHSlist_,fieldlist_] := MultipleFuncDer[RHSlist,fieldlist,{}]
-MultipleFuncDer[RHSlist_,fieldlist_,replacementList_] := Module[{dummysuperindexlist,firstfield, newfieldlist, newRHSlist,newreplacementList},
+MultipleFuncDer[RHSlist_,fieldlist_,replacementList_] := Module[{dummysuperindexlist,firstfield, newfieldlist, newRHSlist,newreplacementList,intResult},
 
 myEcho["MultipleFuncDer",1];
 
@@ -821,7 +825,8 @@ myEcho["Further FuncDer",2];
 newRHSlist =Table[Null,{i,1,Length@RHSlist}];
 newreplacementList= Table[Null,{i,1,Length@RHSlist}];
 
-({newRHSlist[[#]],newreplacementList[[#]]} = FuncDer[RHSlist[[#]],firstfield])&/@Table[i,{i,1,Length@RHSlist}];
+intResult=ParallelMap[(FuncDer[RHSlist[[#]],firstfield])&,Table[i,{i,1,Length@RHSlist}]];
+({newRHSlist[[#]],newreplacementList[[#]]} = intResult[[#]])&/@Table[i,{i,1,Length@RHSlist}];
 
 newRHSlist = Flatten[newRHSlist,1];
 ];
@@ -840,7 +845,7 @@ Return[{finalRHSlist,newreplacementList}]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Superindex Diagrams*)
 
 
@@ -1729,8 +1734,7 @@ truncationnew = truncation;
 ];
 
 (* take field trace diag-wise *)
-tracedDiags = 
-(traceSingleDiagram[RHS[[#]],derivativelist,internalreplacementList,fields, truncationnew,brstTruncation,classicalAction])&/@Range[Length@RHS];
+tracedDiags = ParallelMap[(traceSingleDiagram[RHS[[#]],derivativelist,internalreplacementList,fields, truncationnew,brstTruncation,classicalAction])&,Range[Length@RHS]];
 
 Return[Flatten[tracedDiags/.{"dummyEntry"}->Nothing,1]]
 ]
@@ -1739,7 +1743,6 @@ Return[Flatten[tracedDiags/.{"dummyEntry"}->Nothing,1]]
 (* ::Input::Initialization:: *)
 Clear[traceSingleDiagram];
 traceSingleDiagram[RHSDiagram_,derivativelist_,replacementList_,fields_,truncation_,brstTruncation_,classicalAction___] := Module[{allfields,objectPositionAssoc, truncationObject,IndexConfigs = {},sortedDiag},
-
 
 myEcho["GetSingleDiagram",1];
 
@@ -2678,7 +2681,7 @@ Return[{allVars,fullDiags}]
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Derive Equations*)
 
 
