@@ -13,9 +13,18 @@ BeginPackage["QMeSderivation`Tools`"]
 
 
 (* ::Input::Initialization:: *)
-ReduceIdenticalFlowDiagrams::usage = "ReduceIdenticalFlowDiagrams[diagrams,symmetries]
+ReduceIdenticalFlowDiagrams::usage = "ReduceIdenticalFlowDiagrams[diagrams,derivativeList,symmetries]
 
-Reduce a set of flow equations by matching identical topologies and/or by utilizing a given set of symmetries.";
+Reduce a set of flow equations by matching identical topologies and/or by utilizing a given set of symmetries.
+The user has to supply the list of derivatives (i.e. external legs in the diagrams). Then, the symmetries are specified in the following way:
+symmetries = {
+	{ {1, 3}, Minus},
+	{ {2, 4}, Minus}
+	{ {1, 3}, {2, 4}, Plus},
+}
+Here, two antisymmetries (as specified by the Minus) are given, which consist of a single cycle each (1,3) and (2,4). These integers refer to the legs as given in derivativeList (in order).
+ReduceIdenticalFlowDiagrams does not construct all symmetries from the given ones - therefore, the full symmetry group needs to be specified. Therefore, we also supply the symmetry consisting of both cycles explicitly in the third line.
+";
 
 
 (* ::Input::Initialization:: *)
@@ -29,9 +38,7 @@ The options for the function PlotSuperindexDiagram are:
 	This option will toggle whether edges are plotted together with labels to identify them.
 \"EdgeStyle\" ->  List
 	Using this option, one can specify the edge styles of different propagators. e.g.,
-		\"EdgeStyle\"->{q->Blue,A->Orange,\[CapitalPi]->{Dashed,Thick},\[Sigma]->{Dashed,Thick,Purple}}
-	may produce a diagram like
-	{-\!\(\*FractionBox[\(1\), \(2\)]\),Graph[{{$CellContext`externalLeg$155993$156004}, {$CellContext`externalLeg$155993$156007}, {$CellContext`externalLeg$155993$156010}, {$CellContext`externalLeg$155993$156013}, {$CellContext`i}, {$CellContext`a83$471882}, {$CellContext`a83$471893}, {$CellContext`a83$471910}, {$CellContext`a83$471979}}, {{{6, 5}, {8, 7}, {2, 8}, {4, 6}, {5, 9}, {7, 3}, {9, 1}}, {{6, 7}, {8, 9}}}, {FormatType -> TraditionalForm, EdgeStyle -> {UndirectedEdge[{$CellContext`a83$471910}, {$CellContext`a83$471979}] -> {RGBColor[1, 0.5, 0]}, DirectedEdge[{$CellContext`a83$471882}, {$CellContext`i}] -> {RGBColor[0, 0, 1]}, UndirectedEdge[{$CellContext`a83$471882}, {$CellContext`a83$471893}] -> {{Dashing[{Small, Small}], Thickness[Large]}}, DirectedEdge[{$CellContext`i}, {$CellContext`a83$471979}] -> {RGBColor[0, 0, 1]}, DirectedEdge[{$CellContext`externalLeg$155993$156013}, {$CellContext`a83$471882}] -> {RGBColor[0, 0, 1]}, DirectedEdge[{$CellContext`a83$471979}, {$CellContext`externalLeg$155993$156004}] -> {RGBColor[0, 0, 1]}, DirectedEdge[{$CellContext`a83$471910}, {$CellContext`a83$471893}] -> {RGBColor[0, 0, 1]}, DirectedEdge[{$CellContext`a83$471893}, {$CellContext`externalLeg$155993$156010}] -> {RGBColor[0, 0, 1]}, DirectedEdge[{$CellContext`externalLeg$155993$156007}, {$CellContext`a83$471910}] -> {RGBColor[0, 0, 1]}}, VertexLabels -> {{$CellContext`externalLeg$155993$156010} -> $CellContext`qb, {$CellContext`externalLeg$155993$156004} -> $CellContext`qb, {$CellContext`externalLeg$155993$156007} -> $CellContext`q, {$CellContext`externalLeg$155993$156013} -> $CellContext`q}, VertexShape -> {{$CellContext`i} -> Graphics[{Thickness[Large], Line[{{2^Rational[-1, 2], 2^Rational[-1, 2]}, {-2^Rational[-1, 2], -2^Rational[-1, 2]}}], Line[{{2^Rational[-1, 2], -2^Rational[-1, 2]}, {-2^Rational[-1, 2], 2^Rational[-1, 2]}}], Circle[{0, 0}, 1]}]}, VertexSize -> {{$CellContext`i} -> Medium}}]}
+		\"EdgeStyle\"->{q->Blue,A->Orange,\[CapitalPi]->{Dashed,Thick},\[Sigma]->{Dashed,Thick,Purple}}.
 ";
 
 
@@ -153,11 +160,11 @@ GetFermions[setup_Association]:=Map[Head[#[[2]]]&,setup["FieldSpace"]["fermionic
 GetAntiFermions[setup_Association]:=Map[Head[#[[1]]]&,setup["FieldSpace"]["fermionic"]];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Diagram reduction*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Diagram grouping*)
 
 
@@ -202,7 +209,7 @@ nextPos=DeleteCases[candidates,curPos][[1]];
 Return[{nextPos,exitIdx}];
 ];
 
-CheckOneLoopDiagramIdentity[indiag1_,indiag2_,symmetries_:{}]:=Module[{startPos,CheckIteration,entryIdx,diag1,diag2,symmidx},
+CheckOneLoopDiagramIdentity[indiag1_,indiag2_,symmetryList_List:{}]:=Module[{startPos,CheckIteration,entryIdx,diag1,diag2,symmidx,sign},
 (*Given two one-loop diagrams, start in both at the regulator. 
 Then, step through the diagrams (at the same time) in one direction and compare whether they are identical.
 Do this several times: Both directions and utilizing (one after the other) all symmetry transformations (symmetries).
@@ -237,24 +244,27 @@ If[iter>=50,Return[False]];
 Return[True]
 ];
 
-For[symmidx=0,symmidx<=Length[symmetries],symmidx++,
+For[symmidx=0,symmidx<=Length[symmetryList],symmidx++,
 diag1=indiag1;
-If[symmidx>0,diag2=indiag2/.symmetries[[symmidx]],diag2=indiag2];
+If[symmidx>0,diag2=indiag2/.symmetryList[[symmidx]]["Rule"],diag2=indiag2];
+If[symmidx>0,
+sign=If[symmetryList[[symmidx]]["Sign"]===Plus,1,-1],
+sign=1];
 
 startPos=Map[GetRegulatordot,{diag1,diag2}];
 
 entryIdx=Map[#["indices"][[1]]&,startPos];
 If[entryIdx[[1,1]]==entryIdx[[2,1]],
-If[CheckIteration[entryIdx],Return[True]];
+If[CheckIteration[entryIdx],Return[{True,sign}]];
 ];
 
 entryIdx[[2]]=startPos[[2]]["indices"][[2]];
 If[entryIdx[[1,1]]==entryIdx[[2,1]],
-If[CheckIteration[entryIdx],Return[True]];
+If[CheckIteration[entryIdx],Return[{True,sign}]];
 ];
 ];
 
-Return[False]
+Return[{False,0}]
 ];
 
 
@@ -263,20 +273,66 @@ Return[False]
 
 
 (* ::Input::Initialization:: *)
-ReduceIdenticalFlowDiagrams[diags_,symmetries_List]:=Module[{separatedGroups,reduceGroup,reducedGroups},
+BuildSymmetryList[symmetries_,derivativeList_]:=Module[{procDerList,buildOneSymmetry},
+If[Head[symmetries]=!=List,Print["Symmetries must be given as a list!"];Abort[]];
+If[Length[symmetries]==0,Return[{}]];
+If[Length[derivativeList]==0,Return[{}]];
+
+procDerList=Map[{Head[#],List@@#}&,derivativeList];
+
+buildOneSymmetry[sym_]:=Module[{valid=True,buildCycle,pairs},
+If[sym[[-1]]=!=Plus&&sym[[-1]]=!=Minus,valid=False];
+If[AnyTrue[sym[[;;-2]],Not[Head[#]===List]&],valid=False];
+pairs=Subsets[sym[[;;-2]],{2}];
+valid=Not@AnyTrue[Map[ContainsAny[#[[1]],#[[2]]]&,pairs],Identity];
+If[Not@valid,Print[sym," is  not a valid symmetry!"];Abort[]];
+
+buildCycle[cyc_]:=Module[{cycvalid=True,numberRules,idx,nextIdx},
+If[AnyTrue[cyc,Not[IntegerQ[#]]&],cycvalid=False];
+If[AnyTrue[cyc,(#>Length[derivativeList])||(#<1)&],cycvalid=False];
+If[Not@cycvalid,Print[cyc," is  not a valid cycle!"];Abort[]];
+
+numberRules={};
+For[idx=1,idx<=Length[cyc],idx++,
+nextIdx=Mod[(idx),Length[cyc]]+1;
+numberRules=Join[numberRules,{{cyc[[idx]],cyc[[nextIdx]]}}];
+];
+
+Return[Map[procDerList[[#[[1]]]]->procDerList[[#[[2]]]]&,numberRules]];
+];
+
+<|
+"Rule"->Flatten[Map[buildCycle,sym[[;;-2]]],1],
+"Sign"->sym[[-1]]
+|>
+];
+
+Map[buildOneSymmetry,symmetries]
+];
+
+
+(* ::Input::Initialization:: *)
+ReduceIdenticalFlowDiagrams[diags_,derivativeList_:{},symmetries_List:{}]:=Module[{separatedGroups,reduceGroup,reducedGroups,symmetryList},
 AssertAllSuperIndexDiagrams[diags,"ReduceIdenticalFlowDiagrams"];
 
 separatedGroups=SeparateSuperIndexDiagramGroups[diags];
+symmetryList=BuildSymmetryList[symmetries,derivativeList];
 
-reduceGroup[groupDiags_]:=Module[{i,j,multiplicities,identities,prefactors,newDiags},
+reduceGroup[groupDiags_]:=Module[{i,j,multiplicities,identitiesSigns,signs,identities,prefactors,newDiags},
 multiplicities=Table[1,{i,Length[groupDiags]}];
 For[i=1,i<=Length[groupDiags],i++,
 If[multiplicities[[i]]>0,
-identities=Map[CheckOneLoopDiagramIdentity[groupDiags[[i]],#,symmetries]&,groupDiags[[i+1;;]]];
-identities=Map[If[#,1,0]&,identities];
+identitiesSigns=Table[{False,0},{k,i+1,Length[groupDiags]}];
+For[j=i+1,j<=Length[groupDiags],j++,
+If[multiplicities[[j]]>0,
+identitiesSigns[[j-i]]=CheckOneLoopDiagramIdentity[groupDiags[[i]],groupDiags[[j]],symmetryList];
+];
+];
+signs=Map[If[#[[1]],#[[2]],0]&,identitiesSigns];
+identities=Map[If[#[[1]],1,0]&,identitiesSigns];
 identities=Join[
 Table[0,{j,i-1}],
-{Total[identities]},
+{Total[signs]},
 -identities];
 multiplicities=multiplicities+identities;
 ];
@@ -301,7 +357,21 @@ Return[Flatten[reducedGroups,1]];
 ];
 
 
-(* ::Section:: *)
+
+(* ::Input:: *)
+(*Diagramsqbqqbq=Select[Import["./diagramsqbqqbq.m"],Not[MemberQ[#,\[CapitalPi],Infinity]]&&Not[MemberQ[#,\[Sigma],Infinity]]&];*)
+(*DerivativeListqbqqbq= {qb[p4,{d4,c4,f4}],q[p3,{d3,c3,f3}],qb[p2,{d2,c2,f2}],q[p1,{p1,c1,f1}]};*)
+(*Diagramsqbqqbq//Length*)
+(*symm={*)
+(*{{1,3},Plus},*)
+(*{{2,4},Plus},*)
+(*{{1,3},{2,4},Plus}*)
+(*};*)
+(*res=ReduceIdenticalFlowDiagrams[Diagramsqbqqbq,DerivativeListqbqqbq,symm];*)
+(*PlotSuperindexDiagrams[res,SetupfRG]*)
+
+
+(* ::Section::Closed:: *)
 (*Diagram drawing*)
 
 
@@ -481,7 +551,8 @@ Map[PlotSuperindexDiagram[#,setup,a]&,diags]
 (**)
 (*SetupfRG= <|"MasterEquation"->fRGEq,*)
 (*"FieldSpace"->fieldsNf2p1,*)
-(*"Truncation"->TruncationNf2p1|>;DerivativeListqbq= {qb[p4,{d4,c4,f4}],q[p3,{d3,c3,f3}],qb[p2,{d2,c2,f2}],q[p1,{p1,c1,f1}]};*)
+(*"Truncation"->TruncationNf2p1|>;*)
+(*DerivativeListqbq= {qb[p4,{d4,c4,f4}],q[p3,{d3,c3,f3}],qb[p2,{d2,c2,f2}],q[p1,{p1,c1,f1}]};*)
 (*QMeSderivation`Private`$DebugLevel=0*)
 (*Timing[DeriveFunctionalEquation[SetupfRG,DerivativeListqbq,"OutputLevel"->"SuperindexDiagrams"]]*)
 
@@ -496,25 +567,16 @@ Map[PlotSuperindexDiagram[#,setup,a]&,diags]
 
 (* ::Input:: *)
 (*symm={*)
-(*{*)
-(*{qb,{p4,{d4,c4,f4}}}->{qb,{p2,{d2,c2,f2}}},*)
-(*{qb,{p2,{d2,c2,f2}}}->{qb,{p4,{d4,c4,f4}}},*)
-(*{q,{p3,{d3,c3,f3}}}->{q,{p1,{p1,c1,f1}}},*)
-(*{q,{p1,{p1,c1,f1}}}->{q,{p3,{d3,c3,f3}}}*)
-(*},*)
-(*{*)
-(*{qb,{p4,{d4,c4,f4}}}->{qb,{p2,{d2,c2,f2}}},*)
-(*{qb,{p2,{d2,c2,f2}}}->{qb,{p4,{d4,c4,f4}}}*)
-(*},*)
-(*{*)
-(*{q,{p3,{d3,c3,f3}}}->{q,{p1,{p1,c1,f1}}},*)
-(*{q,{p1,{p1,c1,f1}}}->{q,{p3,{d3,c3,f3}}}*)
-(*}*)
+(*{1,3,Plus}*)
 (*};*)
 
 
 (* ::Input:: *)
-(*res=ReduceIdenticalFlowDiagrams[Diagramsqbq,symm];*)
+(**)
+(*symm={*)
+(*{1,3,Plus}*)
+(*};*)
+(*res=ReduceIdenticalFlowDiagrams[Diagramsqbq,DerivativeListqbq,symm];*)
 (*res//Length*)
 
 
