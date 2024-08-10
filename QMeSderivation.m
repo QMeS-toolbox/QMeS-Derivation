@@ -560,7 +560,7 @@ Return[newActionTerms]
 (*Functional Derivatives*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Multiple Functional Derivatives*)
 
 
@@ -792,7 +792,7 @@ Return[{AllDerivatives, replacementList}]
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Main*)
 
 
@@ -849,7 +849,7 @@ Return[{finalRHSlist,newreplacementList}]
 (*Superindex Diagrams*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Get Fields and Misc*)
 
 
@@ -890,7 +890,7 @@ Return[fullList]
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Possible Configs*)
 
 
@@ -1712,7 +1712,7 @@ Return[{totalDiagPref}];
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Trace over Fields*)
 
 
@@ -2681,7 +2681,7 @@ Return[{allVars,fullDiags}]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Derive Equations*)
 
 
@@ -2763,7 +2763,7 @@ Options[DeriveFunctionalEquation] = {"OutputLevel" -> "FunctionalDerivatives",
 
 
 (* ::Input::Initialization:: *)
-SuperindexToFullDiagrams[diags_,derivativeList_,setupAssoc_]:=Module[{fields,loopIndex,allVars, fullDiags},
+SuperindexToFullDiagrams[diags_,setupAssoc_,derivativeList_]:=Module[{fields,loopIndex,allVars, fullDiags},
 fields =Association["bosonic"->{},"fermionic"->{},setupAssoc[["FieldSpace"]]];
      loopIndex = Global`q;
  {allVars, fullDiags} = InsertFeynRulesAllDiags[diags, derivativeList,fields, loopIndex] /. QMeSderivation`Private`q->Global`q;

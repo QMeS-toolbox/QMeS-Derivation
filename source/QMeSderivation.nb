@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    397693,       9678]
-NotebookOptionsPosition[    384050,       9429]
-NotebookOutlinePosition[    384446,       9445]
-CellTagsIndexPosition[    384403,       9442]
+NotebookDataLength[    397746,       9680]
+NotebookOptionsPosition[    384103,       9431]
+NotebookOutlinePosition[    384499,       9447]
+CellTagsIndexPosition[    384456,       9444]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -9383,7 +9383,7 @@ output (i.e. \[OpenCurlyDoubleQuote]FunctionalDerivatives\
 Cell[BoxData[
  RowBox[{
   RowBox[{"SuperindexToFullDiagrams", "[", 
-   RowBox[{"diags_", ",", "derivativeList_", ",", "setupAssoc_"}], "]"}], ":=", 
+   RowBox[{"diags_", ",", "setupAssoc_", ",", "derivativeList_"}], "]"}], ":=", 
   RowBox[{"Module", "[", 
    RowBox[{
     RowBox[{"{", 
@@ -9417,7 +9417,9 @@ Cell[BoxData[
    "]"}]}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{
-  3.93218125692752*^9},ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-412e36cf6c8d"],
+  3.93218125692752*^9, {3.93231133049966*^9, 
+   3.9323113344987803`*^9}},ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-\
+412e36cf6c8d"],
 
 Cell[BoxData[{
  RowBox[{"End", "[", "]"}], "\n", 
@@ -9674,9 +9676,9 @@ Cell[CellGroupData[{
 Cell[371672, 9149, 90, 0, 52, "Section",ExpressionUUID->"f7b89351-b82e-458d-bce9-f3c725209e58"],
 Cell[371765, 9151, 10619, 229, 1620, "Input",ExpressionUUID->"6ca5fc88-9951-4045-ac07-4eb8fbd1f515",
  InitializationCell->True],
-Cell[382387, 9382, 1452, 37, 155, "Input",ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-412e36cf6c8d",
+Cell[382387, 9382, 1505, 39, 155, "Input",ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-412e36cf6c8d",
  InitializationCell->True],
-Cell[383842, 9421, 180, 4, 67, "Input",ExpressionUUID->"6ae29785-f7d1-4d85-9b99-b147d9011e08",
+Cell[383895, 9423, 180, 4, 67, "Input",ExpressionUUID->"6ae29785-f7d1-4d85-9b99-b147d9011e08",
  InitializationCell->True]
 }, Open  ]]
 }, Open  ]]
