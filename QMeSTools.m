@@ -30,7 +30,7 @@ ReduceIdenticalFlowDiagrams does not construct all symmetries from the given one
 (* ::Input::Initialization:: *)
 PlotSuperindexDiagram::usage = "PlotSuperindexDiagram[diagram, setup, options]
 
-Plot a single superindex diagram. The first argument to this function is the diagram itself, the second one is a valid QMeS setup.
+Plot a single superindex diagram. The first argument to this function is the diagram itself, the second one is the corresponding QMeS setup.
 The diagram has to be a superindex diagram.
 
 The options for the function PlotSuperindexDiagram are:
@@ -45,7 +45,7 @@ The options for the function PlotSuperindexDiagram are:
 (* ::Input::Initialization:: *)
 PlotSuperindexDiagrams::usage="PlotSuperindexDiagram[diagrams, setup, options]
 
-Plot a set of superindex diagrams. The first argument to this function is a list of diagrams, the second one is a valid QMeS setup.
+Plot a set of superindex diagrams. The first argument to this function is a list of diagrams, the second one is the corresponding QMeS setup.
 The diagrams have to be superindex diagrams.
 
 The options for the function PlotSuperindexDiagrams are:
@@ -58,8 +58,12 @@ The options for the function PlotSuperindexDiagrams are:
 
 
 (* ::Input::Initialization:: *)
-RerouteFermionicMomenta::usage="RerouteFermionicMomenta[diagrams,setup,derivativeList]
+RerouteFermionicMomenta::usage="RerouteFermionicMomenta[diagrams, setup, derivativeList]
 
+Reroute external fermionic momenta in diagrams such that Matsubara frequencies are automatically correctly routed.
+If a closed fermion loop is present, the momentum in this loop is marked by attaching the character 'f' to it (i.e. q -> qf in such a loop).
+The first argument to this function is a list of diagrams, the second one is the corresponding QMeS setup. The third argument is the derivative list that has been used to derive the set of diagrams.
+Be aware, that the rerouting exploits momentum conservation - therefore, one of the external momenta may be eliminated if this is not yet the case.
 "
 
 
@@ -83,7 +87,7 @@ myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 (*Utilities*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Tests and assertions*)
 
 
@@ -121,6 +125,19 @@ regulatordotMatch=Select[content,StringMatchQ[#,"Regulatordot"~~___]&];
 If[Length[regulatordotMatch]==1,True,False]
 ];
 AssertIsFlowDiagram[diag_List,context_String:""]:=If[Not@TestIsFlowDiagram[diag],Print[context," Diagram is not a flow diagram."];Abort[]];
+
+
+(* ::Input::Initialization:: *)
+TestIsFullDiagram[diag_/;Head[diag]=!=List]:=Module[{extr,symbols},
+If[Head[diag]===Association||Head[diag]===Rule,Return[False]];
+extr=diag/.h_[{a___}]:>h;
+symbols=GetAllSymbols[extr];
+AllTrue[symbols,
+(StringPart[ToString[#],1]=="G")||(StringPart[ToString[#],1]=="\[CapitalGamma]")||(StringPart[ToString[#],1]=="R")&
+]
+];
+TestIsFullDiagram[diag_List]:=AllTrue[diag,TestIsFullDiagram];
+AssertIsFullDiagram[diag_,context_String:""]:=If[Not@TestIsFullDiagram[diag],Print[context," Argument is not a FullDiagram."];Abort[]];
 
 
 (* ::Subsection::Closed:: *)
@@ -196,6 +213,9 @@ Print["field ",field," not found!"];
 Abort[];
 ];
 
+
+(* ::Input::Initialization:: *)
+GetAllSymbols[expr_]:=DeleteDuplicates@Cases[{expr},_Symbol,Infinity]
 
 
 (* ::Section:: *)
@@ -549,12 +569,11 @@ Map[PlotSuperindexDiagram[#,setup,a]&,diags]
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Momentum  routing*)
 
 
 (* ::Input::Initialization:: *)
-GetAllSymbols[expr_]:=DeleteDuplicates@Cases[{expr},_Symbol,Infinity]
 ReduceDiagramToMomenta[diag_,momenta_]:=diag/.Cor_[{k___}]:>Cor@@Select[{k},ContainsAny[GetAllSymbols[#],momenta]&]
 
 
@@ -565,6 +584,8 @@ reducedDiagram,
 fermionicPropNames,bosonicPropNames,fermionicProps,bosonicProps,
 nonFermMomentum,momentumConservation,
 fermionArgs,bosonArgs,idx,problems,nothing,dummyMom},
+
+AssertIsFullDiagram[diag,"RerouteFermionicMomenta:"];
 
 loopMomentum=Global`q;
 
@@ -590,8 +611,8 @@ nonFermMomentum[[1]]->-Total[allMomenta]+nonFermMomentum[[1]]
 ];
 
 (*If there are no boson propagators, there is nothing to do, except to mark the loop-momentum with an f (as it is a closed fermion loop)!*)
-If[Length[bPL]==0,
-Return[diag/.loopMomentum->Symbol[ToString[loopMomentum]<>"f"]//.momentumConservation]
+If[Length[bosonicProps]==0,
+Return[diag/.loopMomentum->Symbol[ToString[loopMomentum]<>"f"]/.momentumConservation]
 ];
 
 (*Reduce further by getting rid of field information*)
@@ -601,8 +622,8 @@ bosonArgs=Union[bosonicProps/.Map[#[m___]:>{m}&,bosonicPropNames]];
 (*If a femion momentum appears in a boson propagator, this needs to be fixed*)
 problems={};
 For[idx=1,idx<=Length[fermionMomenta],idx++,
-problems=Union[problems,Select[bosonArgs//.momentumConservation,MemberQ[#,fermionMomenta[[idx]],Infinity]&]];
-problems=Union[problems,Select[bosonArgs//.momentumConservation,MemberQ[#,antifermionMomenta[[idx]],Infinity]&]];
+problems=Union[problems,Select[bosonArgs/.momentumConservation,MemberQ[#,fermionMomenta[[idx]],Infinity]&]];
+problems=Union[problems,Select[bosonArgs/.momentumConservation,MemberQ[#,antifermionMomenta[[idx]],Infinity]&]];
 ];
 
 (*Fix the problems by doing shifts of the loop momentum*)
@@ -610,28 +631,29 @@ If[Length[problems]>0,
 (*There may be no problem at all: If everywhere the same number of fermion and antifermions enter, we do not need to reroute.*)
 If[
 Not@MemberQ[
-problems//.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
-Return[diag//.momentumConservation]
+problems/.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
+Return[diag/.momentumConservation]
 ];
 For[idx=1,idx<=Length[fermionMomenta],idx++,
 If[
 Not@MemberQ[
-problems/.loopMomentum->loopMomentum-fermionMomenta[[idx]]//.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
-Return[diag/.{loopMomentum->loopMomentum-fermionMomenta[[idx]]}//.momentumConservation]
+problems/.loopMomentum->loopMomentum-fermionMomenta[[idx]]/.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
+Return[diag/.{loopMomentum->loopMomentum-fermionMomenta[[idx]]}/.momentumConservation]
 ];
 If[
 Not@MemberQ[
-problems/.loopMomentum->loopMomentum-antifermionMomenta[[idx]]//.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
-Return[diag/.{loopMomentum->loopMomentum-antifermionMomenta[[idx]]}//.momentumConservation]
+problems/.loopMomentum->loopMomentum-antifermionMomenta[[idx]]/.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
+Return[diag/.{loopMomentum->loopMomentum-antifermionMomenta[[idx]]}/.momentumConservation]
 ];
 ];
 ,
-Return[diag//.momentumConservation];
+Return[diag/.momentumConservation];
 ];
 
 Print["Routing momenta failed! Unsolved problems: ",problems];
 Abort[];
 ];
+RerouteFermionicMomenta[diags_List,setup_,derivativeList_]:=Map[RerouteFermionicMomenta[#,setup,derivativeList]&,diags];
 
 
 (* ::Section:: *)
@@ -706,7 +728,6 @@ Abort[];
 (*DerivativeListqbq= {qb[p2,{d2,c2,f2}],q[p1,{p1,c1,f1}]};*)
 (*Diagramsqbq=DeriveFunctionalEquation[SetupfRG,DerivativeListqbq,"OutputLevel"->"FullDiagrams"];*)
 (**)
-(*RerouteFermionicMomenta[diags_List,setup_,derivativeList_]:=Map[RerouteFermionicMomenta[#,setup,derivativeList]&,diags];*)
 (*RerouteFermionicMomenta[Diagramsqbq,SetupfRG,DerivativeListqbq]*)
 
 
