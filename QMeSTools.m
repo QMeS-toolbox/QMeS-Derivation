@@ -43,7 +43,24 @@ The options for the function PlotSuperindexDiagram are:
 
 
 (* ::Input::Initialization:: *)
-PlotSuperindexDiagrams::usage=""
+PlotSuperindexDiagrams::usage="PlotSuperindexDiagram[diagrams, setup, options]
+
+Plot a set of superindex diagrams. The first argument to this function is a list of diagrams, the second one is a valid QMeS setup.
+The diagrams have to be superindex diagrams.
+
+The options for the function PlotSuperindexDiagrams are:
+\"ShowEdgeLabels\" ->  False / True
+	This option will toggle whether edges are plotted together with labels to identify them.
+\"EdgeStyle\" ->  List
+	Using this option, one can specify the edge styles of different propagators. e.g.,
+		\"EdgeStyle\"->{q->Blue,A->Orange,\[CapitalPi]->{Dashed,Thick},\[Sigma]->{Dashed,Thick,Purple}}.
+"
+
+
+(* ::Input::Initialization:: *)
+RerouteFermionicMomenta::usage="RerouteFermionicMomenta[diagrams,setup,derivativeList]
+
+"
 
 
 (* ::Input::Initialization:: *)
@@ -62,11 +79,11 @@ $DebugLevel =0;
 myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Utilities*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Tests and assertions*)
 
 
@@ -106,7 +123,7 @@ If[Length[regulatordotMatch]==1,True,False]
 AssertIsFlowDiagram[diag_List,context_String:""]:=If[Not@TestIsFlowDiagram[diag],Print[context," Diagram is not a flow diagram."];Abort[]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Getting objects*)
 
 
@@ -160,6 +177,27 @@ GetFermions[setup_Association]:=Map[Head[#[[2]]]&,setup["FieldSpace"]["fermionic
 GetAntiFermions[setup_Association]:=Map[Head[#[[1]]]&,setup["FieldSpace"]["fermionic"]];
 
 
+(* ::Input::Initialization:: *)
+GetPartnerField[field_,setup_]:=Module[{fermions,bosons,sel},
+fermions=GetFermionPairs[setup];
+bosons=GetBosons[setup];
+
+If[MemberQ[fermions,field,Infinity],
+sel=Select[fermions,MemberQ[#,field,Infinity]&][[1]];
+sel=DeleteCases[sel,field];
+Return[sel[[1]]];
+];
+
+If[MemberQ[bosons,field,Infinity],
+Return[field]
+];
+
+Print["field ",field," not found!"];
+Abort[];
+];
+
+
+
 (* ::Section:: *)
 (*Diagram reduction*)
 
@@ -187,7 +225,7 @@ Return[groupedDiagrams]
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Comparison of two diagrams*)
 
 
@@ -268,7 +306,7 @@ Return[{False,0}]
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Diagram set reduction*)
 
 
@@ -376,24 +414,6 @@ Return[Flatten[reducedGroups,1]];
 
 
 (* ::Input::Initialization:: *)
-GetPartnerField[field_,setup_]:=Module[{fermions,bosons,sel},
-fermions=GetFermionPairs[setup];
-bosons=GetBosons[setup];
-
-If[MemberQ[fermions,field,Infinity],
-sel=Select[fermions,MemberQ[#,field,Infinity]&][[1]];
-sel=DeleteCases[sel,field];
-Return[sel[[1]]];
-];
-
-If[MemberQ[bosons,field,Infinity],
-Return[field]
-];
-
-Print["field ",field," not found!"];
-Abort[];
-];
-
 GetEdgeRule[obj_,fields_,setup_]:=Module[{fermions,bosons,sel},
 If[Length[obj]!=Length[fields]||Length[obj]!=2,Print["Mismatch!"];Abort[]];
 fermions=GetFermionPairs[setup];
@@ -530,6 +550,91 @@ Map[PlotSuperindexDiagram[#,setup,a]&,diags]
 
 
 (* ::Section:: *)
+(*Momentum  routing*)
+
+
+(* ::Input::Initialization:: *)
+GetAllSymbols[expr_]:=DeleteDuplicates@Cases[{expr},_Symbol,Infinity]
+ReduceDiagramToMomenta[diag_,momenta_]:=diag/.Cor_[{k___}]:>Cor@@Select[{k},ContainsAny[GetAllSymbols[#],momenta]&]
+
+
+(* ::Input::Initialization:: *)
+RerouteFermionicMomenta[diag_/;Head[diag]=!=List,setup_,derivativeList_]:=Module[
+{loopMomentum,fermions,antifermions,bosons,allMomenta,fermionMomenta,antifermionMomenta,
+reducedDiagram,
+fermionicPropNames,bosonicPropNames,fermionicProps,bosonicProps,
+nonFermMomentum,momentumConservation,
+fermionArgs,bosonArgs,idx,problems,nothing,dummyMom},
+
+loopMomentum=Global`q;
+
+fermions=GetFermions[setup];
+antifermions=GetAntiFermions[setup];
+bosons=GetBosons[setup];
+
+allMomenta=derivativeList//.Map[#[a_,___]:>a&,fermions\[Union]antifermions\[Union]bosons];
+fermionMomenta=Select[derivativeList,MemberQ[fermions,Head[#]]&]//.Map[#[a_,___]:>a&,fermions];
+antifermionMomenta=Select[derivativeList,MemberQ[antifermions,Head[#]]&]//.Map[#[a_,___]:>a&,antifermions];
+If[Length[fermionMomenta]!=Length[antifermionMomenta],Print["Diagram has not the same number of fermions as antifermions!"];Abort[]];
+reducedDiagram=ReduceDiagramToMomenta[diag,{allMomenta}\[Union]{loopMomentum}];
+
+fermionicPropNames=Map[Symbol["G"<>ToString[#[[2]]]<>ToString[#[[1]]]]&,GetFermionPairs[setup]];
+bosonicPropNames=Map[Symbol["G"<>ToString[#]<>ToString[#]]&,GetBosons[setup]];
+fermionicProps=Flatten[Union[Map[Cases[reducedDiagram,#,Infinity]&,Map[#[__]&,fermionicPropNames]]]];
+bosonicProps=Flatten[Union[Map[Cases[reducedDiagram,#,Infinity]&,Map[#[__]&,bosonicPropNames]]]];
+
+nonFermMomentum=Select[allMomenta,Not@MemberQ[fermionMomenta\[Union]antifermionMomenta,#,Infinity]&];
+momentumConservation=If[Length[nonFermMomentum]==0,
+allMomenta[[1]]->-Total[allMomenta]+allMomenta[[1]],
+nonFermMomentum[[1]]->-Total[allMomenta]+nonFermMomentum[[1]]
+];
+
+(*If there are no boson propagators, there is nothing to do, except to mark the loop-momentum with an f (as it is a closed fermion loop)!*)
+If[Length[bPL]==0,
+Return[diag/.loopMomentum->Symbol[ToString[loopMomentum]<>"f"]//.momentumConservation]
+];
+
+(*Reduce further by getting rid of field information*)
+fermionArgs=Union[fermionicProps/.Map[#[m___]:>{m}&,fermionicPropNames]];
+bosonArgs=Union[bosonicProps/.Map[#[m___]:>{m}&,bosonicPropNames]];
+
+(*If a femion momentum appears in a boson propagator, this needs to be fixed*)
+problems={};
+For[idx=1,idx<=Length[fermionMomenta],idx++,
+problems=Union[problems,Select[bosonArgs//.momentumConservation,MemberQ[#,fermionMomenta[[idx]],Infinity]&]];
+problems=Union[problems,Select[bosonArgs//.momentumConservation,MemberQ[#,antifermionMomenta[[idx]],Infinity]&]];
+];
+
+(*Fix the problems by doing shifts of the loop momentum*)
+If[Length[problems]>0,
+(*There may be no problem at all: If everywhere the same number of fermion and antifermions enter, we do not need to reroute.*)
+If[
+Not@MemberQ[
+problems//.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
+Return[diag//.momentumConservation]
+];
+For[idx=1,idx<=Length[fermionMomenta],idx++,
+If[
+Not@MemberQ[
+problems/.loopMomentum->loopMomentum-fermionMomenta[[idx]]//.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
+Return[diag/.{loopMomentum->loopMomentum-fermionMomenta[[idx]]}//.momentumConservation]
+];
+If[
+Not@MemberQ[
+problems/.loopMomentum->loopMomentum-antifermionMomenta[[idx]]//.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
+Return[diag/.{loopMomentum->loopMomentum-antifermionMomenta[[idx]]}//.momentumConservation]
+];
+];
+,
+Return[diag//.momentumConservation];
+];
+
+Print["Routing momenta failed! Unsolved problems: ",problems];
+Abort[];
+];
+
+
+(* ::Section:: *)
 (*Testing*)
 
 
@@ -552,6 +657,10 @@ Map[PlotSuperindexDiagram[#,setup,a]&,diags]
 (*SetupfRG= <|"MasterEquation"->fRGEq,*)
 (*"FieldSpace"->fieldsNf2p1,*)
 (*"Truncation"->TruncationNf2p1|>;*)
+
+
+(* ::Input:: *)
+(**)
 (*DerivativeListqbq= {qb[p4,{d4,c4,f4}],q[p3,{d3,c3,f3}],qb[p2,{d2,c2,f2}],q[p1,{p1,c1,f1}]};*)
 (*QMeSderivation`Private`$DebugLevel=0*)
 (*Timing[DeriveFunctionalEquation[SetupfRG,DerivativeListqbq,"OutputLevel"->"SuperindexDiagrams"]]*)
@@ -591,6 +700,14 @@ Map[PlotSuperindexDiagram[#,setup,a]&,diags]
 (* ::Input:: *)
 (*ReduceIdenticalFlowDiagrams[Diagramsqbq];*)
 (*SuperindexToFullDiagrams[%,DerivativeListqbq,SetupfRG]*)
+
+
+(* ::Input:: *)
+(*DerivativeListqbq= {qb[p2,{d2,c2,f2}],q[p1,{p1,c1,f1}]};*)
+(*Diagramsqbq=DeriveFunctionalEquation[SetupfRG,DerivativeListqbq,"OutputLevel"->"FullDiagrams"];*)
+(**)
+(*RerouteFermionicMomenta[diags_List,setup_,derivativeList_]:=Map[RerouteFermionicMomenta[#,setup,derivativeList]&,diags];*)
+(*RerouteFermionicMomenta[Diagramsqbq,SetupfRG,DerivativeListqbq]*)
 
 
 (* ::Section:: *)
