@@ -30,8 +30,8 @@ ReduceIdenticalFlowDiagrams does not construct all symmetries from the given one
 (* ::Input::Initialization:: *)
 PlotSuperindexDiagram::usage = "PlotSuperindexDiagram[diagram, setup, options]
 
-Plot a single superindex diagram. The first argument to this function is the diagram itself, the second one is the corresponding QMeS setup.
-The diagram has to be a superindex diagram.
+Plot one or multiple superindex diagrams. The first argument to this function are the diagram(s), the second one is the corresponding QMeS setup.
+The diagram(s) have to be superindex diagram(s).
 
 The options for the function PlotSuperindexDiagram are:
 \"ShowEdgeLabels\" ->  False / True
@@ -40,21 +40,6 @@ The options for the function PlotSuperindexDiagram are:
 	Using this option, one can specify the edge styles of different propagators. e.g.,
 		\"EdgeStyle\"->{q->Blue,A->Orange,\[CapitalPi]->{Dashed,Thick},\[Sigma]->{Dashed,Thick,Purple}}.
 ";
-
-
-(* ::Input::Initialization:: *)
-PlotSuperindexDiagrams::usage="PlotSuperindexDiagram[diagrams, setup, options]
-
-Plot a set of superindex diagrams. The first argument to this function is a list of diagrams, the second one is the corresponding QMeS setup.
-The diagrams have to be superindex diagrams.
-
-The options for the function PlotSuperindexDiagrams are:
-\"ShowEdgeLabels\" ->  False / True
-	This option will toggle whether edges are plotted together with labels to identify them.
-\"EdgeStyle\" ->  List
-	Using this option, one can specify the edge styles of different propagators. e.g.,
-		\"EdgeStyle\"->{q->Blue,A->Orange,\[CapitalPi]->{Dashed,Thick},\[Sigma]->{Dashed,Thick,Purple}}.
-"
 
 
 (* ::Input::Initialization:: *)
@@ -87,7 +72,7 @@ myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 (*Utilities*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Tests and assertions*)
 
 
@@ -98,13 +83,13 @@ hasAssociations=AllTrue[Map[AssociationQ,Flatten@diag[[2;;]]],Identity]&&Length[
 hasPrefactor=Extract[diag[[1]],1]=="Prefactor";
 Return[hasAssociations&&hasPrefactor]
 ]
-AssertIsSuperIndexDiagram[diag_,context_String:""]:=If[Not@TestIsSuperindexDiagram[diag],Print[context," Argument is not a SuperIndexDiagram."];Abort[]];
-AssertAllSuperIndexDiagrams[diags_List,context_String:""]:=Map[AssertIsSuperIndexDiagram[#,context]&,diags];
+AssertIsSuperindexDiagram[diag_,context_String:""]:=If[Not@TestIsSuperindexDiagram[diag],Print[context," Argument is not a SuperindexDiagram."];Abort[]];
+AssertAllSuperindexDiagrams[diags_List,context_String:""]:=Map[AssertIsSuperindexDiagram[#,context]&,diags];
 
 
 (* ::Input::Initialization:: *)
 TestIsOneLoop[diag_]:=Module[{internalIndices,objectIndices,assignNumber,mapAssignNumber,testNumbers},
-AssertIsSuperIndexDiagram[diag,"TestIsOneLoop:"];
+AssertIsSuperindexDiagram[diag,"TestIsOneLoop:"];
 
 (*An expression is one-loop if every object (vertex or propagator) has only one incoming and one outgoing index.
 Therefore, what we do here is to check the number of internal indices of any object in the diagram and testing whether this is exactly 2 for all objects.*)
@@ -146,16 +131,16 @@ AssertIsFullDiagram[diag_,context_String:""]:=If[Not@TestIsFullDiagram[diag],Pri
 
 (* ::Input::Initialization:: *)
 GetIndices[diag_List]:=Module[{},
-AssertIsSuperIndexDiagram[diag,"TestIsOneLoop:"];
+AssertIsSuperindexDiagram[diag,"TestIsOneLoop:"];
 Flatten[Map[#["indices"]&,diag[[2;;]]],1]
 ];
 GetExternalIndices[diag_List]:=Module[{allIndices},
-AssertIsSuperIndexDiagram[diag,"TestIsOneLoop:"];
+AssertIsSuperindexDiagram[diag,"TestIsOneLoop:"];
 allIndices=GetIndices[diag];
 Keys@Select[Counts[allIndices],#==1&]
 ];
 GetInternalIndices[diag_List]:=Module[{allIndices},
-AssertIsSuperIndexDiagram[diag,"TestIsOneLoop:"];
+AssertIsSuperindexDiagram[diag,"TestIsOneLoop:"];
 allIndices=GetIndices[diag];
 Keys@Select[Counts[allIndices],#>1&]
 ];
@@ -169,7 +154,7 @@ externalIndices=GetExternalIndices[diag];
 Select[allIndices,MemberQ[externalIndices,#]&]
 ];
 GetInternalIndices[diag_List,obj_Association]:=Module[{allIndices,internalIndices},
-AssertIsSuperIndexDiagram[diag,"TestIsOneLoop:"];
+AssertIsSuperindexDiagram[diag,"TestIsOneLoop:"];
 allIndices=GetIndices[obj];
 internalIndices=GetInternalIndices[diag];
 Select[allIndices,MemberQ[internalIndices,#]&]
@@ -228,7 +213,7 @@ GetAllSymbols[expr_]:=DeleteDuplicates@Cases[{expr},_Symbol,Infinity]
 
 (* ::Input::Initialization:: *)
 SuperIndexDiagramContent[diag_]:=Module[{},
-AssertIsSuperIndexDiagram[diag,"SuperIndexDiagramContent:"];
+AssertIsSuperindexDiagram[diag,"SuperIndexDiagramContent:"];
 Sort[Map[GetObjectIdentifier,diag[[2;;]]]]
 ];
 SeparateSuperIndexDiagramGroups[diags_List]:=Module[{identifierRep,removeFirsts,groupedDiagrams},
@@ -473,14 +458,14 @@ Return[corStyle]
 
 
 (* ::Input::Initialization:: *)
-PlotSuperindexDiagram[diag_,setup_,OptionsPattern[]]:=Module[
+PlotOneSuperindexDiagram[diag_,setup_,OptionsPattern[]]:=Module[
 {ShowEdgeLabels,EdgeStyle,
 transformedDiag,vertices,edges,prefactor,
 externalLegs,externalIndices,idx,field,partnerField,outerIdx,externalLeg,
 regulatorVertex,curVertex,rules,corStyle,cross,
 explVertices,explEdges,vertexShapes,vertexLabels,edgeLabels},
 
-AssertIsSuperIndexDiagram[diag];
+AssertIsSuperindexDiagram[diag];
 
 EdgeStyle=OptionValue["EdgeStyle"];
 ShowEdgeLabels=OptionValue["ShowEdgeLabels"];
@@ -563,13 +548,21 @@ EdgeLabels->edgeLabels
 }
 ];
 ];
-Options[PlotSuperindexDiagram]={"ShowEdgeLabels"->False,"EdgeStyle"->{}};
-PlotSuperindexDiagrams[diags_List,setup_,a___]:=Module[{},
-Map[PlotSuperindexDiagram[#,setup,a]&,diags]
+Options[PlotOneSuperindexDiagram]={"ShowEdgeLabels"->False,"EdgeStyle"->{}};
+
+PlotSuperindexDiagram[diags_List,setup_,a___]:=Module[{},
+If[AllTrue[diags,TestIsSuperindexDiagram],
+Return[Map[PlotOneSuperindexDiagram[#,setup,a]&,diags]];
+];
+If[TestIsSuperindexDiagram[diags],
+Return[PlotOneSuperindexDiagram[diags,setup,a]];
+];
+Print["PlotSuperindexDiagram: diagram argument is not a superindex diagram or a list thereof!"];
+Abort[];
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Momentum  routing*)
 
 
@@ -612,7 +605,7 @@ nonFermMomentum[[1]]->-Total[allMomenta]+nonFermMomentum[[1]]
 
 (*If there are no boson propagators, there is nothing to do, except to mark the loop-momentum with an f (as it is a closed fermion loop)!*)
 If[Length[bosonicProps]==0,
-Return[diag/.loopMomentum->Symbol[ToString[loopMomentum]<>"f"]/.momentumConservation]
+Return[diag/.loopMomentum->Symbol[ToString[loopMomentum]<>"f"]/.momentumConservation//Simplify]
 ];
 
 (*Reduce further by getting rid of field information*)
@@ -632,22 +625,24 @@ If[Length[problems]>0,
 If[
 Not@MemberQ[
 problems/.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
-Return[diag/.momentumConservation]
+Return[diag/.momentumConservation//Simplify]
 ];
+
+(*Otherwises, see if there is a shift of the loop integration, using which we can get the momenta routed correctly.*)
 For[idx=1,idx<=Length[fermionMomenta],idx++,
 If[
 Not@MemberQ[
 problems/.loopMomentum->loopMomentum-fermionMomenta[[idx]]/.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
-Return[diag/.{loopMomentum->loopMomentum-fermionMomenta[[idx]]}/.momentumConservation]
+Return[diag/.{loopMomentum->loopMomentum-fermionMomenta[[idx]]}/.momentumConservation//Simplify]
 ];
 If[
 Not@MemberQ[
 problems/.loopMomentum->loopMomentum-antifermionMomenta[[idx]]/.momentumConservation/.Map[#->dummyMom&,fermionMomenta]/.Map[#->-dummyMom&,antifermionMomenta]//Simplify,dummyMom,Infinity],
-Return[diag/.{loopMomentum->loopMomentum-antifermionMomenta[[idx]]}/.momentumConservation]
+Return[diag/.{loopMomentum->loopMomentum-antifermionMomenta[[idx]]}/.momentumConservation//Simplify]
 ];
 ];
 ,
-Return[diag/.momentumConservation];
+Return[diag/.momentumConservation//Simplify];
 ];
 
 Print["Routing momenta failed! Unsolved problems: ",problems];
