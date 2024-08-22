@@ -1831,7 +1831,7 @@ Return[superindexReplacementList]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Full Diagrams*)
 
 
@@ -2274,7 +2274,7 @@ Return[positionAssoc]
 ]                                                                                       
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Helper*)
 
 
@@ -2589,7 +2589,7 @@ Return[newindices]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Main Function*)
 
 
@@ -2603,17 +2603,18 @@ myEcho["Insert Feynman Rules",1];
 objectPositionAssoc = getAllObjectPositions[dummyDiagObj];
 
 
-
+If[Length@derivativeList>0,
 newsuperindexReplacementList = (derivativeList[[#]]->List@@(derivativeList[[#]]))&/@Range[Length@derivativeList];
-
+dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
+];
 
 
 
 (* replace superincides with full set of indices *)
-dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
 (newsuperindexReplacementList= ReplaceIndices[dummyDiagObj[[#]],newsuperindexReplacementList,fields];
 dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
 )&/@Range[Length@dummyDiagObj];
+
 
 
 (* ------------------ Check and shift loop momentum ------------------------------ *)
@@ -2664,13 +2665,42 @@ Return[{diagVars,fullDiag}]
 
 
 (* ::Input::Initialization:: *)
+InsertFeynRulesNoExternals[diag_,fields_,loopIndex_]:=Module[{prefDiag,repDiag,fieldNames,rules,diagVars,funcObjects,fullDiag,indices},
+If[Length[diag]!=3,Print["Cannot route non-flow diagrams without derivatives!"];Abort[]];
+
+prefDiag = diag[[1,2]];
+fieldNames=Join[Map[Head[#]&,fields["bosonic"]],Map[Head[#[[1]]]&,fields["fermionic"]]];
+
+indices=Transpose[{diag[[2,"indices",All,1]],diag[[2,"indices",All,2]]}];
+
+rules=Join@@Map[ReplaceOneIndex[#[[1]],#[[2]],{},fields]&,indices];
+rules[[1]]= rules[[1]]/.{(a_->{b_,c___}):>(a->{loopIndex,c})};
+rules[[2]]= rules[[2]]/.{(a_->{b_,c___}):>(a->{-loopIndex,c})};
+
+repDiag=diag[[2;;]]/.rules;
+
+{diagVars,funcObjects} =  ReplaceObjectsWithFunctions[repDiag];
+fullDiag =  prefDiag*Apply[Times,funcObjects];
+
+Return[{diagVars,fullDiag}]
+]
+
+
+(* ::Input::Initialization:: *)
 Clear[InsertFeynRulesAllDiags] (*takes as RHS one single diagram*)
 InsertFeynRulesAllDiags[allDiags_,derivativeList_,fields_,loopIndex_] := Module[{allVars = Table[{},Length@allDiags], fullDiags = Table[Null,Length@allDiags]},
 
+If[Length[derivativeList]==0,
+(
+myEcho[{"Insert Feynman Rules in Diagram no: ",# },1];
+{allVars[[#]],fullDiags[[#]]} = InsertFeynRulesNoExternals[allDiags[[#]],fields,loopIndex];
+)&/@Table[i,{i,1,Length@allDiags}];
 
+Return[{allVars,fullDiags}];
+];
 
 (
-myEcho[{"Insert Feynman Rules in Diagram no: ",#},1];
+myEcho[{"Insert Feynman Rules in Diagram no: ",# },1];
 
 {allVars[[#]],fullDiags[[#]]} = InsertFeynRules[allDiags[[#]],derivativeList,fields,loopIndex];
 
@@ -2727,6 +2757,7 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
 
             "SuperindexDiagrams",
                 {funcDerDiagrams, replacementList}=MultipleFuncDer[masterEq, derivativeListnew];
+	If[derivativeListnew==={},funcDerDiagrams={funcDerDiagrams}];
 
                 If[AssociationQ[setupAssoc[["MasterEquation"]]] == True,
                     superindexDiags = TraceOverFields[funcDerDiagrams,derivativeList, replacementList, fields, truncation, classicalAction],
@@ -2738,6 +2769,7 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
             "FullDiagrams",
                 myEcho[MultipleFuncDer[masterEq, derivativeListnew],1];
                 {funcDerDiagrams, replacementList} = MultipleFuncDer[masterEq, derivativeListnew];
+	If[derivativeListnew==={},funcDerDiagrams={funcDerDiagrams}];
 
                 If[AssociationQ[setupAssoc[["MasterEquation"]]] == True,
                     superindexDiags = TraceOverFields[funcDerDiagrams,derivativeList, replacementList, fields, truncation, classicalAction],
