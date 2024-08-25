@@ -2778,7 +2778,9 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
 
                 {allVars, fullDiags} = InsertFeynRulesAllDiags[superindexDiags, derivativeList, fields, loopIndex] /. QMeSderivation`Private`q->Global`q;
 
-                If[OptionValue["ReturnAll"] == False,
+	If[OptionValue["FiniteT"] ,fullDiags=QMeSderivation`Tools`RerouteFermionicMomenta[fullDiags,setupAssoc,derivativeList];];
+
+         If[OptionValue["ReturnAll"] == False,
                     Return[fullDiags],
                     Return[{superindexDiags, fullDiags}]
                 ];
@@ -2788,19 +2790,23 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
                     Return[{allVars, fullDiags}]
                 ];
         ];
-    ]
+    ];
 
 Options[DeriveFunctionalEquation] = {"OutputLevel" -> "FunctionalDerivatives",
-     "LoopIndex" -> q, "DummyVarList" -> False,"ReturnAll"->False};
+     "LoopIndex" -> q, "DummyVarList" -> False,"ReturnAll"->False,"FiniteT"->True};
 
 
 (* ::Input::Initialization:: *)
-SuperindexToFullDiagrams[diags_,setupAssoc_,derivativeList_]:=Module[{fields,loopIndex,allVars, fullDiags},
+SuperindexToFullDiagrams[diags_,setupAssoc_,derivativeList_,OptionsPattern[]]:=Module[{fields,loopIndex,allVars, fullDiags},
 fields =Association["bosonic"->{},"fermionic"->{},setupAssoc[["FieldSpace"]]];
      loopIndex = Global`q;
  {allVars, fullDiags} = InsertFeynRulesAllDiags[diags, derivativeList,fields, loopIndex] /. QMeSderivation`Private`q->Global`q;
+
+If[OptionValue["FiniteT"] ,fullDiags=QMeSderivation`Tools`RerouteFermionicMomenta[fullDiags,setupAssoc,derivativeList];];
 Return[fullDiags]
-]
+];
+
+Options[SuperindexToFullDiagrams] = {"FiniteT" ->True};
 
 
 (* ::Input::Initialization:: *)

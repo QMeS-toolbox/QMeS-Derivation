@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    405909,       9884]
-NotebookOptionsPosition[    392117,       9633]
-NotebookOutlinePosition[    392515,       9649]
-CellTagsIndexPosition[    392472,       9646]
+NotebookDataLength[    407661,       9918]
+NotebookOptionsPosition[    393871,       9667]
+NotebookOutlinePosition[    394267,       9683]
+CellTagsIndexPosition[    394224,       9680]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -9341,228 +9341,242 @@ Cell[BoxData[{
   RowBox[{"Clear", "[", "DeriveFunctionalEquation", "]"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{
-   RowBox[{"DeriveFunctionalEquation", "[", 
-    RowBox[{"setupAssoc_", ",", " ", "derivativeList_", ",", " ", 
-     RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], " ", ":=", "\n", "    ", 
-   RowBox[{"Module", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"masterEq", ",", " ", "derivativeListnew", ",", " ", 
-       RowBox[{"dse", " ", "=", " ", "False"}], ",", " ", "classicalAction", 
-       ",", "\n", "         ", "fields", ",", " ", "truncation", ",", " ", 
-       "outputLevel", ",", " ", "loopIndex", ",", " ", "funcDerDiagrams", ",",
-        " ", "replacementList", ",", "\n", "         ", 
-       "superindexReplacementList", ",", " ", "superindexDiags", ",", " ", 
-       "allVars", ",", " ", "fullDiags"}], "}"}], ",", "\n", "\n", "        ", 
+   RowBox[{
+    RowBox[{"DeriveFunctionalEquation", "[", 
+     RowBox[{"setupAssoc_", ",", " ", "derivativeList_", ",", " ", 
+      RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], " ", ":=", "\n", "    ", 
+    
+    RowBox[{"Module", "[", 
      RowBox[{
-      RowBox[{"If", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"AssociationQ", "[", 
-          RowBox[{"setupAssoc", "[", 
-           RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}], "]"}], " ", "==",
-          " ", "True"}], ",", "\n", "            ", 
-        RowBox[{
-         RowBox[{"classicalAction", " ", "=", " ", 
-          RowBox[{"setupAssoc", "[", 
-           RowBox[{"[", 
-            RowBox[{
-            "\"\<MasterEquation\>\"", ",", " ", "\"\<classicalAction\>\""}], 
-            "]"}], "]"}]}], ";", "\n", "            ", 
-         RowBox[{"masterEq", " ", "=", " ", 
-          RowBox[{"getDSE", "[", 
-           RowBox[{"classicalAction", ",", " ", 
-            RowBox[{"Last", "[", "derivativeList", "]"}]}], "]"}]}], ";", 
-         "\n", "            ", 
-         RowBox[{"derivativeListnew", " ", "=", " ", 
-          RowBox[{"derivativeList", "[", 
-           RowBox[{"[", 
-            RowBox[{"1", " ", ";;", " ", 
-             RowBox[{"-", "2"}]}], "]"}], "]"}]}], ";", "\n", "            ", 
-         
-         RowBox[{"dse", " ", "=", " ", "True"}], ";"}], "\n", "            ", 
-        ",", "\n", "            ", 
-        RowBox[{
-         RowBox[{"derivativeListnew", " ", "=", " ", "derivativeList"}], ";", 
-         "\n", "            ", 
-         RowBox[{"masterEq", " ", "=", " ", 
-          RowBox[{"setupAssoc", "[", 
-           RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}]}], ";"}]}], 
-       "\n", "        ", "]"}], ";", "\n", "\n", "        ", 
-      RowBox[{"fields", " ", "=", 
-       RowBox[{"Association", "[", 
-        RowBox[{
-         RowBox[{"\"\<bosonic\>\"", "->", 
-          RowBox[{"{", "}"}]}], ",", 
-         RowBox[{"\"\<fermionic\>\"", "->", 
-          RowBox[{"{", "}"}]}], ",", 
-         RowBox[{"setupAssoc", "[", 
-          RowBox[{"[", "\"\<FieldSpace\>\"", "]"}], "]"}]}], "]"}]}], ";", 
-      "\n", "        ", 
-      RowBox[{"truncation", " ", "=", " ", 
-       RowBox[{"setupAssoc", "[", 
-        RowBox[{"[", "\"\<Truncation\>\"", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"masterEq", ",", " ", "derivativeListnew", ",", " ", 
+        RowBox[{"dse", " ", "=", " ", "False"}], ",", " ", "classicalAction", 
+        ",", "\n", "         ", "fields", ",", " ", "truncation", ",", " ", 
+        "outputLevel", ",", " ", "loopIndex", ",", " ", "funcDerDiagrams", 
+        ",", " ", "replacementList", ",", "\n", "         ", 
+        "superindexReplacementList", ",", " ", "superindexDiags", ",", " ", 
+        "allVars", ",", " ", "fullDiags"}], "}"}], ",", "\n", "\n", 
       "        ", 
-      RowBox[{"myEcho", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"masterEq", ",", " ", "fields", ",", " ", "truncation"}], 
-         "}"}], ",", " ", "1"}], "]"}], ";", "\n", "        ", 
-      RowBox[{"outputLevel", " ", "=", " ", 
-       RowBox[{"OptionValue", "[", "\"\<OutputLevel\>\"", "]"}]}], ";", "\n", 
-      "        ", 
-      RowBox[{"loopIndex", " ", "=", " ", 
-       RowBox[{"OptionValue", "[", "\"\<LoopIndex\>\"", "]"}]}], ";", "\n", 
-      "\n", "        ", 
-      RowBox[{"Switch", "[", 
-       RowBox[{
-       "outputLevel", ",", "\n", "            ", "\"\<getDSE\>\"", ",", "\n", 
-        "                ", 
-        RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
          RowBox[{
-          RowBox[{"dse", " ", "==", " ", "True"}], ",", "\n", 
-          "                    ", 
-          RowBox[{"Return", "[", "masterEq", "]"}], "\n", 
-          "                    ", ",", 
+          RowBox[{"AssociationQ", "[", 
+           RowBox[{"setupAssoc", "[", 
+            RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}], "]"}], " ", "==",
+           " ", "True"}], ",", "\n", "            ", 
+         RowBox[{
+          RowBox[{"classicalAction", " ", "=", " ", 
+           RowBox[{"setupAssoc", "[", 
+            RowBox[{"[", 
+             RowBox[{
+             "\"\<MasterEquation\>\"", ",", " ", "\"\<classicalAction\>\""}], 
+             "]"}], "]"}]}], ";", "\n", "            ", 
+          RowBox[{"masterEq", " ", "=", " ", 
+           RowBox[{"getDSE", "[", 
+            RowBox[{"classicalAction", ",", " ", 
+             RowBox[{"Last", "[", "derivativeList", "]"}]}], "]"}]}], ";", 
+          "\n", "            ", 
+          RowBox[{"derivativeListnew", " ", "=", " ", 
+           RowBox[{"derivativeList", "[", 
+            RowBox[{"[", 
+             RowBox[{"1", " ", ";;", " ", 
+              RowBox[{"-", "2"}]}], "]"}], "]"}]}], ";", "\n", "            ", 
+          RowBox[{"dse", " ", "=", " ", "True"}], ";"}], "\n", "            ",
+          ",", "\n", "            ", 
+         RowBox[{
+          RowBox[{"derivativeListnew", " ", "=", " ", "derivativeList"}], ";",
+           "\n", "            ", 
+          RowBox[{"masterEq", " ", "=", " ", 
+           RowBox[{"setupAssoc", "[", 
+            RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}]}], ";"}]}], 
+        "\n", "        ", "]"}], ";", "\n", "\n", "        ", 
+       RowBox[{"fields", " ", "=", 
+        RowBox[{"Association", "[", 
+         RowBox[{
+          RowBox[{"\"\<bosonic\>\"", "->", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"\"\<fermionic\>\"", "->", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"setupAssoc", "[", 
+           RowBox[{"[", "\"\<FieldSpace\>\"", "]"}], "]"}]}], "]"}]}], ";", 
+       "\n", "        ", 
+       RowBox[{"truncation", " ", "=", " ", 
+        RowBox[{"setupAssoc", "[", 
+         RowBox[{"[", "\"\<Truncation\>\"", "]"}], "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"myEcho", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"masterEq", ",", " ", "fields", ",", " ", "truncation"}], 
+          "}"}], ",", " ", "1"}], "]"}], ";", "\n", "        ", 
+       RowBox[{"outputLevel", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "\"\<OutputLevel\>\"", "]"}]}], ";", "\n",
+        "        ", 
+       RowBox[{"loopIndex", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "\"\<LoopIndex\>\"", "]"}]}], ";", "\n", 
+       "\n", "        ", 
+       RowBox[{"Switch", "[", 
+        RowBox[{
+        "outputLevel", ",", "\n", "            ", "\"\<getDSE\>\"", ",", "\n",
+          "                ", 
+         RowBox[{"If", "[", 
           RowBox[{
+           RowBox[{"dse", " ", "==", " ", "True"}], ",", "\n", 
+           "                    ", 
+           RowBox[{"Return", "[", "masterEq", "]"}], "\n", 
+           "                    ", ",", 
            RowBox[{
-           "Print", "[", 
-            "\"\<Master equation is aleady given. Please choose a different \
+            RowBox[{
+            "Print", "[", 
+             "\"\<Master equation is aleady given. Please choose a different \
 output (i.e. \[OpenCurlyDoubleQuote]FunctionalDerivatives\
 \[CloseCurlyDoubleQuote], \[OpenCurlyDoubleQuote]SuperindexDiagrams\
 \[CloseCurlyDoubleQuote] or \[OpenCurlyDoubleQuote]FullDiagrams\
 \[CloseCurlyDoubleQuote]).\>\"", "]"}], ";", "\n", "                    ", 
-           RowBox[{"Return", "[", "masterEq", "]"}]}]}], "\n", 
-         "                ", "]"}], "\n", "            ", ",", "\n", "\n", 
-        "            ", "\"\<FunctionalDerivatives\>\"", ",", "\n", 
-        "                ", 
-        RowBox[{
+            RowBox[{"Return", "[", "masterEq", "]"}]}]}], "\n", 
+          "                ", "]"}], "\n", "            ", ",", "\n", "\n", 
+         "            ", "\"\<FunctionalDerivatives\>\"", ",", "\n", 
+         "                ", 
          RowBox[{
-          RowBox[{"{", 
-           RowBox[{"funcDerDiagrams", ",", " ", "replacementList"}], "}"}], 
-          " ", "=", " ", 
-          RowBox[{"MultipleFuncDer", "[", 
-           RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}]}], ";", 
-         "\n", "                ", 
-         RowBox[{"funcDerDiagrams", " ", "=", " ", 
-          RowBox[{"funcDerDiagrams", " ", "/.", " ", "replacementList"}]}], 
-         ";", "\n", "                    ", "\n", "                ", 
-         RowBox[{"Return", "[", "funcDerDiagrams", "]"}]}], "\n", 
-        "            ", ",", "\n", "\n", "            ", 
-        "\"\<SuperindexDiagrams\>\"", ",", "\n", "                ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"funcDerDiagrams", ",", " ", "replacementList"}], "}"}], 
-          "=", 
-          RowBox[{"MultipleFuncDer", "[", 
-           RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}]}], ";", 
-         "\[IndentingNewLine]", "\t", 
-         RowBox[{"If", "[", 
           RowBox[{
-           RowBox[{"derivativeListnew", "===", 
-            RowBox[{"{", "}"}]}], ",", 
-           RowBox[{"funcDerDiagrams", "=", 
-            RowBox[{"{", "funcDerDiagrams", "}"}]}]}], "]"}], ";", "\n", "\n",
-          "                ", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"AssociationQ", "[", 
-             RowBox[{"setupAssoc", "[", 
-              RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}], "]"}], " ",
-             "==", " ", "True"}], ",", "\n", "                    ", 
-           RowBox[{"superindexDiags", " ", "=", " ", 
-            RowBox[{"TraceOverFields", "[", 
-             RowBox[{
-             "funcDerDiagrams", ",", "derivativeList", ",", " ", 
-              "replacementList", ",", " ", "fields", ",", " ", "truncation", 
-              ",", " ", "classicalAction"}], "]"}]}], ",", "\n", 
-           "                    ", 
-           RowBox[{"superindexDiags", " ", "=", " ", 
-            RowBox[{"TraceOverFields", "[", 
-             RowBox[{
-             "funcDerDiagrams", ",", "derivativeList", ",", " ", 
-              "replacementList", ",", " ", "fields", ",", " ", "truncation"}],
-              "]"}]}]}], "]"}], ";", "\n", "\n", "                ", 
-         RowBox[{"Return", "[", "superindexDiags", "]"}]}], "\n", 
-        "            ", ",", "\n", "\n", "            ", 
-        "\"\<FullDiagrams\>\"", ",", "\n", "                ", 
-        RowBox[{
-         RowBox[{"myEcho", "[", 
-          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"funcDerDiagrams", ",", " ", "replacementList"}], "}"}], 
+           " ", "=", " ", 
            RowBox[{"MultipleFuncDer", "[", 
-            RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}], ",", 
-           "1"}], "]"}], ";", "\n", "                ", 
+            RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}]}], ";",
+           "\n", "                ", 
+          RowBox[{"funcDerDiagrams", " ", "=", " ", 
+           RowBox[{"funcDerDiagrams", " ", "/.", " ", "replacementList"}]}], 
+          ";", "\n", "                    ", "\n", "                ", 
+          RowBox[{"Return", "[", "funcDerDiagrams", "]"}]}], "\n", 
+         "            ", ",", "\n", "\n", "            ", 
+         "\"\<SuperindexDiagrams\>\"", ",", "\n", "                ", 
          RowBox[{
-          RowBox[{"{", 
-           RowBox[{"funcDerDiagrams", ",", " ", "replacementList"}], "}"}], 
-          " ", "=", " ", 
-          RowBox[{"MultipleFuncDer", "[", 
-           RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}]}], ";", 
-         "\[IndentingNewLine]", "\t", 
-         RowBox[{"If", "[", 
           RowBox[{
-           RowBox[{"derivativeListnew", "===", 
-            RowBox[{"{", "}"}]}], ",", 
-           RowBox[{"funcDerDiagrams", "=", 
-            RowBox[{"{", "funcDerDiagrams", "}"}]}]}], "]"}], ";", "\n", "\n",
-          "                ", 
-         RowBox[{"If", "[", 
-          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"funcDerDiagrams", ",", " ", "replacementList"}], "}"}], 
+           "=", 
+           RowBox[{"MultipleFuncDer", "[", 
+            RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}]}], ";",
+           "\[IndentingNewLine]", "\t", 
+          RowBox[{"If", "[", 
            RowBox[{
-            RowBox[{"AssociationQ", "[", 
-             RowBox[{"setupAssoc", "[", 
-              RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}], "]"}], " ",
-             "==", " ", "True"}], ",", "\n", "                    ", 
-           RowBox[{"superindexDiags", " ", "=", " ", 
-            RowBox[{"TraceOverFields", "[", 
-             RowBox[{
-             "funcDerDiagrams", ",", "derivativeList", ",", " ", 
-              "replacementList", ",", " ", "fields", ",", " ", "truncation", 
-              ",", " ", "classicalAction"}], "]"}]}], ",", "\n", 
-           "                    ", 
-           RowBox[{"superindexDiags", " ", "=", " ", 
-            RowBox[{"TraceOverFields", "[", 
-             RowBox[{
-             "funcDerDiagrams", ",", "derivativeList", ",", " ", 
-              "replacementList", ",", " ", "fields", ",", " ", "truncation"}],
-              "]"}]}]}], "\n", "                ", "]"}], ";", "\n", "\n", 
-         "                ", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"allVars", ",", " ", "fullDiags"}], "}"}], " ", "=", " ", 
-          RowBox[{
-           RowBox[{"InsertFeynRulesAllDiags", "[", 
+            RowBox[{"derivativeListnew", "===", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"funcDerDiagrams", "=", 
+             RowBox[{"{", "funcDerDiagrams", "}"}]}]}], "]"}], ";", "\n", 
+          "\n", "                ", 
+          RowBox[{"If", "[", 
+           RowBox[{
             RowBox[{
-            "superindexDiags", ",", " ", "derivativeList", ",", " ", "fields",
-              ",", " ", "loopIndex"}], "]"}], " ", "/.", " ", 
-           RowBox[{"QMeSderivation`Private`q", "->", "Global`q"}]}]}], ";", 
-         "\[IndentingNewLine]", "\n", "                ", 
-         RowBox[{"If", "[", 
-          RowBox[{
+             RowBox[{"AssociationQ", "[", 
+              RowBox[{"setupAssoc", "[", 
+               RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}], "]"}], 
+             " ", "==", " ", "True"}], ",", "\n", "                    ", 
+            RowBox[{"superindexDiags", " ", "=", " ", 
+             RowBox[{"TraceOverFields", "[", 
+              RowBox[{
+              "funcDerDiagrams", ",", "derivativeList", ",", " ", 
+               "replacementList", ",", " ", "fields", ",", " ", "truncation", 
+               ",", " ", "classicalAction"}], "]"}]}], ",", "\n", 
+            "                    ", 
+            RowBox[{"superindexDiags", " ", "=", " ", 
+             RowBox[{"TraceOverFields", "[", 
+              RowBox[{
+              "funcDerDiagrams", ",", "derivativeList", ",", " ", 
+               "replacementList", ",", " ", "fields", ",", " ", 
+               "truncation"}], "]"}]}]}], "]"}], ";", "\n", "\n", 
+          "                ", 
+          RowBox[{"Return", "[", "superindexDiags", "]"}]}], "\n", 
+         "            ", ",", "\n", "\n", "            ", 
+         "\"\<FullDiagrams\>\"", ",", "\n", "                ", 
+         RowBox[{
+          RowBox[{"myEcho", "[", 
            RowBox[{
-            RowBox[{"OptionValue", "[", "\"\<ReturnAll\>\"", "]"}], " ", "==",
-             " ", "False"}], ",", "\n", "                    ", 
-           RowBox[{"Return", "[", "fullDiags", "]"}], ",", "\n", 
-           "                    ", 
-           RowBox[{"Return", "[", 
-            RowBox[{"{", 
-             RowBox[{"superindexDiags", ",", " ", "fullDiags"}], "}"}], 
-            "]"}]}], "\n", "                ", "]"}], ";", "\n", "\n", 
-         "                ", 
-         RowBox[{"If", "[", 
+            RowBox[{"MultipleFuncDer", "[", 
+             RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}], ",", 
+            "1"}], "]"}], ";", "\n", "                ", 
           RowBox[{
+           RowBox[{"{", 
+            RowBox[{"funcDerDiagrams", ",", " ", "replacementList"}], "}"}], 
+           " ", "=", " ", 
+           RowBox[{"MultipleFuncDer", "[", 
+            RowBox[{"masterEq", ",", " ", "derivativeListnew"}], "]"}]}], ";",
+           "\[IndentingNewLine]", "\t", 
+          RowBox[{"If", "[", 
            RowBox[{
-            RowBox[{"OptionValue", "[", "\"\<DummyVarList\>\"", "]"}], " ", "==",
-             " ", "False"}], ",", "\n", "                    ", 
-           RowBox[{"Return", "[", "fullDiags", "]"}], ",", "\n", 
-           "                    ", 
-           RowBox[{"Return", "[", 
-            RowBox[{"{", 
-             RowBox[{"allVars", ",", " ", "fullDiags"}], "}"}], "]"}]}], "\n",
-           "                ", "]"}], ";"}]}], "\n", "        ", "]"}], 
-      ";"}]}], "\n", "    ", "]"}]}], "\n"}], "\n", 
+            RowBox[{"derivativeListnew", "===", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"funcDerDiagrams", "=", 
+             RowBox[{"{", "funcDerDiagrams", "}"}]}]}], "]"}], ";", "\n", 
+          "\n", "                ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"AssociationQ", "[", 
+              RowBox[{"setupAssoc", "[", 
+               RowBox[{"[", "\"\<MasterEquation\>\"", "]"}], "]"}], "]"}], 
+             " ", "==", " ", "True"}], ",", "\n", "                    ", 
+            RowBox[{"superindexDiags", " ", "=", " ", 
+             RowBox[{"TraceOverFields", "[", 
+              RowBox[{
+              "funcDerDiagrams", ",", "derivativeList", ",", " ", 
+               "replacementList", ",", " ", "fields", ",", " ", "truncation", 
+               ",", " ", "classicalAction"}], "]"}]}], ",", "\n", 
+            "                    ", 
+            RowBox[{"superindexDiags", " ", "=", " ", 
+             RowBox[{"TraceOverFields", "[", 
+              RowBox[{
+              "funcDerDiagrams", ",", "derivativeList", ",", " ", 
+               "replacementList", ",", " ", "fields", ",", " ", 
+               "truncation"}], "]"}]}]}], "\n", "                ", "]"}], 
+          ";", "\n", "\n", "                ", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"allVars", ",", " ", "fullDiags"}], "}"}], " ", "=", " ", 
+           
+           RowBox[{
+            RowBox[{"InsertFeynRulesAllDiags", "[", 
+             RowBox[{
+             "superindexDiags", ",", " ", "derivativeList", ",", " ", 
+              "fields", ",", " ", "loopIndex"}], "]"}], " ", "/.", " ", 
+            RowBox[{"QMeSderivation`Private`q", "->", "Global`q"}]}]}], ";", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", "\t", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"OptionValue", "[", "\"\<FiniteT\>\"", "]"}], " ", ",", 
+            RowBox[{
+             RowBox[{"fullDiags", "=", 
+              RowBox[{"QMeSderivation`Tools`RerouteFermionicMomenta", "[", 
+               RowBox[{
+               "fullDiags", ",", "setupAssoc", ",", "derivativeList"}], 
+               "]"}]}], ";"}]}], "]"}], ";", "\n", "\[IndentingNewLine]", 
+          "         ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"OptionValue", "[", "\"\<ReturnAll\>\"", "]"}], " ", "==",
+              " ", "False"}], ",", "\n", "                    ", 
+            RowBox[{"Return", "[", "fullDiags", "]"}], ",", "\n", 
+            "                    ", 
+            RowBox[{"Return", "[", 
+             RowBox[{"{", 
+              RowBox[{"superindexDiags", ",", " ", "fullDiags"}], "}"}], 
+             "]"}]}], "\n", "                ", "]"}], ";", "\n", "\n", 
+          "                ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"OptionValue", "[", "\"\<DummyVarList\>\"", "]"}], " ", "==",
+              " ", "False"}], ",", "\n", "                    ", 
+            RowBox[{"Return", "[", "fullDiags", "]"}], ",", "\n", 
+            "                    ", 
+            RowBox[{"Return", "[", 
+             RowBox[{"{", 
+              RowBox[{"allVars", ",", " ", "fullDiags"}], "}"}], "]"}]}], 
+           "\n", "                ", "]"}], ";"}]}], "\n", "        ", "]"}], 
+       ";"}]}], "\n", "    ", "]"}]}], ";"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"Options", "[", "DeriveFunctionalEquation", "]"}], " ", "=", " ", 
@@ -9573,54 +9587,74 @@ output (i.e. \[OpenCurlyDoubleQuote]FunctionalDerivatives\
       ",", "\n", "     ", 
      RowBox[{"\"\<LoopIndex\>\"", " ", "->", " ", "q"}], ",", " ", 
      RowBox[{"\"\<DummyVarList\>\"", " ", "->", " ", "False"}], ",", 
-     RowBox[{"\"\<ReturnAll\>\"", "->", "False"}]}], "}"}]}], ";"}]}], "Input",\
-
+     RowBox[{"\"\<ReturnAll\>\"", "->", "False"}], ",", 
+     RowBox[{"\"\<FiniteT\>\"", "->", "True"}]}], "}"}]}], ";"}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.932091867598856*^9, 3.93209188114114*^9}, {
-  3.932092111347263*^9, 3.932092114932242*^9}, {3.933258898268841*^9, 
-  3.933258950316133*^9}, {3.933261604235168*^9, 
-  3.933261612858774*^9}},ExpressionUUID->"6ca5fc88-9951-4045-ac07-\
+   3.932092111347263*^9, 3.932092114932242*^9}, {3.933258898268841*^9, 
+   3.933258950316133*^9}, {3.933261604235168*^9, 3.933261612858774*^9}, {
+   3.9335713171258*^9, 3.933571420223168*^9}, {3.93357149548748*^9, 
+   3.933571498767198*^9}, 
+   3.9335733686661043`*^9},ExpressionUUID->"6ca5fc88-9951-4045-ac07-\
 4eb8fbd1f515"],
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
-  RowBox[{"SuperindexToFullDiagrams", "[", 
-   RowBox[{"diags_", ",", "setupAssoc_", ",", "derivativeList_"}], "]"}], ":=", 
-  RowBox[{"Module", "[", 
+  RowBox[{
    RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-     "fields", ",", "loopIndex", ",", "allVars", ",", " ", "fullDiags"}], 
-     "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"fields", " ", "=", 
-      RowBox[{"Association", "[", 
-       RowBox[{
-        RowBox[{"\"\<bosonic\>\"", "->", 
-         RowBox[{"{", "}"}]}], ",", 
-        RowBox[{"\"\<fermionic\>\"", "->", 
-         RowBox[{"{", "}"}]}], ",", 
-        RowBox[{"setupAssoc", "[", 
-         RowBox[{"[", "\"\<FieldSpace\>\"", "]"}], "]"}]}], "]"}]}], ";", 
-     "\n", "     ", 
-     RowBox[{"loopIndex", " ", "=", " ", "Global`q"}], ";", 
-     "\[IndentingNewLine]", " ", 
+    RowBox[{"SuperindexToFullDiagrams", "[", 
+     RowBox[{"diags_", ",", "setupAssoc_", ",", "derivativeList_", ",", 
+      RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
-       RowBox[{"allVars", ",", " ", "fullDiags"}], "}"}], " ", "=", " ", 
+       RowBox[{
+       "fields", ",", "loopIndex", ",", "allVars", ",", " ", "fullDiags"}], 
+       "}"}], ",", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"InsertFeynRulesAllDiags", "[", 
+       RowBox[{"fields", " ", "=", 
+        RowBox[{"Association", "[", 
+         RowBox[{
+          RowBox[{"\"\<bosonic\>\"", "->", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"\"\<fermionic\>\"", "->", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"setupAssoc", "[", 
+           RowBox[{"[", "\"\<FieldSpace\>\"", "]"}], "]"}]}], "]"}]}], ";", 
+       "\n", "     ", 
+       RowBox[{"loopIndex", " ", "=", " ", "Global`q"}], ";", 
+       "\[IndentingNewLine]", " ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"allVars", ",", " ", "fullDiags"}], "}"}], " ", "=", " ", 
         RowBox[{
-        "diags", ",", " ", "derivativeList", ",", "fields", ",", " ", 
-         "loopIndex"}], "]"}], " ", "/.", " ", 
-       RowBox[{"QMeSderivation`Private`q", "->", "Global`q"}]}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Return", "[", "fullDiags", "]"}]}]}], "\[IndentingNewLine]", 
-   "]"}]}]], "Input",
+         RowBox[{"InsertFeynRulesAllDiags", "[", 
+          RowBox[{
+          "diags", ",", " ", "derivativeList", ",", "fields", ",", " ", 
+           "loopIndex"}], "]"}], " ", "/.", " ", 
+         RowBox[{"QMeSderivation`Private`q", "->", "Global`q"}]}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"OptionValue", "[", "\"\<FiniteT\>\"", "]"}], " ", ",", 
+         RowBox[{
+          RowBox[{"fullDiags", "=", 
+           RowBox[{"QMeSderivation`Tools`RerouteFermionicMomenta", "[", 
+            RowBox[{"fullDiags", ",", "setupAssoc", ",", "derivativeList"}], 
+            "]"}]}], ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "fullDiags", "]"}]}]}], "\[IndentingNewLine]", 
+     "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "[", "SuperindexToFullDiagrams", "]"}], " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"\"\<FiniteT\>\"", " ", "->", "True"}], "}"}]}], ";"}]}], "Input",\
+
  InitializationCell->True,
  CellChangeTimes->{
-  3.93218125692752*^9, {3.93231133049966*^9, 
-   3.93231133449878*^9}},ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-\
+  3.93218125692752*^9, {3.93231133049966*^9, 3.93231133449878*^9}, {
+   3.933571437486968*^9, 3.93357150228614*^9}, 
+   3.9335733707609377`*^9},ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-\
 412e36cf6c8d"],
 
 Cell[BoxData[{
@@ -9631,7 +9665,7 @@ Cell[BoxData[{
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{885.75, 962.25},
+WindowSize->{1800, 1012.5},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"14.0 for Linux x86 (64-bit) (December 12, 2023)",
 StyleDefinitions->"Default.nb",
@@ -9841,25 +9875,25 @@ Cell[CellGroupData[{
 Cell[304416, 7440, 83, 0, 39, "Subsection",ExpressionUUID->"28afae71-cb16-4a0e-8e5b-025a1af2d0a3"],
 Cell[304502, 7442, 2416, 59, 440, "Input",ExpressionUUID->"c69cc621-26d8-4c9a-9812-affd3b44481e",
  InitializationCell->True],
-Cell[306921, 7503, 2183, 54, 386, "Input",ExpressionUUID->"0545ff2b-cb85-411b-bc9c-3c0db1b327f9",
+Cell[306921, 7503, 2183, 54, 322, "Input",ExpressionUUID->"0545ff2b-cb85-411b-bc9c-3c0db1b327f9",
  InitializationCell->True],
-Cell[309107, 7559, 2276, 57, 470, "Input",ExpressionUUID->"333e9ef9-680d-4807-b8ee-0ffc7609539e",
+Cell[309107, 7559, 2276, 57, 429, "Input",ExpressionUUID->"333e9ef9-680d-4807-b8ee-0ffc7609539e",
  InitializationCell->True],
-Cell[311386, 7618, 2497, 58, 491, "Input",ExpressionUUID->"5c86bd2c-9cb0-4211-8717-e2f38f3e4958",
+Cell[311386, 7618, 2497, 58, 408, "Input",ExpressionUUID->"5c86bd2c-9cb0-4211-8717-e2f38f3e4958",
  InitializationCell->True],
-Cell[313886, 7678, 1472, 36, 344, "Input",ExpressionUUID->"51f3ab91-0c7b-4eb8-8d70-be57a16a75b5",
+Cell[313886, 7678, 1472, 36, 324, "Input",ExpressionUUID->"51f3ab91-0c7b-4eb8-8d70-be57a16a75b5",
  InitializationCell->True],
-Cell[315361, 7716, 1545, 40, 365, "Input",ExpressionUUID->"750ff0fe-2576-4e7f-acee-4edd86373bed",
+Cell[315361, 7716, 1545, 40, 344, "Input",ExpressionUUID->"750ff0fe-2576-4e7f-acee-4edd86373bed",
  InitializationCell->True],
-Cell[316909, 7758, 4527, 115, 575, "Input",ExpressionUUID->"97b1d85b-edea-4dce-8af5-88ef4907ed6e",
+Cell[316909, 7758, 4527, 115, 451, "Input",ExpressionUUID->"97b1d85b-edea-4dce-8af5-88ef4907ed6e",
  InitializationCell->True],
-Cell[321439, 7875, 15758, 384, 1661, "Input",ExpressionUUID->"534afdc8-366f-42bb-8f19-be0273f2f631",
+Cell[321439, 7875, 15758, 384, 1350, "Input",ExpressionUUID->"534afdc8-366f-42bb-8f19-be0273f2f631",
  InitializationCell->True],
-Cell[337200, 8261, 1618, 40, 318, "Input",ExpressionUUID->"6372fc10-f1de-4aba-af51-7023592bcba6",
+Cell[337200, 8261, 1618, 40, 297, "Input",ExpressionUUID->"6372fc10-f1de-4aba-af51-7023592bcba6",
  InitializationCell->True],
-Cell[338821, 8303, 3291, 86, 526, "Input",ExpressionUUID->"842305f0-9156-462f-a305-238218cafc78",
+Cell[338821, 8303, 3291, 86, 485, "Input",ExpressionUUID->"842305f0-9156-462f-a305-238218cafc78",
  InitializationCell->True],
-Cell[342115, 8391, 4739, 119, 577, "Input",ExpressionUUID->"da321ddd-94a1-4d7c-8761-876d9290435d",
+Cell[342115, 8391, 4739, 119, 430, "Input",ExpressionUUID->"da321ddd-94a1-4d7c-8761-876d9290435d",
  InitializationCell->True],
 Cell[346857, 8512, 9860, 233, 594, "Input",ExpressionUUID->"a7c6b7f3-16a2-447d-91f9-5970d44e2039",
  InitializationCell->True],
@@ -9878,11 +9912,11 @@ Cell[375237, 9228, 3734, 102, 498, "Input",ExpressionUUID->"10933651-0b16-4a43-8
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[379020, 9336, 90, 0, 66, "Section",ExpressionUUID->"f7b89351-b82e-458d-bce9-f3c725209e58"],
-Cell[379113, 9338, 11288, 244, 1858, "Input",ExpressionUUID->"6ca5fc88-9951-4045-ac07-4eb8fbd1f515",
+Cell[379113, 9338, 12190, 260, 1704, "Input",ExpressionUUID->"6ca5fc88-9951-4045-ac07-4eb8fbd1f515",
  InitializationCell->True],
-Cell[390404, 9584, 1502, 39, 196, "Input",ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-412e36cf6c8d",
+Cell[391306, 9600, 2354, 57, 241, "Input",ExpressionUUID->"b0e49f7d-ddc2-4eb6-a1a4-412e36cf6c8d",
  InitializationCell->True],
-Cell[391909, 9625, 180, 4, 67, "Input",ExpressionUUID->"6ae29785-f7d1-4d85-9b99-b147d9011e08",
+Cell[393663, 9659, 180, 4, 67, "Input",ExpressionUUID->"6ae29785-f7d1-4d85-9b99-b147d9011e08",
  InitializationCell->True]
 }, Open  ]]
 }, Open  ]]

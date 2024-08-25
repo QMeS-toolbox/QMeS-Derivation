@@ -598,8 +598,12 @@ fermionicProps=Flatten[Union[Map[Cases[reducedDiagram,#,Infinity]&,Map[#[__]&,fe
 bosonicProps=Flatten[Union[Map[Cases[reducedDiagram,#,Infinity]&,Map[#[__]&,bosonicPropNames]]]];
 
 nonFermMomentum=Select[allMomenta,Not@MemberQ[fermionMomenta\[Union]antifermionMomenta,#,Infinity]&];
-momentumConservation=If[Length[nonFermMomentum]==0,
-allMomenta[[1]]->-Total[allMomenta]+allMomenta[[1]],
+momentumConservation=
+If[Length[nonFermMomentum]==0,
+If[Length[allMomenta]==0,
+{},
+allMomenta[[1]]->-Total[allMomenta]+allMomenta[[1]]
+],
 nonFermMomentum[[1]]->-Total[allMomenta]+nonFermMomentum[[1]]
 ];
 
