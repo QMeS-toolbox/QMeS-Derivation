@@ -5,7 +5,19 @@
 
 
 (* ::Input::Initialization:: *)
+Needs["QMeSderivation`Tools`"]
+
+
+(* ::Input::Initialization:: *)
 BeginPackage["QMeSderivation`"]
+
+
+(* ::Input::Initialization:: *)
+$DistributedContexts:={$Context,"QMeSderivation`","QMeSderivation`Private`"};
+
+
+(* ::Section::Closed:: *)
+(*Exports*)
 
 
 (* ::Input::Initialization:: *)
@@ -71,24 +83,34 @@ getDSE[{{phi,phi},{phi,phi,phi,phi}}, phi[a]]
 
 
 (* ::Input::Initialization:: *)
+SuperindexToFullDiagrams::usage = "SuperindexToFullDiagrams[diagrams,setup, derivativelist, options]
+
+Insert the physical indices and momentum routing into a list of superindex diagrams.
+";
+
+
+(* ::Input::Initialization:: *)
 Begin["`Private`"]
 
 
-(* ::Section:: *)
-(*Load*)
-
-
-(* ::Input:: *)
-(*qmesDerivationDirectory=SelectFirst[*)
-(*Join[*)
-(*{FileNameJoin[{$UserBaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$BaseDirectory,"Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Applications","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","Packages","QMeS-Derivation"}],FileNameJoin[{$InstallationDirectory,"AddOns","ExtraPackages","QMeS-Derivation"}]*)
-(*},*)
-(*Select[$Path,StringContainsQ[#,"QMeS-Derivation"]&]*)
-(*],DirectoryQ[#]&];*)
-
-
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Debug*)
+
+
+(* ::Input::Initialization:: *)
+qmesDerivationDirectory=SelectFirst[
+Join[
+{
+FileNameJoin[{$UserBaseDirectory,"Applications","QMeSderivation"}],
+FileNameJoin[{$BaseDirectory,"Applications","QMeSderivation"}],
+FileNameJoin[{$InstallationDirectory,"AddOns","Applications","QMeSderivation"}],
+FileNameJoin[{$InstallationDirectory,"AddOns","Packages","QMeSderivation"}],
+FileNameJoin[{$InstallationDirectory,"AddOns","ExtraPackages","QMeSderivation"}]
+},
+Select[$Path,StringContainsQ[#,"QMeS-Derivation"]&]
+],
+DirectoryQ[#]&
+];
 
 
 (* ::Input::Initialization:: *)
@@ -99,7 +121,7 @@ $DebugLevel =0;
 myEcho[msg_,lvl_] := If[$DebugLevel >=lvl, Echo[msg];, Nothing;]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Get DSE*)
 
 
@@ -538,7 +560,7 @@ Return[newActionTerms]
 (*Functional Derivatives*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Multiple Functional Derivatives*)
 
 
@@ -770,7 +792,7 @@ Return[{AllDerivatives, replacementList}]
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Main*)
 
 
@@ -783,7 +805,7 @@ truefieldlist =fieldlist[["FieldDerivatives"]];
 MultipleFuncDer[RHSlist,truefieldlist, {},indexOptions]
 ]*)
 MultipleFuncDer[RHSlist_,fieldlist_] := MultipleFuncDer[RHSlist,fieldlist,{}]
-MultipleFuncDer[RHSlist_,fieldlist_,replacementList_] := Module[{dummysuperindexlist,firstfield, newfieldlist, newRHSlist,newreplacementList},
+MultipleFuncDer[RHSlist_,fieldlist_,replacementList_] := Module[{dummysuperindexlist,firstfield, newfieldlist, newRHSlist,newreplacementList,intResult},
 
 myEcho["MultipleFuncDer",1];
 
@@ -803,7 +825,8 @@ myEcho["Further FuncDer",2];
 newRHSlist =Table[Null,{i,1,Length@RHSlist}];
 newreplacementList= Table[Null,{i,1,Length@RHSlist}];
 
-({newRHSlist[[#]],newreplacementList[[#]]} = FuncDer[RHSlist[[#]],firstfield])&/@Table[i,{i,1,Length@RHSlist}];
+intResult=ParallelMap[(FuncDer[RHSlist[[#]],firstfield])&,Table[i,{i,1,Length@RHSlist}]];
+({newRHSlist[[#]],newreplacementList[[#]]} = intResult[[#]])&/@Table[i,{i,1,Length@RHSlist}];
 
 newRHSlist = Flatten[newRHSlist,1];
 ];
@@ -826,7 +849,7 @@ Return[{finalRHSlist,newreplacementList}]
 (*Superindex Diagrams*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Get Fields and Misc*)
 
 
@@ -867,7 +890,7 @@ Return[fullList]
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Possible Configs*)
 
 
@@ -1689,7 +1712,7 @@ Return[{totalDiagPref}];
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Trace over Fields*)
 
 
@@ -1711,8 +1734,7 @@ truncationnew = truncation;
 ];
 
 (* take field trace diag-wise *)
-tracedDiags = 
-(traceSingleDiagram[RHS[[#]],derivativelist,internalreplacementList,fields, truncationnew,brstTruncation,classicalAction])&/@Range[Length@RHS];
+tracedDiags = ParallelMap[(traceSingleDiagram[RHS[[#]],derivativelist,internalreplacementList,fields, truncationnew,brstTruncation,classicalAction])&,Range[Length@RHS]];
 
 Return[Flatten[tracedDiags/.{"dummyEntry"}->Nothing,1]]
 ]
@@ -1721,7 +1743,6 @@ Return[Flatten[tracedDiags/.{"dummyEntry"}->Nothing,1]]
 (* ::Input::Initialization:: *)
 Clear[traceSingleDiagram];
 traceSingleDiagram[RHSDiagram_,derivativelist_,replacementList_,fields_,truncation_,brstTruncation_,classicalAction___] := Module[{allfields,objectPositionAssoc, truncationObject,IndexConfigs = {},sortedDiag},
-
 
 myEcho["GetSingleDiagram",1];
 
@@ -1810,7 +1831,7 @@ Return[superindexReplacementList]
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Full Diagrams*)
 
 
@@ -2253,7 +2274,7 @@ Return[positionAssoc]
 ]                                                                                       
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Helper*)
 
 
@@ -2568,7 +2589,7 @@ Return[newindices]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Main Function*)
 
 
@@ -2582,17 +2603,18 @@ myEcho["Insert Feynman Rules",1];
 objectPositionAssoc = getAllObjectPositions[dummyDiagObj];
 
 
-
+If[Length@derivativeList>0,
 newsuperindexReplacementList = (derivativeList[[#]]->List@@(derivativeList[[#]]))&/@Range[Length@derivativeList];
-
+dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
+];
 
 
 
 (* replace superincides with full set of indices *)
-dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
 (newsuperindexReplacementList= ReplaceIndices[dummyDiagObj[[#]],newsuperindexReplacementList,fields];
 dummyDiagObj = dummyDiagObj/.newsuperindexReplacementList;
 )&/@Range[Length@dummyDiagObj];
+
 
 
 (* ------------------ Check and shift loop momentum ------------------------------ *)
@@ -2643,13 +2665,42 @@ Return[{diagVars,fullDiag}]
 
 
 (* ::Input::Initialization:: *)
+InsertFeynRulesNoExternals[diag_,fields_,loopIndex_]:=Module[{prefDiag,repDiag,fieldNames,rules,diagVars,funcObjects,fullDiag,indices},
+If[Length[diag]!=3,Print["Cannot route non-flow diagrams without derivatives!"];Abort[]];
+
+prefDiag = diag[[1,2]];
+fieldNames=Join[Map[Head[#]&,fields["bosonic"]],Map[Head[#[[1]]]&,fields["fermionic"]]];
+
+indices=Transpose[{diag[[2,"indices",All,1]],diag[[2,"indices",All,2]]}];
+
+rules=Join@@Map[ReplaceOneIndex[#[[1]],#[[2]],{},fields]&,indices];
+rules[[1]]= rules[[1]]/.{(a_->{b_,c___}):>(a->{loopIndex,c})};
+rules[[2]]= rules[[2]]/.{(a_->{b_,c___}):>(a->{-loopIndex,c})};
+
+repDiag=diag[[2;;]]/.rules;
+
+{diagVars,funcObjects} =  ReplaceObjectsWithFunctions[repDiag];
+fullDiag =  prefDiag*Apply[Times,funcObjects];
+
+Return[{diagVars,fullDiag}]
+]
+
+
+(* ::Input::Initialization:: *)
 Clear[InsertFeynRulesAllDiags] (*takes as RHS one single diagram*)
 InsertFeynRulesAllDiags[allDiags_,derivativeList_,fields_,loopIndex_] := Module[{allVars = Table[{},Length@allDiags], fullDiags = Table[Null,Length@allDiags]},
 
+If[Length[derivativeList]==0,
+(
+myEcho[{"Insert Feynman Rules in Diagram no: ",# },1];
+{allVars[[#]],fullDiags[[#]]} = InsertFeynRulesNoExternals[allDiags[[#]],fields,loopIndex];
+)&/@Table[i,{i,1,Length@allDiags}];
 
+Return[{allVars,fullDiags}];
+];
 
 (
-myEcho[{"Insert Feynman Rules in Diagram no: ",#},1];
+myEcho[{"Insert Feynman Rules in Diagram no: ",# },1];
 
 {allVars[[#]],fullDiags[[#]]} = InsertFeynRules[allDiags[[#]],derivativeList,fields,loopIndex];
 
@@ -2706,6 +2757,7 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
 
             "SuperindexDiagrams",
                 {funcDerDiagrams, replacementList}=MultipleFuncDer[masterEq, derivativeListnew];
+	If[derivativeListnew==={},funcDerDiagrams={funcDerDiagrams}];
 
                 If[AssociationQ[setupAssoc[["MasterEquation"]]] == True,
                     superindexDiags = TraceOverFields[funcDerDiagrams,derivativeList, replacementList, fields, truncation, classicalAction],
@@ -2717,6 +2769,7 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
             "FullDiagrams",
                 myEcho[MultipleFuncDer[masterEq, derivativeListnew],1];
                 {funcDerDiagrams, replacementList} = MultipleFuncDer[masterEq, derivativeListnew];
+	If[derivativeListnew==={},funcDerDiagrams={funcDerDiagrams}];
 
                 If[AssociationQ[setupAssoc[["MasterEquation"]]] == True,
                     superindexDiags = TraceOverFields[funcDerDiagrams,derivativeList, replacementList, fields, truncation, classicalAction],
@@ -2725,15 +2778,35 @@ DeriveFunctionalEquation[setupAssoc_, derivativeList_, OptionsPattern[]] :=
 
                 {allVars, fullDiags} = InsertFeynRulesAllDiags[superindexDiags, derivativeList, fields, loopIndex] /. QMeSderivation`Private`q->Global`q;
 
+	If[OptionValue["FiniteT"] ,fullDiags=QMeSderivation`Tools`RerouteFermionicMomenta[fullDiags,setupAssoc,derivativeList];];
+
+         If[OptionValue["ReturnAll"] == False,
+                    Return[fullDiags],
+                    Return[{superindexDiags, fullDiags}]
+                ];
+
                 If[OptionValue["DummyVarList"] == False,
                     Return[fullDiags],
                     Return[{allVars, fullDiags}]
                 ];
         ];
-    ]
+    ];
 
 Options[DeriveFunctionalEquation] = {"OutputLevel" -> "FunctionalDerivatives",
-     "LoopIndex" -> q, "DummyVarList" -> False};
+     "LoopIndex" -> q, "DummyVarList" -> False,"ReturnAll"->False,"FiniteT"->True};
+
+
+(* ::Input::Initialization:: *)
+SuperindexToFullDiagrams[diags_,setupAssoc_,derivativeList_,OptionsPattern[]]:=Module[{fields,loopIndex,allVars, fullDiags},
+fields =Association["bosonic"->{},"fermionic"->{},setupAssoc[["FieldSpace"]]];
+     loopIndex = Global`q;
+ {allVars, fullDiags} = InsertFeynRulesAllDiags[diags, derivativeList,fields, loopIndex] /. QMeSderivation`Private`q->Global`q;
+
+If[OptionValue["FiniteT"] ,fullDiags=QMeSderivation`Tools`RerouteFermionicMomenta[fullDiags,setupAssoc,derivativeList];];
+Return[fullDiags]
+];
+
+Options[SuperindexToFullDiagrams] = {"FiniteT" ->True};
 
 
 (* ::Input::Initialization:: *)
